@@ -1,5 +1,13 @@
 export default function DummyPost() {
 return (
-    <div style={{ width: 100, height: 100,borderRadius: 10, backgroundColor: "black" }}></div>
+    <div style={{ 
+        width: 'min(50vw, 50vh)', 
+        height: 'min(50vw, 50vh)', 
+        borderRadius: 10, 
+        backgroundColor: "black",
+        display: 'flex',
+        justifyContent: 'center'
+
+    }}></div>
   );
 }
