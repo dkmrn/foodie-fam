@@ -5,7 +5,8 @@ import { useState } from 'react';
 
 
 const App = () => {
-  // Sample array of items
+  // Sample array of items 
+  // NEED TO UPDATE THIS ACCORDING TO EACH NEW POST
   const items = ["Pizza", "Burger", "Pasta", "Sushi", "Tacos"];
 
   return (
@@ -14,7 +15,7 @@ const App = () => {
         <h1>Find your group</h1>
         <p>Say hi!</p>
       </header>
-      <div className="row">
+      <div className="grid">
         {items.map((item,index) => (
           <DummyPost key ={index} title={item} />
         ))}
