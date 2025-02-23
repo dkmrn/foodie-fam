@@ -1,24 +1,26 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "./components/Navbar";
 import DummyPost from "./components/dummyPost";
+import { useState } from 'react';
+
+
 
 const App = () => {
+  // Sample array of items
+  const items = ["Pizza", "Burger", "Pasta", "Sushi", "Tacos"];
+
   return (
-  
     <div className="container">
       <header className="header">
-        <h1>Restaurant Reviews</h1>
-        <p> Welcome~</p>
+        <h1>Find your group</h1>
+        <p>Say hi!</p>
       </header>
       <div className="row">
-      <DummyPost /> 
-      <DummyPost />
-      <DummyPost />
+        {items.map((item,index) => (
+          <DummyPost key ={index} title={item} />
+        ))}
       </div>
     </div>
   );
 };
 
-
 export default App;
-
