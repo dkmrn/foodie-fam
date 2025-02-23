@@ -22,14 +22,16 @@ return (
                 src="https://picsum.photos/id/237/200/300"
                 alt="profile picture"
                 style={{
-                    width: '5vw',
-                    height: '5vw',
+                    width: 'min(5vw,5vh)',
+                    height: 'min(5vw,5vh',
                     borderRadius: '50%',
                     objectFit: 'cover',
                     marginRight: '4%'
                 }}
             />
-            u
+            <span style={{ fontSize: 'min(3vw, 3vh)' }}>
+                joycejeoung
+            </span>
         </div>
     </div>
   );
