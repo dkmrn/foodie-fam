@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import './createStyle.css';
 
 export function GoToCreate() {
     return (
-        <button className="createButton" onClick={() => console.log("Clicked!")}>
-        Click Me
-        </button>
+        <div style={{ color: "black" }} >
+            <button className="createButton" onClick={() => console.log("Clicked!")}>
+                Create Post Here!
+            </button>
+        </div>
     );
   }

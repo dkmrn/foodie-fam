@@ -1,0 +1,19 @@
+.createButton {
+    border: 2px solid #000000; 
+    padding: 10px 30px; 
+    background-color: #f0f0f0; 
+    font-size: 16px; 
+    /* font-weight: bold; */
+    cursor: pointer; /* for hover */
+    width: auto; /* based on the content */
+    height: auto; 
+    display: flex; /* flexbox to align text inside */
+    align-items: center; /* center text */
+    justify-content: center;
+    transition: all 0.3s ease; /*smooth transition effect*/
+}
+
+.createButton:hover {
+    background-color: #fcaec6; /* bground color when hovering */
+    border-color: #000000; 
+}
