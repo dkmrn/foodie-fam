@@ -3,6 +3,18 @@ import { useParams, useNavigate } from "react-router-dom";
 import './createStyle.css';
 // might need to make it that the text is relative while rectangle is absolute instead
 export function CreatePost() {
+    const [restaurant, setRestaurant] = useState("");
+    const [address, setAddress] = useState("");
+    const [date, setDate] = useState("");
+    const [time, setTime] = useState("");
+    const [additionalInfo, setAdditionalInfo] = useState("");
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    const handleSubmit = () => {
+        setIsSubmitted(true);
+        console.log("Submitted Data:", { restaurant, address, date, time, additionalInfo });
+    };
+
     return <div className="rectangle">
         <div className="text highlight-background" style={{ position: 'absolute', fontSize: '5vh', top: '6vh', color: 'black' }}>
             Cook Up Your FoodieFam Feast!
@@ -16,6 +28,9 @@ export function CreatePost() {
                 className="input-box" 
                 style={{ position: 'absolute', top: '25vh', width: '25vw', height: '5vh' }} 
                 placeholder="BCD"
+                value={restaurant}
+                onChange={(e) => setRestaurant(e.target.value)}
+                disabled={isSubmitted}
         ></textarea>
 
 
@@ -26,6 +41,9 @@ export function CreatePost() {
                 className="input-box" 
                 style={{ position: 'absolute', top: '40vh', width: '25vw', height: '5vh' }} 
                 placeholder="123 Christmas Lane"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                disabled={isSubmitted}
         ></textarea>
 
 
@@ -36,6 +54,9 @@ export function CreatePost() {
                 className="input-box" 
                 style={{ position: 'absolute', top: '55vh', width: '25vw', height: '5vh' }} 
                 placeholder="1/1/2026"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                disabled={isSubmitted}
         ></textarea>
 
 
@@ -46,6 +67,9 @@ export function CreatePost() {
                 className="input-box" 
                 style={{ position: 'absolute', top: '70vh', width: '25vw', height: '5vh' }} 
                 placeholder="0:00"
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+                disabled={isSubmitted}
         ></textarea>
 
 
@@ -56,14 +80,21 @@ export function CreatePost() {
                 className="input-box" 
                 style={{ position: 'absolute', top: '85vh', width: '25vw', height: '20vh' }} 
                 placeholder="Any allergies? What dishes are you planning on ordering?"
+                value={additionalInfo}
+                onChange={(e) => setAdditionalInfo(e.target.value)}
+                disabled={isSubmitted}
         ></textarea>
 
 
         <div style={{ color: "black" }} >
-            <button className="createButton" style={{ position: 'absolute',top:'118vh', left: '50%', transform: 'translate(-50%, -50%)', color: '#95c1e8' }} onClick={() => console.log("Clicked Submit!")}>
-                Submit Post
+            <button className="createButton" style={{ position: 'absolute',top:'118vh', left: '50%', transform: 'translate(-50%, -50%)', color: '#95c1e8' }}
+                onClick={handleSubmit}
+                disabled={isSubmitted}
+            >
+                {isSubmitted ? "Submitted" : "Submit Post"}
             </button>
         </div>
 
     </div>;
-}
+} 
+//NOTE*** when opening the console, the submit post page does not scale correctly --> look into this
