@@ -1,7 +1,9 @@
 import { Outlet } from "react-router-dom";
 import DummyPost from "./components/dummyPost";
  import { GoToCreate } from "./components/dummyCreate";
+import { Login } from "./components/logout";
 import { useState } from 'react';
+
 
 
 
@@ -29,6 +31,9 @@ const App = () => {
         <p>Say hi!</p>
         <div className="create-container">
           <GoToCreate />
+        </div>
+        <div className="log-box">
+          <Login />
         </div>
       </header>
       <div className="grid">

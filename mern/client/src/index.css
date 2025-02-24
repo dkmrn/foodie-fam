@@ -24,3 +24,9 @@
     top: 2vh;
     right: 2vw;
 }
+
+.log-box {
+    position: absolute;
+    top: 2vh;
+    left: 2vw;
+}
