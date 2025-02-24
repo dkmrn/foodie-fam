@@ -10,6 +10,18 @@ const App = () => {
   // NEED TO UPDATE THIS ACCORDING TO EACH NEW POST
   const items = ["Pizza", "Burger", "Pasta", "Sushi", "Tacos","test", "test"];
 
+  const [expandedIndex, setExpandedIndex] = useState(null);
+
+  const handlePostClick = (index) => {
+    if (expandedIndex === index) {
+      setExpandedIndex(null);
+    }
+      else
+      {
+        setExpandedIndex(index);
+      }
+    };
+
   return (
     <div className="container">
       <header className="header">
@@ -21,7 +33,16 @@ const App = () => {
       </header>
       <div className="grid">
         {items.map((item,index) => (
-          <DummyPost key ={index} title={item} />
+          <div 
+          key = {index}
+          onClick={() => handlePostClick(index)}
+          style={{ cursor: 'pointer' }}
+          >
+          <DummyPost
+          title={item}
+          isExpanded={expandedIndex === index} 
+          />
+          </div>
         ))}
       </div>
     </div>
