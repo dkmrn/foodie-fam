@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import './createStyle.css';
-// might need to make it that the text is relative while rectangle is absolute instead
+import { sendPost } from "../api/sendPost";
+
 export function CreatePost() {
     const [formData, setFormData] = useState({
         name: "",
@@ -23,10 +24,17 @@ export function CreatePost() {
         });
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         setIsSubmitted(true);
         // console.log("Submitted Data:", { restaurant, address, date, time, additionalInfo });
-        console.log("Submitted Data:", formData);
+        // console.log("Submitted Data:", formData);
+        try {
+            //send formData to backend
+            const response = await sendPost(formData);
+            console.log("Post Created Successfully:", response);
+        } catch (error) {
+            console.error("Failed to submit post:", error);
+        }
     };
 
     return <div className="rectangle">
@@ -120,3 +128,4 @@ export function CreatePost() {
     </div>;
 } 
 //NOTE*** when opening the console, the submit post page does not scale correctly --> look into this
+    // might need to make it that the text is relative while rectangle is absolute instead
