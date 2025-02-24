@@ -67,7 +67,7 @@ router.patch("/:id", async (req, res) => {
       const query = { _id: new ObjectId(req.params.id) };
       const updates = {
         $set: {
-            //name: req.body.name,
+            name: req.body.name,
             location: req.body.location,
             date: req.body.date,
             time: req.body.time,
@@ -97,29 +97,24 @@ router.patch("/:id", async (req, res) => {
     }
   });
 
-  router.patch("/:postId/add-participant", async (req, res) => {
+  router.patch("/:id/add-participant", async (req, res) => {
     try {
-
-      const query = { _id: new ObjectId(req.params.postId) };
-      const participant = {
-        _id: new ObjectId(req.body.userId),
-        name: req.body.name,
-      };
-  
-      let collection = await db.collection("posts");
-      let result = await collection.updateOne(query, { $push: { participants: participant } });
-  
-      if (result.modifiedCount === 0) {
-        return res.status(404).send("Post not found");
+      //console.log('User ID:', req.body.user._id);
+      const user = await db.collection('users').findOne( {_id: new ObjectId(req.body.user._id)});
+      if (!user) {
+        return res.status(404).send(`User not found: ${req.body.user._id}`);
       }
-  
+      await db.collection('posts').updateOne( 
+        //{_id: new ObjectId(req.params.id)},
+        {_id: new ObjectId(req.params.id)},
+        { $push: { participants: user} }
+      );
       res.status(200).send("Participant added to post");
-    } catch (err) {
-      console.error(err);
-      res.status(500).send("Error adding participant");
+    }
+    catch(err){
+      res.status(500).send("Error adding user to participants");
     }
   });
   
-  
-  export default router;
+export default router;
   
