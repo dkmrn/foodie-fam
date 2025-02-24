@@ -23,12 +23,34 @@ router.get("/", async (req, res) => {
 
 // This section will help you get a single user by id
 router.get("/:id", async (req, res) => {
+  try {
   let collection = await db.collection("users");
   let query = { _id: new ObjectId(req.params.id) };
   let result = await collection.findOne(query);
 
   if (!result) res.send("Not found").status(404);
   else res.send(result).status(200);
+} catch (err) {
+  console.error(err);
+  res.status(500).send("Error finding user");
+}
+  
+});
+
+
+//This section will help you get a single user by email
+router.get("/email/:email", async (req, res) => {
+  try {
+    let collection = await db.collection("users");
+    let query = { email: req.params.email };
+    let result = await collection.findOne(query);
+
+  if (!result) res.send("Not found").status(404);
+  else res.send(result).status(200);
+} catch (err) {
+  console.error(err);
+  res.status(500).send("Error finding user");
+}
 });
 
 // This section will help you create a new user.
