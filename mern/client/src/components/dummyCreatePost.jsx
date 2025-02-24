@@ -3,16 +3,30 @@ import { useParams, useNavigate } from "react-router-dom";
 import './createStyle.css';
 // might need to make it that the text is relative while rectangle is absolute instead
 export function CreatePost() {
-    const [restaurant, setRestaurant] = useState("");
-    const [address, setAddress] = useState("");
-    const [date, setDate] = useState("");
-    const [time, setTime] = useState("");
+    const [formData, setFormData] = useState({
+        name: "",
+        location: "",
+        date: "",
+        time: "",
+        // additionalInfo: "", //for now, backend does not have parameter for additional info
+        lister: { _id: "67bbb5ed2630bbe8ddd713be", name: "eggert" } //for right now, only eggert
+    });
+
     const [additionalInfo, setAdditionalInfo] = useState("");
+
     const [isSubmitted, setIsSubmitted] = useState(false);
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
 
     const handleSubmit = () => {
         setIsSubmitted(true);
-        console.log("Submitted Data:", { restaurant, address, date, time, additionalInfo });
+        // console.log("Submitted Data:", { restaurant, address, date, time, additionalInfo });
+        console.log("Submitted Data:", formData);
     };
 
     return <div className="rectangle">
@@ -28,8 +42,9 @@ export function CreatePost() {
                 className="input-box" 
                 style={{ position: 'absolute', top: '25vh', width: '25vw', height: '5vh' }} 
                 placeholder="BCD"
-                value={restaurant}
-                onChange={(e) => setRestaurant(e.target.value)}
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
                 disabled={isSubmitted}
         ></textarea>
 
@@ -41,8 +56,9 @@ export function CreatePost() {
                 className="input-box" 
                 style={{ position: 'absolute', top: '40vh', width: '25vw', height: '5vh' }} 
                 placeholder="123 Christmas Lane"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
                 disabled={isSubmitted}
         ></textarea>
 
@@ -54,8 +70,9 @@ export function CreatePost() {
                 className="input-box" 
                 style={{ position: 'absolute', top: '55vh', width: '25vw', height: '5vh' }} 
                 placeholder="1/1/2026"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
+                name="date"
+                value={formData.date}
+                onChange={handleChange}
                 disabled={isSubmitted}
         ></textarea>
 
@@ -67,8 +84,9 @@ export function CreatePost() {
                 className="input-box" 
                 style={{ position: 'absolute', top: '70vh', width: '25vw', height: '5vh' }} 
                 placeholder="0:00"
-                value={time}
-                onChange={(e) => setTime(e.target.value)}
+                name="time"
+                value={formData.time}
+                onChange={handleChange}
                 disabled={isSubmitted}
         ></textarea>
 
@@ -80,6 +98,10 @@ export function CreatePost() {
                 className="input-box" 
                 style={{ position: 'absolute', top: '85vh', width: '25vw', height: '20vh' }} 
                 placeholder="Any allergies? What dishes are you planning on ordering?"
+                // name="additionalInfo"
+                // value={formData.additionalInfo}
+                // onChange={handleChange}
+                // disabled={isSubmitted}
                 value={additionalInfo}
                 onChange={(e) => setAdditionalInfo(e.target.value)}
                 disabled={isSubmitted}
