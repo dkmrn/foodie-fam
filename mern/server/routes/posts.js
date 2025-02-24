@@ -67,7 +67,7 @@ router.patch("/:id", async (req, res) => {
       const query = { _id: new ObjectId(req.params.id) };
       const updates = {
         $set: {
-            name: req.body.name,
+            //name: req.body.name,
             location: req.body.location,
             date: req.body.date,
             time: req.body.time,
@@ -99,6 +99,7 @@ router.patch("/:id", async (req, res) => {
 
   router.patch("/:postId/add-participant", async (req, res) => {
     try {
+
       const query = { _id: new ObjectId(req.params.postId) };
       const participant = {
         _id: new ObjectId(req.body.userId),
