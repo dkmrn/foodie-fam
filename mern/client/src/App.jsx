@@ -27,7 +27,7 @@ const App = () => {
   );
 };
 
-App.use(express.json());
+// App.use(express.json());
 
 export default App;
 
