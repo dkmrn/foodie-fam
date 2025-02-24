@@ -10,7 +10,7 @@ import { useState } from 'react';
 const App = () => {
   // Sample array of items 
   // NEED TO UPDATE THIS ACCORDING TO EACH NEW POST
-  const items = ["Pizza", "Burger", "Pasta", "Sushi", "Tacos","test", "test"];
+  const items = ["test", "test", "test", "test", "test","test", "test"];
 
   const [expandedIndex, setExpandedIndex] = useState(null);
 
@@ -44,7 +44,7 @@ const App = () => {
           style={{ cursor: 'pointer' }}
           >
           <DummyPost
-          title={item}
+          title={item} // change this to be the user name
           isExpanded={expandedIndex === index} 
           />
           </div>

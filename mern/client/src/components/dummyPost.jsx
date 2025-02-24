@@ -37,16 +37,6 @@ export default function DummyPost({ title, isExpanded }) {
               marginBottom: isExpanded ? '1rem' : '0',
             }}
           />
-          <div>
-            <h3 style={{ fontSize: isExpanded ? '1.5rem' : '1rem' }}>
-              {title}
-            </h3>
-            {isExpanded && (
-              <p style={{ fontSize: '1rem', marginTop: '1rem' }}>
-                Additional content for {title}. This content is shown when the post is expanded.
-              </p>
-            )}
-          </div>
         </div>
       </div>
     );
