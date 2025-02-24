@@ -20,9 +20,39 @@
 }
 
 .rectangle {
-    width: 100%; 
-    height: min(50vw, 50vh); 
+    width: 50%; 
+    height: 70vw; 
     border-radius: 20px;
-    background-color: #ffffff; 
+    background-color: #013f87; 
     border: 2px solid #333;
+    position: relative;
+}
+
+.text {
+    position: absolute; /* Absolutely position the text inside the rectangle */
+    font-size: 2.2vh; /* Make font size responsive based on the viewport width */
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Times New Roman, serif';
+    color: #333; /* Default text color */
+    width: 100%;
+}
+
+.highlight-background {
+    background-color: #aed2fc; /* Yellow background with transparency */
+    padding: 5px; /* Add some padding to the text */
+    border-radius: 5px; /* Rounded corners for the background */
+    color: black; /* Text color */
+}
+
+.input-box {
+    position: absolute;
+    left: 25%;
+    background-color: #f0f0f0; /* Gray background for the input box */
+    border: 1px solid #ccc;
+    padding: 1vh;
+    border-radius: 5px;
+    font-size: 2vh;
+    font-family: 'Times New Roman, serif';
+    text-align: left;
 }
