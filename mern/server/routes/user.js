@@ -59,7 +59,6 @@ router.post("/", async (req, res) => {
     const myhash = await bcrypt.hash(req.body.password, saltRounds);
 
     let newDocument = {
-      name: req.body.name,
       email: req.body.email,
       password: myhash,
     };
