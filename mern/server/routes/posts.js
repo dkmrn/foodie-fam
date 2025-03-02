@@ -51,9 +51,10 @@ router.post("/", async (req, res) => {
       let post = await collection.findOne({ _id: result._id });
 
       let profileCollection = await db.collection("profiles");
-      let profile = await profileCollection.findOne({ myUserId: req.body.userId });
-      profile.myPosts.push(post);
-      await profileCollection.updateOne({ myUserId: req.body.userId }, { $set: { myPosts: profile.myPosts } });
+      await profileCollection.findOneAndUpdate({ myUserId: req.body.userId }, {$push: {myPosts: post}});
+      
+      // profile.myPosts.push(post);
+      // await profileCollection.updateOne({ myUserId: req.body.userId }, { $set: { myPosts: profile.myPosts } });
       res.send(post);
       // res.status(201).send(result);
     } catch (err) {
