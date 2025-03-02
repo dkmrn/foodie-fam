@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.container {
+    padding: 2vh;
+}
+
+.header {
+    text-align: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+    margin-left:5vw;
+    margin-right: 5vw;
+}
+
+.create-container {
+    position: absolute;
+    top: 2vh;
+    right: 2vw;
+}
+
+.log-box {
+    position: absolute;
+    top: 2vh;
+    left: 2vw;
+}
