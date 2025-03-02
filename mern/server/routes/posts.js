@@ -48,7 +48,7 @@ router.post("/", async (req, res) => {
 
       let collection = await db.collection("posts");
       let result = await collection.insertOne(newDocument);
-      let post = await collection.findOne({ _id: new ObjectId(result._id) });
+      let post = await collection.findOne({ _id: result.insertedId });
 
       let profileCollection = await db.collection("profiles");
       await profileCollection.findOneAndUpdate({ myUserId: req.body.userId }, {$push: {myPosts: post}});

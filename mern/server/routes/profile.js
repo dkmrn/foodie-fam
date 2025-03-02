@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
 
 
         let newDocument = {
-            myUser: req.body.userId,
+            myUserId: req.body.userId,
             myName: req.body.name,
             myLocation: req.body.location,
             myBio: req.body.bio,
