@@ -119,6 +119,14 @@ router.patch("/:id", async (req, res) => {
         {_id: new ObjectId(req.params.id)},
         { $push: { participants: user} }
       );
+
+      let postCollection = await db.collection('posts');
+      let post = await postCollection.findOne({_id: new ObjectId(req.params.id)});
+
+      await db.collection('profiles').findOneAndUpdate(
+        {myUserId: user._id},
+        { $push: { myJoinedPosts: post} }
+      );
       res.status(200).send("Participant added to post");
     }
     catch(err){

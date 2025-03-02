@@ -2,7 +2,7 @@ import express from "express";
 import db from "../db/connection.js";
 import { ObjectId, ProfilingLevel } from "mongodb";
 import user from "./user.js";
-import posts from "./posts.js";
+import posts from "./post.js";
 
 const router = express.Router();
 
