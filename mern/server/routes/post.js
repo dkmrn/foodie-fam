@@ -95,10 +95,34 @@ router.patch("/:id", async (req, res) => {
   // This section will help you delete a record
   router.delete("/:id", async (req, res) => {
     try {
-      const query = { _id: new ObjectId(req.params.id) };
-  
-      const collection = db.collection("posts");
-      let result = await collection.deleteOne(query);
+      let postCollection = await db.collection('posts');
+      let post = await postCollection.findOne({_id: new ObjectId(req.params.id)});
+
+      let listerId = post.listerId;
+      let participantsIds = post.participants;
+
+      let profileCollection = await db.collection('profiles');
+
+      let listerProfile = await profileCollection.findOne({myUserId: listerId});
+      let listerPosts = listerProfile.myPosts;
+      let index = listerPosts.indexOf(post);
+      listerPosts.splice(index,1);
+      await profileCollection.updateOne(
+        {myUserId: listerId},
+        {$set: {myPost: listerPosts}});
+
+      for(let i = 0; i < participantsIds.length(); i++){
+        let participantId = participantsIds[i];
+        let participantProfile = await profileCollection.findOne({myUserId: participantId});
+        let participantPosts = participantProfile.myJoinedPosts;
+        index = participantPosts.indexOf(post);
+        participantPosts.splice(index,1);
+        await profileCollection.updateOne(
+          {myUserId: participantId},
+          {$set: {myJoinedPosts: participantPosts}});
+      }
+      
+      let result = await postCollection.deleteOne(post);
   
       res.send(result).status(200);
     } catch (err) {
@@ -117,7 +141,7 @@ router.patch("/:id", async (req, res) => {
       await db.collection('posts').updateOne( 
         //{_id: new ObjectId(req.params.id)},
         {_id: new ObjectId(req.params.id)},
-        { $push: { participants: user} }
+        { $push: { participants: toString(user._id)} }
       );
 
       let postCollection = await db.collection('posts');
