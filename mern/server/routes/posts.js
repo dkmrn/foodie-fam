@@ -48,17 +48,8 @@ router.post("/", async (req, res) => {
       let collection = await db.collection("posts");
       let result = await collection.insertOne(newDocument);
       res.send(result).status(204);
-      // res.status(201).send(result);
     } catch (err) {
       console.error(err);
-      /*
-      console.log(newDocument.name);
-      console.log(newDocument.location);
-      console.log(newDocument.date);
-      console.log(newDocument.time);
-      console.log(newDocument.lister._id);
-      console.log(newDocument.lister.name);
-      */
       res.status(500).send("Error adding posts");
     }
   });
