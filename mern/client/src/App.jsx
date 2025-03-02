@@ -10,19 +10,8 @@ import { useState } from 'react';
 const App = () => {
   // Sample array of items 
   // NEED TO UPDATE THIS ACCORDING TO EACH NEW POST
-  const items = ["test", "test", "test", "test", "test","test", "test"];
+  const users = ["Katia", "Joyce", "Amanda", "Daya", "Joaquin"];
 
-  const [expandedIndex, setExpandedIndex] = useState(null);
-
-  const handlePostClick = (index) => {
-    if (expandedIndex === index) {
-      setExpandedIndex(null);
-    }
-      else
-      {
-        setExpandedIndex(index);
-      }
-    };
 
   return (
     <div className="container">
@@ -37,15 +26,14 @@ const App = () => {
         </div>
       </header>
       <div className="grid">
-        {items.map((item,index) => (
+        {users.map((users,index) => (
           <div 
           key = {index}
           onClick={() => handlePostClick(index)}
           style={{ cursor: 'pointer' }}
           >
           <DummyPost
-          title={item} // change this to be the user name
-          isExpanded={expandedIndex === index} 
+          username ={users}
           />
           </div>
         ))}

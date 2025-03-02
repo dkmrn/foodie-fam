@@ -46,12 +46,12 @@ function getTime(post) {
     return "7:30 p.m.";
 }
 
-function getUsername() {
-    return "joycejeoung";
-}
+//function getUsername() {
+//    return "joycejeoung";
+//}
 
-export default function DummyPost() {   
-    const username = getUsername();
+export default function DummyPost({username}) {   
+   // const username = getUsername();
 
     function handleClick() {
         console.log("send my request to join!");
