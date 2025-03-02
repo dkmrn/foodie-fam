@@ -44,14 +44,23 @@ router.post("/", async (req, res) => {
         location: req.body.location,
         date: req.body.date,
         time: req.body.time,
-        lister: user,
+        listerId: req.body.userId,
         participants: [],
       };
+
 
       let collection = await db.collection("posts");
       let result = await collection.insertOne(newDocument);
       let post = await collection.findOne({ _id: result._id });
+
+      let pofileCollections = await db.collection("profiles");
+      let profile = await pofileCollections.findOne({ myUser: user });
+      if (!profile) {
+        return res.status(404).send("Profile not found for user");
+      }
+      profile.myPosts.push(post);
       res.send(post);
+
     } catch (err) {
       console.error(err);
       res.status(500).send("Error adding posts");
@@ -68,7 +77,7 @@ router.patch("/:id", async (req, res) => {
             location: req.body.location,
             date: req.body.date,
             time: req.body.time,
-            lister: user,
+            listerId: req.body.userID,
             participants: [],
         },
       };
@@ -96,15 +105,24 @@ router.patch("/:id", async (req, res) => {
 
   router.patch("/:id/add-participant", async (req, res) => {
     try {
-      //console.log('User ID:', req.body.user._id);
+      // Finding the user by id
       const user = await db.collection('users').findOne( {_id: new ObjectId(req.params.id)});
       if (!user) {
         return res.status(404).send(`User not found: ${req.body.user._id}`);
       }
+
+      // Adding post to user's profile joined posts
+      const profile = await db.collection('profiles').findOne({myUser: user});
+      if (!post) {
+        return res.status(404).send("Post Not Found");
+      }
+      profile.myJoinedPosts.push(post);
+
+      // Updating post with user as participant
       await db.collection('posts').updateOne( 
         //{_id: new ObjectId(req.params.id)},
         {_id: new ObjectId(req.params.id)},
-        { $push: { participants: user} }
+        { $push: { participants: req.params.id} }
       );
       res.status(200).send("Participant added to post");
     }
