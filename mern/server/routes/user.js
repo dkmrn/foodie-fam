@@ -59,7 +59,6 @@ router.post("/", async (req, res) => {
     const myhash = await bcrypt.hash(req.body.password, saltRounds);
 
     let newDocument = {
-      name: req.body.name,
       email: req.body.email,
       password: myhash,
     };
@@ -105,6 +104,29 @@ router.delete("/:id", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send("Error deleting record");
+  }
+});
+
+// Authenticate the user given email and password
+router.post("/login", async (req, res) => {
+  try {
+    let collection = await db.collection("users");
+    let query = { email: req.body.email };
+    let user = await collection.findOne(query);
+ 
+    if (!user) return res.status(400).send("User not found");
+
+    const validPassword = await bcrypt.compare(req.body.password, user.password);
+
+    if (!validPassword) return res.status(400).send("Please enter a valid password.");
+
+    //at this point, login is successful, return the user info without the password info
+    user.password = undefined;
+
+    res.send(user);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Something went wrong");
   }
 });
 

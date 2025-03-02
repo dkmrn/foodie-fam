@@ -1,0 +1,58 @@
+.createButton {
+    border: 2px solid #000000; 
+    padding: 2vh 5vw; 
+    background-color: #f0f0f0; 
+    font-size: 18px; 
+    /* font-weight: bold; */
+    cursor: pointer; /* for hover */
+    width: auto; /* based on the content inside */
+    height: auto; 
+    border-radius: 10px;
+    display: flex; /* flexbox to align text inside */
+    align-items: center; /* center text */
+    justify-content: center;
+    transition: all 0.3s ease; /*smooth transition effect*/
+}
+
+.createButton:hover {
+    background-color: #fcaec6; /* bground color when hovering */
+    border-color: #000000; 
+}
+
+.rectangle {
+    width: 50%; 
+    height: 70vw; 
+    border-radius: 20px;
+    background-color: #013f87; 
+    border: 2px solid #333;
+    position: relative;
+}
+
+.text {
+    position: absolute; /* Absolutely position the text inside the rectangle */
+    font-size: 2.2vh; /* Make font size responsive based on the viewport width */
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Times New Roman, serif';
+    color: #333; /* Default text color */
+    width: 100%;
+}
+
+.highlight-background {
+    background-color: #aed2fc; /* Yellow background with transparency */
+    padding: 5px; /* Add some padding to the text */
+    border-radius: 5px; /* Rounded corners for the background */
+    color: black; /* Text color */
+}
+
+.input-box {
+    position: absolute;
+    left: 25%;
+    background-color: #f0f0f0; /* Gray background for the input box */
+    border: 1px solid #ccc;
+    padding: 1vh;
+    border-radius: 5px;
+    font-size: 2vh;
+    font-family: 'Times New Roman, serif';
+    text-align: left;
+}
