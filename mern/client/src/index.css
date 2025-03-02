@@ -14,7 +14,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    margin-top: 2rem;
+    margin-top: 4rem;
     margin-left:5vw;
     margin-right: 5vw;
 }
@@ -25,14 +25,21 @@
     right: 2vw;
 }
 
-.logout-button {
-    position: absolute;
-    top: 4vh;
-    left: 2vw;
-}
 
 .profile-button {
     position: absolute;
     top: 2vh;
     left: 2vw;
+}
+
+.logout-button {
+    position: absolute;
+    top: 6vh;
+    left: 2vw;
+}
+
+.report-button {
+    position: absolute;
+    top: 10vh;
+    left:2vw;
 }

@@ -3,6 +3,7 @@ import DummyPost from "./components/dummyPost";
 import { GoToCreate } from "./components/dummyCreate";
 import { Logout } from "./components/logout";
 import  { ProfileButton } from "./components/profileButton";
+import { ReportButton } from "./components/reportButton";
 import { useState } from 'react';
 
 
@@ -27,11 +28,15 @@ const App = () => {
         </div>
 
         <div className="profile-button">
-          <profileButton />
+          <ProfileButton />
         </div>
 
         <div className="logout-button">
           <Logout />
+        </div>
+
+        <div className="report-button">
+          <ReportButton />
         </div>
       </header>
 
