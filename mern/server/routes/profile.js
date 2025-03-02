@@ -7,7 +7,7 @@ import posts from "./posts.js";
 const router = express.Router();
 
 /*
-myUserID: userID
+myUserId: userId
 myName: name
 myLocation: location
 myBio: Bio/Info
@@ -17,13 +17,13 @@ myJoinedPosts: joinedPosts []
 router.post("/", async (req, res) => {
     try {
         const userCollection = await db.collection("users");
-        const user = await userCollection.findOne({ _id: new ObjectId(req.body.myUser._id) });
+        const user = await userCollection.findOne({ _id: new ObjectId(req.body.userId) });
         if (!user) {
             return res.status(404).send("User not found");
         }
 
         let newDocument = {
-            myUser: user,
+            myUser: req.body.userId,
             myName: req.body.name,
             myLocation: req.body.location,
             myBio: req.body.bio,
@@ -40,15 +40,6 @@ router.post("/", async (req, res) => {
         res.status(500).send("Error adding profile");
     }
 });
-
-
-export default router;
-
-
-// 
-
-
-
 
 // This route is for updating basic user info: Name, bio, location, profile pic, 
 router.patch("/profile/:id/update", async (req, res) => {
@@ -71,3 +62,5 @@ router.patch("/profile/:id/update", async (req, res) => {
     }
   });
   
+export default router;
+
