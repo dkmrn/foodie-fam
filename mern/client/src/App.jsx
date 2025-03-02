@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import DummyPost from "./components/dummyPost";
-import { GoToCreate } from "./components/dummyCreate";
+import DummyPost from "./components/Post";
+import { GoToCreate } from "./components/Create";
 import { Logout } from "./components/logout";
 import  { ProfileButton } from "./components/profileButton";
 import { useState } from 'react';
