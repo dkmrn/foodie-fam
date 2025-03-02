@@ -5,15 +5,15 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import App from "./App";
-import CreatePostPage from "./CreatePostPage";
 import Record from "./components/Record";
 import RecordList from "./components/RecordList";
 import "./index.css";
+import LoginPage from "./LoginPage"; //temporary add
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <LoginPage />, //temporary add
     children: [
       {
         path: "/",
@@ -23,7 +23,13 @@ const router = createBrowserRouter([
   },
   {
     path: "/create",
-    element: <CreatePostPage />,
+    element: <App />,
+    children: [
+      {
+        path: "/create",
+        element: <Record />,
+      },
+    ],
   },
   {
     path: "/edit/:id",
