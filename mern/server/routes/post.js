@@ -49,9 +49,10 @@ router.post("/", async (req, res) => {
       let collection = await db.collection("posts");
       let result = await collection.insertOne(newDocument);
       let post = await collection.findOne({ _id: result.insertedId });
+      
 
       let profileCollection = await db.collection("profiles");
-      await profileCollection.findOneAndUpdate({ myUserId: req.body.userId }, {$push: {myPosts: post}});
+      await profileCollection.findOneAndUpdate({ myUserId: req.body.userId }, {$push: {myPosts: (post._id).toString() }});
       
       // profile.myPosts.push(post);
       // await profileCollection.updateOne({ myUserId: req.body.userId }, { $set: { myPosts: profile.myPosts } });
@@ -134,22 +135,26 @@ router.patch("/:id", async (req, res) => {
   router.patch("/:id/add-participant", async (req, res) => {
     try {
       //console.log('User ID:', req.body.user._id);
-      const user = await db.collection('users').findOne( {_id: new ObjectId(req.body.user._id)});
+      const user = await db.collection('users').findOne( {_id: new ObjectId(req.body.userId)});
       if (!user) {
-        return res.status(404).send(`User not found: ${req.body.user._id}`);
+        return res.status(404).send(`User not found: ${req.body.userId}`);
       }
+      console.log("FOUND USER")
+
+      
       await db.collection('posts').updateOne( 
         //{_id: new ObjectId(req.params.id)},
         {_id: new ObjectId(req.params.id)},
-        { $push: { participants: toString(user._id)} }
+        { $push: { participants: req.body.userId} }
       );
+      console.log("UPDATED POST")
 
       let postCollection = await db.collection('posts');
       let post = await postCollection.findOne({_id: new ObjectId(req.params.id)});
 
       await db.collection('profiles').findOneAndUpdate(
-        {myUserId: req.body.user._id},
-        { $push: { myJoinedPosts: post} }
+        {myUserId: req.body.userId},
+        { $push: { myJoinedPosts: req.params.id} }
       );
       res.status(200).send("Participant added to post");
     }
