@@ -19,13 +19,19 @@
     margin-right: 5vw;
 }
 
-.create-container {
+.post-button {
     position: absolute;
     top: 2vh;
     right: 2vw;
 }
 
-.log-box {
+.logout-button {
+    position: absolute;
+    top: 4vh;
+    left: 2vw;
+}
+
+.profile-button {
     position: absolute;
     top: 2vh;
     left: 2vw;

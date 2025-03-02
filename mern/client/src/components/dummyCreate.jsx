@@ -5,9 +5,12 @@ import './createStyle.css';
 export function GoToCreate() {
     return (
         <div style={{ color: "black" }} >
-            <button className="createButton" onClick={() => console.log("Clicked!")}>
+            <button className="createButton" onClick={() => console.log("Clicked Create!")}>
                 Create Post Here!
             </button>
-        </div>
-    );
-  }
+    </div>
+
+
+
+);
+}

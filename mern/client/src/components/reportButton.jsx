@@ -1,13 +1,16 @@
+
+
+
 import React, {useState} from 'react';
 
-export function Logout() {
+export function reportButton() {
 return (
     <div style={{
-        color: "red",
+        color: "yellow",
         textDecoration: "underline"
     }}>
         <button>
-            Logout
+            Submit Report
             </button>
     </div>
 );

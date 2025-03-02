@@ -1,13 +1,14 @@
+
 import React, {useState} from 'react';
 
-export function Logout() {
+export function ProfileButton() {
 return (
     <div style={{
-        color: "red",
+        color: "black",
         textDecoration: "underline"
     }}>
         <button>
-            Logout
+            My Profile
             </button>
     </div>
 );

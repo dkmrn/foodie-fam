@@ -1,7 +1,8 @@
 import { Outlet } from "react-router-dom";
 import DummyPost from "./components/dummyPost";
- import { GoToCreate } from "./components/dummyCreate";
-import { Login } from "./components/logout";
+import { GoToCreate } from "./components/dummyCreate";
+import { Logout } from "./components/logout";
+import  { ProfileButton } from "./components/profileButton";
 import { useState } from 'react';
 
 
@@ -15,26 +16,35 @@ const App = () => {
 
   return (
     <div className="container">
+
       <header className="header">
         <h1>Find your group</h1>
         <p>Say hi!</p>
-        <div className="create-container">
+
+
+        <div className="post-button">
           <GoToCreate />
         </div>
-        <div className="log-box">
-          <Login />
+
+        <div className="profile-button">
+          <profileButton />
+        </div>
+
+        <div className="logout-button">
+          <Logout />
         </div>
       </header>
+
+
       <div className="grid">
-        {users.map((users,index) => (
+        {users.map((user,index) => (
           <div 
-          key = {index}
-          onClick={() => handlePostClick(index)}
-          style={{ cursor: 'pointer' }}
-          >
-          <DummyPost
-          username ={users}
-          />
+            key = {index}
+        >
+        <
+          DummyPost
+          username ={user}
+        />
           </div>
         ))}
       </div>
