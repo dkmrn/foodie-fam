@@ -4,7 +4,7 @@ import React from "react";
 const SubmitReportPage = () => {
     return (
         <div>
-            <SubmitReport />
+            <SubmitReport /> 
         </div>
     )
 }

@@ -1,8 +1,9 @@
 import { Outlet } from "react-router-dom";
-import DummyPost from "./components/Post";
+import Post from "./components/Post";
 import { GoToCreate } from "./components/Create";
 import { Logout } from "./components/logout";
 import  { ProfileButton } from "./components/profileButton";
+import { ReportButton } from "./components/reportButton";
 import { useState } from 'react';
 
 
@@ -27,11 +28,15 @@ const App = () => {
         </div>
 
         <div className="profile-button">
-          <profileButton />
+          <ProfileButton />
         </div>
 
         <div className="logout-button">
           <Logout />
+        </div>
+
+        <div className="report-button">
+          <ReportButton />
         </div>
       </header>
 
@@ -42,7 +47,7 @@ const App = () => {
             key = {index}
         >
         <
-          DummyPost
+          Post
           username ={user}
         />
           </div>

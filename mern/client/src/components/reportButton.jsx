@@ -3,10 +3,10 @@
 
 import React, {useState} from 'react';
 
-export function reportButton() {
+export function ReportButton() {
 return (
     <div style={{
-        color: "yellow",
+        color: "grey",
         textDecoration: "underline"
     }}>
         <button>
