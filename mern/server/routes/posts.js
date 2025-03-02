@@ -45,9 +45,16 @@ router.post("/", async (req, res) => {
         listerId: req.body.userId,
         participants: [],
       };
+
       let collection = await db.collection("posts");
       let result = await collection.insertOne(newDocument);
-      res.send(result).status(204);
+      let post = await collection.findOne({ _id: result._id });
+
+      let profileCollection = await db.collection("profiles");
+      profileCollection.updateOne(
+        { myUserId: req.body.userId },
+        { $push: { myPosts: post } });
+      res.send(post);
       // res.status(201).send(result);
     } catch (err) {
       console.error(err);
