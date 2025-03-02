@@ -97,7 +97,7 @@ router.patch("/:id", async (req, res) => {
   router.patch("/:id/add-participant", async (req, res) => {
     try {
       //console.log('User ID:', req.body.user._id);
-      const user = await db.collection('users').findOne( {_id: new ObjectId(req.body.user._id)});
+      const user = await db.collection('users').findOne( {_id: new ObjectId(req.params.id)});
       if (!user) {
         return res.status(404).send(`User not found: ${req.body.user._id}`);
       }
