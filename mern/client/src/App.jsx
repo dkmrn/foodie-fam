@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import DummyPost from "./components/dummyPost";
-import { GoToCreate } from "./components/dummyCreate";
+import Post from "./components/Post";
+import { GoToCreate } from "./components/Create";
 import { Logout } from "./components/logout";
 import  { ProfileButton } from "./components/profileButton";
 import { ReportButton } from "./components/reportButton";
@@ -47,7 +47,7 @@ const App = () => {
             key = {index}
         >
         <
-          DummyPost
+          Post
           username ={user}
         />
           </div>

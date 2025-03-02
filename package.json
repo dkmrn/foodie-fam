@@ -1,0 +1,23 @@
+{
+  "name": "mern-stack-example-main",
+  "version": "1.0.0",
+  "description": "Mern Stack code for the [Mern Tutorial](https://www.mongodb.com/languages/mern-stack-tutorial)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dkmrn/mern-stack-example-main.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dkmrn/mern-stack-example-main/issues"
+  },
+  "homepage": "https://github.com/dkmrn/mern-stack-example-main#readme",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.7.2"
+  }
+}

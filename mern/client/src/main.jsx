@@ -8,6 +8,7 @@ import App from "./App";
 import CreatePostPage from "./CreatePostPage";
 import Record from "./components/Record";
 import RecordList from "./components/RecordList";
+import SubmitReportPage from "./SubmitReportPage";
 import "./index.css";
 
 const router = createBrowserRouter([

@@ -1,4 +1,4 @@
-import { CreatePost } from "./components/dummyCreatePost";
+import { CreatePost } from "./components/CreatePost";
 import React from "react";
 
 const CreatePostPage = () => {
