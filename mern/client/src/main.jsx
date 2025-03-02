@@ -17,37 +17,26 @@ import CreateAccountPage from "./CreateAccountPage";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
-    // children: [
-    //   {
-    //     path: "/",
-    //     element: <RecordList />,
-    //   },
-    // ],
+    element: <LoginPage />,
+  },
+  // {
+  //   path: "/logout",
+  //   element: <LoginPage />,
+  // },
+  {
+    path: "/createAccount",
+    element: <CreateAccountPage />
   },
   {
     path: "/create",
     element: <CreatePostPage />,
   },
+
+
+
   {
-    // path: "/edit/:id",
-    // element: <App />,
-    // children: [
-    //   {
-    //     path: "/edit/:id",
-    //     element: <Record />,
-    //   },
-    // ],
-  },
-  {
-    // path: "/edit/:id",
-    // element: <App />,
-    // children: [
-    //   {
-    //     path: "/edit/:id",
-    //     element: <Record />,
-    //   },
-    // ],
+    path: "/tempGoToHomepage",
+    element: <App />
   },
 ]);
 
