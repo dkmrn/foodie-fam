@@ -8,6 +8,8 @@ import { ObjectId } from "mongodb";
 
 import user from "./user.js";
 
+import profile from "./profile.js";
+
 // router is an instance of the express router.
 // We use it to define our routes.
 // The router will be added as a middleware and will take control of requests starting with path /record.
@@ -42,23 +44,16 @@ router.post("/", async (req, res) => {
         location: req.body.location,
         date: req.body.date,
         time: req.body.time,
-        lister: { _id: user._id, name: user.name },
+        lister: user,
         participants: [],
       };
+
       let collection = await db.collection("posts");
       let result = await collection.insertOne(newDocument);
-      res.send(result).status(204);
-      // res.status(201).send(result);
+      let post = await collection.findOne({ _id: result._id });
+      res.send(post);
     } catch (err) {
       console.error(err);
-      /*
-      console.log(newDocument.name);
-      console.log(newDocument.location);
-      console.log(newDocument.date);
-      console.log(newDocument.time);
-      console.log(newDocument.lister._id);
-      console.log(newDocument.lister.name);
-      */
       res.status(500).send("Error adding posts");
     }
   });
@@ -73,7 +68,7 @@ router.patch("/:id", async (req, res) => {
             location: req.body.location,
             date: req.body.date,
             time: req.body.time,
-            lister: { user_id: user._id, user_name: user.name },
+            lister: user,
             participants: [],
         },
       };
@@ -102,7 +97,7 @@ router.patch("/:id", async (req, res) => {
   router.patch("/:id/add-participant", async (req, res) => {
     try {
       //console.log('User ID:', req.body.user._id);
-      const user = await db.collection('users').findOne( {_id: new ObjectId(req.body.user._id)});
+      const user = await db.collection('users').findOne( {_id: new ObjectId(req.params.id)});
       if (!user) {
         return res.status(404).send(`User not found: ${req.body.user._id}`);
       }
