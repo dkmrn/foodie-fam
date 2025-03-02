@@ -8,8 +8,6 @@ import { ObjectId } from "mongodb";
 
 import user from "./user.js";
 
-import profile from "./profile.js";
-
 // router is an instance of the express router.
 // We use it to define our routes.
 // The router will be added as a middleware and will take control of requests starting with path /record.
@@ -35,7 +33,7 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
     try {
       const userCollection = await db.collection("users");
-      const user = await userCollection.findOne({ _id: new ObjectId(req.body.lister._id) });
+      const user = await userCollection.findOne({ _id: new ObjectId(req.body.userId) });
       if (!user) {
         return res.status(404).send("User not found")};
 
@@ -47,22 +45,20 @@ router.post("/", async (req, res) => {
         listerId: req.body.userId,
         participants: [],
       };
-
-
       let collection = await db.collection("posts");
       let result = await collection.insertOne(newDocument);
-      let post = await collection.findOne({ _id: result._id });
-
-      let pofileCollections = await db.collection("profiles");
-      let profile = await pofileCollections.findOne({ myUser: user });
-      if (!profile) {
-        return res.status(404).send("Profile not found for user");
-      }
-      profile.myPosts.push(post);
-      res.send(post);
-
+      res.send(result).status(204);
+      // res.status(201).send(result);
     } catch (err) {
       console.error(err);
+      /*
+      console.log(newDocument.name);
+      console.log(newDocument.location);
+      console.log(newDocument.date);
+      console.log(newDocument.time);
+      console.log(newDocument.lister._id);
+      console.log(newDocument.lister.name);
+      */
       res.status(500).send("Error adding posts");
     }
   });
@@ -77,7 +73,7 @@ router.patch("/:id", async (req, res) => {
             location: req.body.location,
             date: req.body.date,
             time: req.body.time,
-            listerId: req.body.userID,
+            lister: { user_id: user._id, user_name: user.name },
             participants: [],
         },
       };
@@ -105,24 +101,15 @@ router.patch("/:id", async (req, res) => {
 
   router.patch("/:id/add-participant", async (req, res) => {
     try {
-      // Finding the user by id
-      const user = await db.collection('users').findOne( {_id: new ObjectId(req.params.id)});
+      //console.log('User ID:', req.body.user._id);
+      const user = await db.collection('users').findOne( {_id: new ObjectId(req.body.user._id)});
       if (!user) {
         return res.status(404).send(`User not found: ${req.body.user._id}`);
       }
-
-      // Adding post to user's profile joined posts
-      const profile = await db.collection('profiles').findOne({myUser: user});
-      if (!post) {
-        return res.status(404).send("Post Not Found");
-      }
-      profile.myJoinedPosts.push(post);
-
-      // Updating post with user as participant
       await db.collection('posts').updateOne( 
         //{_id: new ObjectId(req.params.id)},
         {_id: new ObjectId(req.params.id)},
-        { $push: { participants: req.params.id} }
+        { $push: { participants: user} }
       );
       res.status(200).send("Participant added to post");
     }

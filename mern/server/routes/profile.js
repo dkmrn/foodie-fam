@@ -15,12 +15,14 @@ myPost: posts []
 myJoinedPosts: joinedPosts []
 */
 router.post("/", async (req, res) => {
+    console.log("ENTER")
     try {
         const userCollection = await db.collection("users");
         const user = await userCollection.findOne({ _id: new ObjectId(req.body.userId) });
         if (!user) {
-            return res.status(404).send("User not found");
+            return res.status(404).send(new ObjectId(req.body.userId));
         }
+
 
         let newDocument = {
             myUser: req.body.userId,
@@ -30,9 +32,11 @@ router.post("/", async (req, res) => {
             myPosts: [],
             myJoinedPosts: []
         };
+        console.log("NEW DOC")
 
         let collection = await db.collection("profiles");
         let result = await collection.insertOne(newDocument);
+        console.log("INSERT")
         let profile = await collection.findOne({ _id: result._id });
         res.send(profile);
     } catch (err) {
