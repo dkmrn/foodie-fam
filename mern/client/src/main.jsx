@@ -5,6 +5,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import App from "./App";
+import Record from "./components/Record";
+import RecordList from "./components/RecordList";
 import CreatePostPage from "./CreatePostPage";
 import "./index.css";
 import LoginPage from "./LoginPage";
@@ -26,6 +28,16 @@ const router = createBrowserRouter([
   {
     path: "/create",
     element: <CreatePostPage />,
+  },
+  {
+    // path: "/edit/:id",
+    // element: <App />,
+    // children: [
+    //   {
+    //     path: "/edit/:id",
+    //     element: <Record />,
+    //   },
+    // ],
   },
   {
     // path: "/edit/:id",
