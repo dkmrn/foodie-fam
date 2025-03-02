@@ -81,10 +81,10 @@ router.patch("/:id", async (req, res) => {
             location: req.body.location,
             date: req.body.date,
             time: req.body.time,
-            lister: { user_id: user._id, user_name: user.name },
-            participants: [],
         },
       };
+      let collection = await db.collection("posts");
+      let result = await collection.updateOne(query, updates);
       res.send(result).status(200);
     } catch (err) {
       console.error(err);
@@ -124,7 +124,7 @@ router.patch("/:id", async (req, res) => {
       let post = await postCollection.findOne({_id: new ObjectId(req.params.id)});
 
       await db.collection('profiles').findOneAndUpdate(
-        {myUserId: user._id},
+        {myUserId: req.body.user._id},
         { $push: { myJoinedPosts: post} }
       );
       res.status(200).send("Participant added to post");
