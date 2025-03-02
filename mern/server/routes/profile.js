@@ -56,7 +56,7 @@ router.patch("/profile/:id/update", async (req, res) => {
           myLocation: req.body.location,
         },
       };
-  
+  //
       let collection = await db.collection("profiles");
       let result = await collection.updateOne(query, updates);
       res.send(result).status(200);
