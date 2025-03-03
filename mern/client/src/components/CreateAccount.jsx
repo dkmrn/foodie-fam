@@ -4,11 +4,30 @@ export function CreateAccount() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const [formDataUser, setFormDataUser] = useState({
+        email: "",
+        password: ""
+    });
+
+    const [formDataProfile, setFormDataProfile] = useState({
+        userId: "",
+        name: "",
+        location: "",
+        bio: ""
+    });
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("Submitted Email:", email);
         console.log("Submitted Password:", password);
         // You can add logic to send this data to your backend here
+
+        try {
+            const responseUser = sendUser(formDataUser);
+            console.log("User Created Successfully, User ID:", responseUser);
+        } catch (error) {
+            console.error("Failed to submit profile:", error);
+        }
     };
 
     return (
@@ -33,7 +52,7 @@ export function CreateAccount() {
                         type="text" 
                         placeholder="Email" 
                         value={email} 
-                        onChange={(e) => setEmail(e.target.value)} 
+                        onChange={(e) => setFormDataUser.email(e.target.value)} 
                         required
                         style={{
                             padding: "10px",
@@ -46,7 +65,7 @@ export function CreateAccount() {
                         type="password" 
                         placeholder="Password" 
                         value={password} 
-                        onChange={(e) => setPassword(e.target.value)} 
+                        onChange={(e) => setFormDataUser.password(e.target.value)} 
                         required
                         style={{
                             padding: "10px",
