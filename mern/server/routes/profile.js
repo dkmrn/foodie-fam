@@ -46,12 +46,12 @@ router.post("/", async (req, res) => {
 });
 
 // This route is for updating basic user info: Name, bio, location, profile pic, 
-router.patch("/profile/:id/update", async (req, res) => {
+router.patch("/:id/update", async (req, res) => {
     try {
-      const query = { myUserID: req.params.userID };
+      const query = { myUserId: req.params.id };
       const updates = {
         $set: {
-          name: req.body.name,
+          myName: req.body.name,
           myBio: req.body.bio,
           myLocation: req.body.location,
         },
