@@ -5,8 +5,6 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import App from "./App";
-import Record from "./components/Record";
-import RecordList from "./components/RecordList";
 import CreatePostPage from "./CreatePostPage";
 import "./index.css";
 import LoginPage from "./LoginPage";
@@ -19,10 +17,14 @@ const router = createBrowserRouter([
     path: "/",
     element: <LoginPage />,
   },
-  // {
-  //   path: "/logout",
-  //   element: <LoginPage />,
-  // },
+  {
+    path: "/submitReport",
+    element: <SubmitReportPage />,
+  },
+  {
+    path: "/myProfile",
+    element: <MyProfilePage />,
+  },
   {
     path: "/createAccount",
     element: <CreateAccountPage />

@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 
 export function ProfileButton() {
 return (
-    <Link to="/createAccount">
+    <Link to="/myProfile">
         <div style={{
             color: "black",
             textDecoration: "underline"
