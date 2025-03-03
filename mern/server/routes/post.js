@@ -109,9 +109,9 @@ router.patch("/:id", async (req, res) => {
       listerPosts.splice(index,1);
       await profileCollection.updateOne(
         {myUserId: listerId},
-        {$set: {myPost: listerPosts}});
+        {$set: {myPosts: listerPosts}});
 
-      for(let i = 0; i < participantsIds.length(); i++){
+      for(let i = 0; i < participantsIds.length; i++){
         let participantId = participantsIds[i];
         let participantProfile = await profileCollection.findOne({myUserId: participantId});
         let participantPosts = participantProfile.myJoinedPosts;
