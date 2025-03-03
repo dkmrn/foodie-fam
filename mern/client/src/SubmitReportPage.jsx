@@ -4,7 +4,8 @@ import React from "react";
 const SubmitReportPage = () => {
     return (
         <div>
-            <SubmitReport />
+            <h1>this is the report page</h1>
+            <SubmitReport /> 
         </div>
     )
 }
