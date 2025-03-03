@@ -1,12 +1,12 @@
 import { useState } from "react";
 
 export function CreateAccount() {
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Submitted Username:", username);
+        console.log("Submitted Email:", email);
         console.log("Submitted Password:", password);
         // You can add logic to send this data to your backend here
     };
@@ -31,9 +31,9 @@ export function CreateAccount() {
                 <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column" }}>
                     <input 
                         type="text" 
-                        placeholder="Username" 
-                        value={username} 
-                        onChange={(e) => setUsername(e.target.value)} 
+                        placeholder="Email" 
+                        value={email} 
+                        onChange={(e) => setEmail(e.target.value)} 
                         required
                         style={{
                             padding: "10px",
