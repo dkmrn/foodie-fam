@@ -1,12 +1,12 @@
 import { SubmitReport } from "./components/SubmitReport";
 import React from "react";
 
-const SubmitReportPage = () => {
+const MyProfilePage = () => {
     return (
         <div>
-            <SubmitReport /> 
+           
         </div>
     )
 }
 
-export default SubmitReportPage;
+export default MyProfilePage;

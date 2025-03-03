@@ -5,6 +5,7 @@ import { Logout } from "./components/logout";
 import  { ProfileButton } from "./components/profileButton";
 import { ReportButton } from "./components/reportButton";
 import { useState } from 'react';
+import {SubmitReport } from "./components/SubmitReport";
 
 
 
@@ -14,6 +15,13 @@ const App = () => {
   // NEED TO UPDATE THIS ACCORDING TO EACH NEW POST
   const users = ["Katia", "Joyce", "Amanda", "Daya", "Joaquin"];
 
+  const [isReportOpen, setIsReportOpen] = useState(false);
+  const openReport = () => {
+    setIsReportOpen(true);
+  }
+  const closeReport = () => {
+    setIsReportOpen(false);
+  }
 
   return (
     <div className="container">
@@ -36,20 +44,27 @@ const App = () => {
         </div>
 
         <div className="report-button">
-          <ReportButton />
+          <ReportButton onClick={openReport}/>
         </div>
       </header>
 
+      {isReportOpen && (
+      <div className="popup">
+        <div className="popup-inside">
+          <button className="exit-report" onClick={closeReport}>
+            X
+          </button>
+          <SubmitReport />
+        </div>
+      </div>
+      )}
 
       <div className="grid">
         {users.map((user,index) => (
           <div 
             key = {index}
         >
-        <
-          Post
-          username ={user}
-        />
+        <Post username ={user}/>
           </div>
         ))}
       </div>

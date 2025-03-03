@@ -9,18 +9,14 @@ import CreatePostPage from "./CreatePostPage";
 import Record from "./components/Record";
 import RecordList from "./components/RecordList";
 import SubmitReportPage from "./SubmitReportPage";
+import MyProfilePage from "./MyProfilePage";
 import "./index.css";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    children: [
-      {
-        path: "/",
-        element: <RecordList />,
-      },
-    ],
+   
   },
   {
     path: "/create",
