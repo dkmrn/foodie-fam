@@ -1,7 +1,7 @@
 // Utility function to create a new post
 export const sendPost = async (postData) => {
     try {
-      const response = await fetch("http://localhost:5050/posts", {
+      const response = await fetch("http://localhost:5050/post", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
