@@ -1,22 +1,8 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export function CreateAccount() {
-
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
-    const [formDataUser, setFormDataUser] = useState({
-        email: "",
-        password: ""
-    });
-
-    const [formDataProfile, setFormDataProfile] = useState({
-        userId: "",
-        name: "",
-        location: "",
-        bio: ""
-    });
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -24,9 +10,6 @@ export function CreateAccount() {
         console.log("Submitted Password:", password);
         // You can add logic to send this data to your backend here
     };
-
-    // So after creating use the return will be user id which will be used to create profile
-    //const responseUser = await sendUser(formDataUser);
 
     return (
         <div style={{
