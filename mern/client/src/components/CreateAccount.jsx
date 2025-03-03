@@ -16,20 +16,22 @@ export function CreateAccount() {
         bio: ""
     });
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log("Submitted Email:", email);
-        console.log("Submitted Password:", password);
-        // You can add logic to send this data to your backend here
-
+    
+    const handleSubmit = async () => {
         try {
-            const responseUser = sendUser(formDataUser);
+            const responseUser = await sendUser(formDataUser);
             console.log("User Created Successfully, User ID:", responseUser);
+            setFormDataUser({userId: responseUser});
+        } catch (error) {
+            console.error("Failed to submit profile:", error);
+        }
+        try {
+            const responseProfile = await sendProfile(formDataProfile);
+            console.log("Profile Created Successfully, Profile ID:", responseProfile);
         } catch (error) {
             console.error("Failed to submit profile:", error);
         }
     };
-
     return (
         <div style={{
             display: "flex",
