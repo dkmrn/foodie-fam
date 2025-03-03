@@ -1,6 +1,3 @@
-import user from "../../../server/routes/user.js";
-import profile from "../../../server/routes/profile.js";
-
 export const sendUser = async (userData) => {
     try{
         const response = await fetch("http://localhost:5050/user", {
