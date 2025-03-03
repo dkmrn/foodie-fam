@@ -6,7 +6,17 @@ import  { ProfileButton } from "./components/profileButton";
 import { ReportButton } from "./components/reportButton";
 import { useState } from 'react';
 
+// Post data structure
+/*
+    _id: "someMongoDBId",
+    name: "restaurant name",
+    location: "restaurant location",
+    date: "the date",
+    time: "the time",
+    listerId: "id of user who created post",
+    participants: [] 
 
+*/
 
 
 const App = () => {
