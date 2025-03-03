@@ -6,31 +6,46 @@ import {
 } from "react-router-dom";
 import App from "./App";
 import CreatePostPage from "./CreatePostPage";
-import Record from "./components/Record";
-import RecordList from "./components/RecordList";
-import SubmitReportPage from "./SubmitReportPage";
-import MyProfilePage from "./MyProfilePage";
 import "./index.css";
+import LoginPage from "./LoginPage";
+import MyProfilePage from "./MyProfilePage";
+import SubmitReportPage from "./SubmitReportPage";
+import CreateAccountPage from "./CreateAccountPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
-   
+    element: <LoginPage />,
+  },
+  {
+    path: "/submitReport",
+    element: <SubmitReportPage />,
+  },
+  {
+    path: "/myProfile",
+    element: <MyProfilePage />,
+  },
+  {
+    path: "/createAccount",
+    element: <CreateAccountPage />
   },
   {
     path: "/create",
     element: <CreatePostPage />,
   },
+
+
+
   {
-    path: "/edit/:id",
-    element: <App />,
-    children: [
-      {
-        path: "/edit/:id",
-        element: <Record />,
-      },
-    ],
+    path: "/tempGoToHomepage",
+    element: <App />
+  },
+
+
+
+  {
+    path: "/tempGoToHomepage",
+    element: <App />
   },
 ]);
 

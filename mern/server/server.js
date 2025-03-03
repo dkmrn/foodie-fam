@@ -1,8 +1,9 @@
 import express from "express";
 import cors from "cors";
 import records from "./routes/record.js";
-import users from "./routes/user.js";
-import posts from "./routes/posts.js";
+import user from "./routes/user.js";
+import post from "./routes/post.js";
+import profile from "./routes/profile.js";
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -14,9 +15,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/record", records);
-app.use("/user", users);
-app.use("/posts", posts);
-
+app.use("/user", user);
+app.use("/post", post);
+app.use("/profile", profile);
 
 // // Enable CORS for requests from localhost:5173
 // app.use(cors({
