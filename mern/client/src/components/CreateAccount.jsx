@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 export function CreateAccount() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    // const [email, setEmail] = useState("");
+    // const [password, setPassword] = useState("");
 
     const [formDataUser, setFormDataUser] = useState({
         email: "",
@@ -15,6 +15,22 @@ export function CreateAccount() {
         location: "",
         bio: ""
     });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        if (["email", "password"].includes(name)) {
+            setFormDataUser((prev) => ({
+                ...prev,
+                [name]: value
+            }));
+        } else {
+            setFormDataProfile((prev) => ({
+                ...prev,
+                [name]: value
+            }));
+        }
+    };
 
     
     const handleSubmit = async () => {
@@ -53,8 +69,9 @@ export function CreateAccount() {
                     <input 
                         type="text" 
                         placeholder="Email" 
-                        value={email} 
-                        onChange={(e) => setFormDataUser.email(e.target.value)} 
+                        name="email"
+                        value={formDataUser.email} 
+                        onChange={handleChange}  
                         required
                         style={{
                             padding: "10px",
@@ -66,8 +83,9 @@ export function CreateAccount() {
                     <input 
                         type="password" 
                         placeholder="Password" 
-                        value={password} 
-                        onChange={(e) => setFormDataUser.password(e.target.value)} 
+                        name="password"
+                        value={formDataUser.password} 
+                        onChange={handleChange}  
                         required
                         style={{
                             padding: "10px",
