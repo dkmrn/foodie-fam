@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import './createStyle.css';
 import { sendUser } from "../api/Users.js";
 import { sendProfile } from "../api/Profiles.js";
@@ -7,6 +7,8 @@ import { sendProfile } from "../api/Profiles.js";
 //ERRRO I MIGHT WANT TO FIX AT BOTTOM
 
 export function CreateAccount() {
+    const navigate = useNavigate(); //need this so we can navigate back to log in page after hitting submit
+
     const [formDataUser, setFormDataUser] = useState({
         email: "",
         password: ""
@@ -37,25 +39,33 @@ export function CreateAccount() {
 
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent default form submission
-        console.log("Form Data (User):", formDataUser);
-        console.log("Form Data (Profile):", formDataProfile);
+        console.log("Submitting user:", formDataUser);
 
         try {
             // Create user
             const responseUser = await sendUser(formDataUser);
-            console.log("User Created Successfully, User ID:", responseUser);
+            console.log("User created successfully:", responseUser);
+
+            if (!responseUser || !responseUser.insertedId) {
+                throw new Error("Invalid user response. User ID not found.");
+            }
 
             // Update formDataProfile with the new userId
-            let userId = responseUser.insertedId;
-            setFormDataProfile({userId: userId});
-            console.log("User ID:", userId);
+            const userId = responseUser.insertedId;
+
+            const updatedProfileData = { 
+                ...formDataProfile, 
+                userId 
+            };
 
             // Create profile
-            const responseProfile = await sendProfile({
-                ...formDataProfile,
-                userId: userId
-            });
+            const responseProfile = await sendProfile(updatedProfileData);
+
+            console.log("Received User ID:", userId);
+            console.log("Submitting profile:", updatedProfileData);
             console.log("Profile Created Successfully, Profile ID:", responseProfile);
+
+            navigate("/"); //go back to log in after creating an account
         } catch (error) {
             console.error("Failed to submit profile:", error);
         }
