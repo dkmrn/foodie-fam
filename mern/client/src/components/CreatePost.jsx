@@ -1,16 +1,18 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import './createStyle.css';
-import { sendPost } from "../api/sendPost";
+import { useState } from "react";
+import { sendPost } from "../api/Posts";
+import { useNavigate } from "react-router-dom";
+import { getUserId } from "../main.jsx";
 
 export function CreatePost() {
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         name: "",
         location: "",
         date: "",
         time: "",
         // additionalInfo: "", //for now, backend does not have parameter for additional info
-        lister: { _id: "67c39b3435f7f948775ce6ce", name: "eggert" } //for right now, only eggert
+        userId: getUserId()
     });
 
     const [additionalInfo, setAdditionalInfo] = useState("");
@@ -32,6 +34,9 @@ export function CreatePost() {
             //send formData to backend
             const response = await sendPost(formData);
             console.log("Post Created Successfully:", response);
+
+            navigate("/goToHomepage");
+
         } catch (error) {
             console.error("Failed to submit post:", error);
         }

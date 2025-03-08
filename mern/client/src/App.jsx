@@ -1,11 +1,23 @@
 import { Outlet } from "react-router-dom";
-import DummyPost from "./components/dummyPost";
-import { GoToCreate } from "./components/dummyCreate";
+import Post from "./components/Post";
+import { GoToCreate } from "./components/Create";
 import { Logout } from "./components/logout";
 import  { ProfileButton } from "./components/profileButton";
 import { ReportButton } from "./components/reportButton";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { fetchPosts } from "./api/Posts";
 
+// Post data structure
+/*
+    _id: "someMongoDBId",
+    name: "restaurant name",
+    location: "restaurant location",
+    date: "the date",
+    time: "the time",
+    listerId: "id of user who created post",
+    participants: [] 
+
+*/
 
 
 
@@ -13,6 +25,27 @@ const App = () => {
   // Sample array of items 
   // NEED TO UPDATE THIS ACCORDING TO EACH NEW POST
   const users = ["Katia", "Joyce", "Amanda", "Daya", "Joaquin"];
+
+  const [postArray, setPostArray] = useState([]);
+
+  useEffect(() => 
+  {
+    async function getPostArray()
+    {
+      try
+      {
+        const postArray = await fetchPosts();
+        setPostArray(postArray);
+      }
+      catch(error)
+      {
+        console.error("Failed to fetch posts:", error);
+      };
+    };
+    getPostArray();
+  },[]);
+
+  console.log(postArray);
 
 
   return (
@@ -42,12 +75,13 @@ const App = () => {
 
 
       <div className="grid">
+
         {users.map((user,index) => (
           <div 
             key = {index}
         >
         <
-          DummyPost
+          Post
           username ={user}
         />
           </div>

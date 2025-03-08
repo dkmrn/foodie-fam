@@ -33,7 +33,7 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
     try {
       const userCollection = await db.collection("users");
-      const user = await userCollection.findOne({ _id: new ObjectId(req.body.lister._id) });
+      const user = await userCollection.findOne({ _id: new ObjectId(req.body.userId) });
       if (!user) {
         return res.status(404).send("User not found")};
 
@@ -42,12 +42,21 @@ router.post("/", async (req, res) => {
         location: req.body.location,
         date: req.body.date,
         time: req.body.time,
-        lister: { _id: user._id, name: user.name },
+        listerId: req.body.userId,
         participants: [],
       };
+
       let collection = await db.collection("posts");
       let result = await collection.insertOne(newDocument);
-      res.send(result).status(204);
+      let post = await collection.findOne({ _id: result.insertedId });
+      
+
+      let profileCollection = await db.collection("profiles");
+      await profileCollection.findOneAndUpdate({ myUserId: req.body.userId }, {$push: {myPosts: (post._id).toString() }});
+      
+      // profile.myPosts.push(post);
+      // await profileCollection.updateOne({ myUserId: req.body.userId }, { $set: { myPosts: profile.myPosts } });
+      res.send(post);
       // res.status(201).send(result);
     } catch (err) {
       console.error(err);
@@ -59,6 +68,7 @@ router.post("/", async (req, res) => {
       console.log(newDocument.lister._id);
       console.log(newDocument.lister.name);
       */
+
       res.status(500).send("Error adding posts");
     }
   });
@@ -73,10 +83,10 @@ router.patch("/:id", async (req, res) => {
             location: req.body.location,
             date: req.body.date,
             time: req.body.time,
-            lister: { user_id: user._id, user_name: user.name },
-            participants: [],
         },
       };
+      let collection = await db.collection("posts");
+      let result = await collection.updateOne(query, updates);
       res.send(result).status(200);
     } catch (err) {
       console.error(err);
@@ -87,10 +97,34 @@ router.patch("/:id", async (req, res) => {
   // This section will help you delete a record
   router.delete("/:id", async (req, res) => {
     try {
-      const query = { _id: new ObjectId(req.params.id) };
-  
-      const collection = db.collection("posts");
-      let result = await collection.deleteOne(query);
+      let postCollection = await db.collection('posts');
+      let post = await postCollection.findOne({_id: new ObjectId(req.params.id)});
+
+      let listerId = post.listerId;
+      let participantsIds = post.participants;
+
+      let profileCollection = await db.collection('profiles');
+
+      let listerProfile = await profileCollection.findOne({myUserId: listerId});
+      let listerPosts = listerProfile.myPosts;
+      let index = listerPosts.indexOf(post);
+      listerPosts.splice(index,1);
+      await profileCollection.updateOne(
+        {myUserId: listerId},
+        {$set: {myPosts: listerPosts}});
+
+      for(let i = 0; i < participantsIds.length; i++){
+        let participantId = participantsIds[i];
+        let participantProfile = await profileCollection.findOne({myUserId: participantId});
+        let participantPosts = participantProfile.myJoinedPosts;
+        index = participantPosts.indexOf(post);
+        participantPosts.splice(index,1);
+        await profileCollection.updateOne(
+          {myUserId: participantId},
+          {$set: {myJoinedPosts: participantPosts}});
+      }
+      
+      let result = await postCollection.deleteOne(post);
   
       res.send(result).status(200);
     } catch (err) {
@@ -102,14 +136,26 @@ router.patch("/:id", async (req, res) => {
   router.patch("/:id/add-participant", async (req, res) => {
     try {
       //console.log('User ID:', req.body.user._id);
-      const user = await db.collection('users').findOne( {_id: new ObjectId(req.body.user._id)});
+      const user = await db.collection('users').findOne( {_id: new ObjectId(req.body.userId)});
       if (!user) {
-        return res.status(404).send(`User not found: ${req.body.user._id}`);
+        return res.status(404).send(`User not found: ${req.body.userId}`);
       }
+      console.log("FOUND USER")
+
+      
       await db.collection('posts').updateOne( 
         //{_id: new ObjectId(req.params.id)},
         {_id: new ObjectId(req.params.id)},
-        { $push: { participants: user} }
+        { $push: { participants: req.body.userId} }
+      );
+      console.log("UPDATED POST")
+
+      let postCollection = await db.collection('posts');
+      let post = await postCollection.findOne({_id: new ObjectId(req.params.id)});
+
+      await db.collection('profiles').findOneAndUpdate(
+        {myUserId: req.body.userId},
+        { $push: { myJoinedPosts: req.params.id} }
       );
       res.status(200).send("Participant added to post");
     }

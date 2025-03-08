@@ -6,34 +6,52 @@ import {
 } from "react-router-dom";
 import App from "./App";
 import CreatePostPage from "./CreatePostPage";
-import Record from "./components/Record";
-import RecordList from "./components/RecordList";
 import "./index.css";
+import LoginPage from "./LoginPage";
+import MyProfilePage from "./MyProfilePage";
+import SubmitReportPage from "./SubmitReportPage";
+import CreateAccountPage from "./CreateAccountPage";
+
+
+let storedUserId = null;
+
+export function setUserId(userId) {
+  try {
+    storedUserId = userId; // Store the userId in the variable
+  } catch (error) {
+    console.error("Failed to set userId:", error);
+  }
+}
+
+export function getUserId() {
+  return storedUserId; // Return the stored userId
+}
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
-    children: [
-      {
-        path: "/",
-        element: <RecordList />,
-      },
-    ],
+    element: <LoginPage />,
+  },
+  {
+    path: "/submitReport",
+    element: <SubmitReportPage />,
+  },
+  {
+    path: "/myProfile",
+    element: <MyProfilePage />,
+  },
+  {
+    path: "/createAccount",
+    element: <CreateAccountPage />
   },
   {
     path: "/create",
     element: <CreatePostPage />,
   },
+
   {
-    path: "/edit/:id",
-    element: <App />,
-    children: [
-      {
-        path: "/edit/:id",
-        element: <Record />,
-      },
-    ],
+    path: "/goToHomepage",
+    element: <App />
   },
 ]);
 
