@@ -5,6 +5,7 @@ import { Logout } from "./components/logout";
 import  { ProfileButton } from "./components/profileButton";
 import { ReportButton } from "./components/reportButton";
 import { useState } from 'react';
+import { fetchPosts } from "./api/Posts";
 
 // Post data structure
 /*

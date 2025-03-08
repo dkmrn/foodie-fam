@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import './createStyle.css';
-import { sendUser } from "../api/sendUser.js";
-import { sendProfile } from "../api/sendProfile.js";
+import { sendUser } from "../api/Users.js";
+import { sendProfile } from "../api/Profiles.js";
 
 //ERRRO I MIGHT WANT TO FIX AT BOTTOM
 
@@ -30,7 +30,7 @@ export function CreateAccount() {
         } else {
             setFormDataProfile((prev) => ({
                 ...prev,
-                userId: userId,
+                [name]: value,
             }));
         }
     };
