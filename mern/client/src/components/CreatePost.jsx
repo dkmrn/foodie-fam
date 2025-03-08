@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import './createStyle.css';
-import { sendPost } from "../api/sendPost";
+import { sendPost } from "../api/Post";
 
 export function CreatePost() {
     const [formData, setFormData] = useState({
