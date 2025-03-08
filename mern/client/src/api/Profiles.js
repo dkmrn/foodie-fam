@@ -12,8 +12,15 @@ export const sendProfile = async (profileData) => {
             throw new Error("Failed to create profile");
         }
 
-        const result = await response.json();
-        return result;
+        //fix the json error from createAccount (parsing empty)
+        const text = await response.text(); // Read as text first
+        if (!text) {
+            return {}; //return empty object instead of parsing empty response
+        }
+        return JSON.parse(text);
+
+        // const result = await response.json();
+        // return result;
     } catch (error) {
         console.error("Error creating profile:", error);
         throw error;
