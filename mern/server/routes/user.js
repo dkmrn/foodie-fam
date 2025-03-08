@@ -118,14 +118,16 @@ router.post("/login", async (req, res) => {
     let query = { email: req.body.email };
     let user = await collection.findOne(query);
  
-    if (!user) return res.status(400).send("User not found");
+    if (!user) return res.status(400).send("Please enter a valid email and password.");
 
     const validPassword = await bcrypt.compare(req.body.password, user.password);
 
-    if (!validPassword) return res.status(400).send("Please enter a valid password.");
+    if (!validPassword) return res.status(400).send("Please enter a valid email and password.");
 
     //at this point, login is successful, return the user info without the password info
     user.password = undefined;
+
+    console.log("LOGIN SUCCESS!")
 
     res.send(user);
   } catch (err) {
@@ -133,6 +135,5 @@ router.post("/login", async (req, res) => {
     res.status(500).send("Something went wrong");
   }
 });
-
 
 export default router;
