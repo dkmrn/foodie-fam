@@ -34,7 +34,7 @@ const App = () => {
     setIsReportOpen(false);
   };
 
-  const array = ["test"];
+  const array = ["test", "test"];
 
   return (
     <div className="container">
