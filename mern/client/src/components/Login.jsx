@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { loginUser } from "../api/Users.js";
-import { loginUser } from "../api/Users.js";
 
 // make the login page auto refresh
 
@@ -11,8 +10,6 @@ export function Login() {
         email: "",
         password: "",
     });
-    const [error, setError] = useState(""); // state used to handle login errors
-    const navigate = useNavigate(); // to use for navigation after successful login
     const [error, setError] = useState(""); // state used to handle login errors
     const navigate = useNavigate(); // to use for navigation after successful login
     
@@ -26,7 +23,6 @@ export function Login() {
     const handleSubmit = async () => {
     const handleSubmit = async () => {
         setIsSubmitted(true);
-        setError(""); // clear previous login errors
         setError(""); // clear previous login errors
         console.log("user email is: ", formData.email);
         console.log("user pass is: ", formData.password);
@@ -79,3 +75,4 @@ export function Login() {
     </div>
     );
 };
+}
