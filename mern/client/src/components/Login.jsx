@@ -32,7 +32,7 @@ export function Login() {
 
             if (loginResponse && loginResponse._id) {
                 console.log("Login successful! Response: ", loginResponse);
-                navigate("/tempGoToHomepage");
+                navigate("/goToHomepage");
             } else {
                 console.error("Login error due to unexpected response format: ", loginResponse);
                 setError("Login failed. Please check your username and password.");
