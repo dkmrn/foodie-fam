@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { sendPost } from "../api/Posts";
-<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
-
-=======
 import { getUserId } from "../main.jsx";
->>>>>>> 472edf9 (Attempts to creates post with usserID)
 
 export function CreatePost() {
     const navigate = useNavigate();
