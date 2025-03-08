@@ -42,95 +42,139 @@ export function CreatePost() {
         }
     };
 
-    return <div className="rectangle">
-        <div className="text highlight-background" style={{ position: 'absolute', fontSize: '5vh', top: '6vh', color: 'black' }}>
-            Cook Up Your FoodieFam Feast!
+    return (
+        <div style={styles.container}>
+            <h1 style={styles.heading}>Cook Up Your FoodieFam Feast!</h1>
+
+            <div style={styles.formContainer}>
+                <label style={styles.label}>Restaurant:</label>
+                <input
+                    type="text"
+                    className="input-box"
+                    style={styles.input}
+                    placeholder="BCD"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    disabled={isSubmitted}
+                />
+
+                <label style={styles.label}>Address:</label>
+                <input
+                    type="text"
+                    className="input-box"
+                    style={styles.input}
+                    placeholder="123 Christmas Lane"
+                    name="location"
+                    value={formData.location}
+                    onChange={handleChange}
+                    disabled={isSubmitted}
+                />
+
+                <label style={styles.label}>Date:</label>
+                <input
+                    type="date"
+                    className="input-box"
+                    style={styles.input}
+                    name="date"
+                    value={formData.date}
+                    onChange={handleChange}
+                    disabled={isSubmitted}
+                />
+
+                <label style={styles.label}>Time:</label>
+                <input
+                    type="time"
+                    className="input-box"
+                    style={styles.input}
+                    name="time"
+                    value={formData.time}
+                    onChange={handleChange}
+                    disabled={isSubmitted}
+                />
+
+                <label style={styles.label}>Additional Info:</label>
+                <textarea
+                    className="input-box"
+                    style={styles.textarea}
+                    placeholder="Any allergies? What dishes are you planning on ordering?"
+                    value={additionalInfo}
+                    onChange={(e) => setAdditionalInfo(e.target.value)}
+                    disabled={isSubmitted}
+                ></textarea>
+
+                <button
+                    className="createButton"
+                    style={styles.button}
+                    onClick={handleSubmit}
+                    disabled={isSubmitted}
+                >
+                    {isSubmitted ? "Submitted" : "Submit Post"}
+                </button>
+            </div>
         </div>
+    );
+}
 
+// Styles
+const styles = {
+    container: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
+        backgroundColor: "#f4e9dc", // Soft beige background
+        fontFamily: "'Arial', sans-serif",
+    },
+    heading: {
+        fontSize: "28px",
+        color: "#d66b4d", // Coral color
+        marginBottom: "20px",
+    },
+    formContainer: {
+        background: "#fffaf2", // Light beige box
+        padding: "30px",
+        borderRadius: "12px",
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+        textAlign: "center",
+        width: "350px",
+        display: "flex",
+        flexDirection: "column",
+    },
+    label: {
+        fontSize: "16px",
+        color: "#5a7d5a", // Soft green
+        marginBottom: "8px",
+        textAlign: "left",
+    },
+    input: {
+        width: "100%",
+        padding: "12px",
+        marginBottom: "15px",
+        border: "2px solid #d9c2a3", // Soft beige border
+        borderRadius: "8px",
+        fontSize: "16px",
+    },
+    textarea: {
+        width: "100%",
+        padding: "12px",
+        marginBottom: "15px",
+        border: "2px solid #d9c2a3",
+        borderRadius: "8px",
+        fontSize: "16px",
+        minHeight: "80px",
+    },
+    button: {
+        backgroundColor: "#5a7d5a", // Soft green button
+        color: "white",
+        fontSize: "16px",
+        padding: "12px",
+        borderRadius: "8px",
+        cursor: "pointer",
+        border: "none",
+        transition: "background 0.3s",
+    },
+};
 
-        <div className="text" style={{ position: 'absolute', top: '30vh', color: '#95c1e8' }}>
-            Restaurant:
-        </div>
-        <textarea 
-                className="input-box" 
-                style={{ position: 'absolute', top: '25vh', width: '25vw', height: '5vh' }} 
-                placeholder="BCD"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                disabled={isSubmitted}
-        ></textarea>
-
-
-        <div className="text" style={{ position: 'absolute', top: '45vh', color: '#95c1e8' }}>
-            Address:
-        </div>
-        <textarea 
-                className="input-box" 
-                style={{ position: 'absolute', top: '40vh', width: '25vw', height: '5vh' }} 
-                placeholder="123 Christmas Lane"
-                name="location"
-                value={formData.location}
-                onChange={handleChange}
-                disabled={isSubmitted}
-        ></textarea>
-
-
-        <div className="text" style={{ position: 'absolute', top: '60vh', color: '#95c1e8' }}>
-            Date:
-        </div>
-        <textarea 
-                className="input-box" 
-                style={{ position: 'absolute', top: '55vh', width: '25vw', height: '5vh' }} 
-                placeholder="1/1/2026"
-                name="date"
-                value={formData.date}
-                onChange={handleChange}
-                disabled={isSubmitted}
-        ></textarea>
-
-
-        <div className="text" style={{ position: 'absolute', top: '75vh', color: '#95c1e8' }}>
-            Time:
-        </div>
-        <textarea 
-                className="input-box" 
-                style={{ position: 'absolute', top: '70vh', width: '25vw', height: '5vh' }} 
-                placeholder="0:00"
-                name="time"
-                value={formData.time}
-                onChange={handleChange}
-                disabled={isSubmitted}
-        ></textarea>
-
-
-        <div className="text" style={{ position: 'absolute', top: '105vh', color: '#95c1e8' }}>
-            Additional Info:
-        </div>
-        <textarea 
-                className="input-box" 
-                style={{ position: 'absolute', top: '85vh', width: '25vw', height: '20vh' }} 
-                placeholder="Any allergies? What dishes are you planning on ordering?"
-                // name="additionalInfo"
-                // value={formData.additionalInfo}
-                // onChange={handleChange}
-                // disabled={isSubmitted}
-                value={additionalInfo}
-                onChange={(e) => setAdditionalInfo(e.target.value)}
-                disabled={isSubmitted}
-        ></textarea>
-
-
-        <div style={{ color: "black" }} >
-            <button className="createButton" style={{ position: 'absolute',top:'118vh', left: '50%', transform: 'translate(-50%, -50%)', color: '#95c1e8' }}
-                onClick={handleSubmit}
-                disabled={isSubmitted}
-            >
-                {isSubmitted ? "Submitted" : "Submit Post"}
-            </button>
-        </div>
-
-    </div>;
-} 
-//NOTE*** when opening the console, the submit post page does not scale correctly --> look into this
-    // might need to make it that the text is relative while rectangle is absolute instead
+export default CreatePost;
