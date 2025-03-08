@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import './createStyle.css';
 import { sendUser } from "../api/Users.js";
 import { sendProfile } from "../api/Profiles.js";
+import { setUserId } from "../main.jsx";
 
 //ERRRO I MIGHT WANT TO FIX AT BOTTOM
 
@@ -57,6 +58,9 @@ export function CreateAccount() {
                 ...formDataProfile, 
                 userId 
             };
+
+            // Update main to have the userId
+            setUserId(userId);
 
             // Create profile
             const responseProfile = await sendProfile(updatedProfileData);
