@@ -4,22 +4,8 @@ import { GoToCreate } from "./components/Create";
 import { Logout } from "./components/logout";
 import  { ProfileButton } from "./components/profileButton";
 import { ReportButton } from "./components/reportButton";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {SubmitReport } from "./components/SubmitReport";
-import { fetchPosts } from "./api/Posts";
-
-// Post data structure
-/*
-    _id: "someMongoDBId",
-    name: "restaurant name",
-    location: "restaurant location",
-    date: "the date",
-    time: "the time",
-    listerId: "id of user who created post",
-    participants: [] 
-
-*/
-
 
 
 const App = () => {
@@ -35,28 +21,7 @@ const App = () => {
     setIsReportOpen(false);
   };
 
-  const array = ["test", "test"];
-  const [postArray, setPostArray] = useState([]);
-
-  useEffect(() => 
-  {
-    async function getPostArray()
-    {
-      try
-      {
-        const postArray = await fetchPosts();
-        setPostArray(postArray);
-      }
-      catch(error)
-      {
-        console.error("Failed to fetch posts:", error);
-      };
-    };
-    getPostArray();
-  },[]);
-
-  console.log(postArray);
-
+  const array = ["test"];
 
   return (
     <div className="container">
@@ -95,8 +60,7 @@ const App = () => {
       )}
 
       <div className="grid">
-
-        {users.map((user,index) => (
+        {array.map((userID,index) => (
           <div 
             key = {index}>
         <Post username ={userID}/>
