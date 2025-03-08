@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { sendPost } from "../api/Posts";
 import { useNavigate } from "react-router-dom";
-
+import { getUserId } from "../main.jsx";
 
 export function CreatePost() {
     const navigate = useNavigate();
@@ -12,7 +12,7 @@ export function CreatePost() {
         date: "",
         time: "",
         // additionalInfo: "", //for now, backend does not have parameter for additional info
-        lister: { _id: "67c39b3435f7f948775ce6ce", name: "eggert" } //for right now, only eggert
+        userId: getUserId()
     });
 
     const [additionalInfo, setAdditionalInfo] = useState("");

@@ -12,21 +12,19 @@ import MyProfilePage from "./MyProfilePage";
 import SubmitReportPage from "./SubmitReportPage";
 import CreateAccountPage from "./CreateAccountPage";
 
-export function setUserId(userId)
-{
-  try
-  {
-    setUserId(userId);
-  }
-  catch(error)
-  {
+
+let storedUserId = null;
+
+export function setUserId(userId) {
+  try {
+    storedUserId = userId; // Store the userId in the variable
+  } catch (error) {
     console.error("Failed to set userId:", error);
   }
 }
 
-export function getUserId()
-{
-  return userId;
+export function getUserId() {
+  return storedUserId; // Return the stored userId
 }
 
 const router = createBrowserRouter([
