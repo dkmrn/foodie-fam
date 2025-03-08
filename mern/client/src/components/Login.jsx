@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { loginUser } from "../api/Users.js";
 
 // make the login page auto refresh
 
@@ -9,6 +10,8 @@ export function Login() {
         email: "",
         password: "",
     });
+    const [error, setError] = useState(""); // state used to handle login errors
+    const navigate = useNavigate(); // to use for navigation after successful login
     
     const handleChange = (info) => {
         setFormData((formData) => ({
@@ -17,10 +20,29 @@ export function Login() {
         }));
     };
     
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         setIsSubmitted(true);
+        setError(""); // clear previous login errors
         console.log("user email is: ", formData.email);
         console.log("user pass is: ", formData.password);
+
+        // implementing use of loginUser() from Users.js
+        try {
+            const loginResponse = await loginUser(formData);
+
+            if (loginResponse && loginResponse._id) {
+                console.log("Login successful! Response: ", loginResponse);
+                navigate("/tempGoToHomepage");
+            } else {
+                console.error("Login error due to unexpected response format: ", loginResponse);
+                setError("Login failed. Please check your username and password.");
+                setIsSubmitted(false); // allows for the user to retry
+            }
+        } catch (error) {
+            console.error("Login Error: ", error.message);
+            setError("Login failed. Please check your username and password!")
+            setIsSubmitted(false); // allows for the user to retry
+        }
     };
     
     return (
