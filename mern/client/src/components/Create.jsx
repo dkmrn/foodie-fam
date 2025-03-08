@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import './createStyle.css';
+// import './createStyle.css';
 
 export function GoToCreate() {
     return (

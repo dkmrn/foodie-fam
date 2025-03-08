@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import './createStyle.css';
+// import './createStyle.css';
 import { sendUser } from "../api/Users.js";
 import { sendProfile } from "../api/Profiles.js";
 
