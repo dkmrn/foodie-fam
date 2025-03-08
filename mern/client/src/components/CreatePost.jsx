@@ -129,11 +129,11 @@ const styles = {
     },
     heading: {
         fontSize: "28px",
-        color: "#d66b4d", // Coral color
+        color: "#d66b4d", //coral
         marginBottom: "20px",
     },
     formContainer: {
-        background: "#fffaf2", // Light beige box
+        background: "#fffaf2", //light beige box
         padding: "30px",
         borderRadius: "12px",
         boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
@@ -144,7 +144,7 @@ const styles = {
     },
     label: {
         fontSize: "16px",
-        color: "#5a7d5a", // Soft green
+        color: "#5a7d5a", //soft green
         marginBottom: "8px",
         textAlign: "left",
     },
@@ -152,7 +152,7 @@ const styles = {
         width: "100%",
         padding: "12px",
         marginBottom: "15px",
-        border: "2px solid #d9c2a3", // Soft beige border
+        border: "2px solid #d9c2a3", //beige border
         borderRadius: "8px",
         fontSize: "16px",
     },
@@ -166,7 +166,7 @@ const styles = {
         minHeight: "80px",
     },
     button: {
-        backgroundColor: "#5a7d5a", // Soft green button
+        backgroundColor: "#5a7d5a", //green button
         color: "white",
         fontSize: "16px",
         padding: "12px",
