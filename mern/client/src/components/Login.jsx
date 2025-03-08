@@ -21,7 +21,6 @@ export function Login() {
     };
     
     const handleSubmit = async () => {
-    const handleSubmit = async () => {
         setIsSubmitted(true);
         setError(""); // clear previous login errors
         console.log("user email is: ", formData.email);
@@ -75,4 +74,3 @@ export function Login() {
     </div>
     );
 };
-}
