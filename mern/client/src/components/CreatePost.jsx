@@ -32,6 +32,7 @@ export function CreatePost() {
         // console.log("Submitted Data:", formData);
         try {
             //send formData to backend
+            console.log(formData.userId);
             const response = await sendPost(formData);
             console.log("Post Created Successfully:", response);
 
