@@ -63,6 +63,10 @@ router.post("/", async (req, res) => {
       password: myhash,
     };
     let collection = await db.collection("users");
+
+    let user = await collection.findOne({email: req.body.email});
+    if (user) return res.status(400).send("An account with this email already exists.");
+
     let result = await collection.insertOne(newDocument);
     res.send(result).status(204);
   } catch (err) {
