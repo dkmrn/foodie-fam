@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { loginUser } from "../api/Users.js";
+import { loginUser } from "../api/Users.js";
 
 // make the login page auto refresh
 
@@ -12,6 +13,8 @@ export function Login() {
     });
     const [error, setError] = useState(""); // state used to handle login errors
     const navigate = useNavigate(); // to use for navigation after successful login
+    const [error, setError] = useState(""); // state used to handle login errors
+    const navigate = useNavigate(); // to use for navigation after successful login
     
     const handleChange = (info) => {
         setFormData((formData) => ({
@@ -21,7 +24,9 @@ export function Login() {
     };
     
     const handleSubmit = async () => {
+    const handleSubmit = async () => {
         setIsSubmitted(true);
+        setError(""); // clear previous login errors
         setError(""); // clear previous login errors
         console.log("user email is: ", formData.email);
         console.log("user pass is: ", formData.password);
@@ -32,7 +37,7 @@ export function Login() {
 
             if (loginResponse && loginResponse._id) {
                 console.log("Login successful! Response: ", loginResponse);
-                navigate("/tempGoToHomepage");
+                navigate("/goToHomepage");
             } else {
                 console.error("Login error due to unexpected response format: ", loginResponse);
                 setError("Login failed. Please check your username and password.");
