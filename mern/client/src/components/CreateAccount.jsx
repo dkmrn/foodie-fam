@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import './createStyle.css';
-import { sendUser } from "../api/sendUser.js";
-import { sendProfile } from "../api/sendProfile.js";
+import { sendUser } from "../api/Users.js";
+import { sendProfile } from "../api/Profiles.js";
 
 //ERRRO I MIGHT WANT TO FIX AT BOTTOM
 
@@ -30,13 +30,15 @@ export function CreateAccount() {
         } else {
             setFormDataProfile((prev) => ({
                 ...prev,
-                [name]: value
+                [name]: value,
             }));
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent default form submission
+        console.log("Form Data (User):", formDataUser);
+        console.log("Form Data (Profile):", formDataProfile);
 
         try {
             // Create user
@@ -134,7 +136,8 @@ export function CreateAccount() {
                         }}
                     />
                     <textarea 
-                        placeholder="Bio" 
+                        placeholder="Tell us more about you! 
+Any allergies?" 
                         name="bio"
                         value={formDataProfile.bio} 
                         onChange={handleChange}  
