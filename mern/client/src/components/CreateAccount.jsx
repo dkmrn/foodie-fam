@@ -30,13 +30,15 @@ export function CreateAccount() {
         } else {
             setFormDataProfile((prev) => ({
                 ...prev,
-                [name]: value
+                userId: userId,
             }));
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent default form submission
+        console.log("Form Data (User):", formDataUser);
+        console.log("Form Data (Profile):", formDataProfile);
 
         try {
             // Create user
@@ -134,7 +136,8 @@ export function CreateAccount() {
                         }}
                     />
                     <textarea 
-                        placeholder="Bio" 
+                        placeholder="Tell us more about you! 
+Any allergies?" 
                         name="bio"
                         value={formDataProfile.bio} 
                         onChange={handleChange}  
