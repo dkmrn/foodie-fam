@@ -8,20 +8,20 @@ import { useState } from 'react';
 import {SubmitReport } from "./components/SubmitReport";
 
 
-
-
 const App = () => {
   // Sample array of items 
   // NEED TO UPDATE THIS ACCORDING TO EACH NEW POST
-  const users = ["Katia", "Joyce", "Amanda", "Daya", "Joaquin"];
+
 
   const [isReportOpen, setIsReportOpen] = useState(false);
   const openReport = () => {
     setIsReportOpen(true);
-  }
+  };
   const closeReport = () => {
     setIsReportOpen(false);
-  }
+  };
+
+  const array = ["test"];
 
   return (
     <div className="container">
@@ -60,11 +60,10 @@ const App = () => {
       )}
 
       <div className="grid">
-        {users.map((user,index) => (
+        {array.map((userID,index) => (
           <div 
-            key = {index}
-        >
-        <Post username ={user}/>
+            key = {index}>
+        <Post username ={userID}/>
           </div>
         ))}
       </div>
