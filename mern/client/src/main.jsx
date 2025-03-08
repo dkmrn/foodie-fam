@@ -12,8 +12,6 @@ import MyProfilePage from "./MyProfilePage";
 import SubmitReportPage from "./SubmitReportPage";
 import CreateAccountPage from "./CreateAccountPage";
 
-const [userId, setUserId] = useState("");
-
 export function setUserId(userId)
 {
   try
