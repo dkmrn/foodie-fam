@@ -51,17 +51,8 @@ const router = createBrowserRouter([
     element: <CreatePostPage />,
   },
 
-
-
   {
-    path: "/tempGoToHomepage",
-    element: <App />
-  },
-
-
-
-  {
-    path: "/tempGoToHomepage",
+    path: "/goToHomepage",
     element: <App />
   },
 ]);

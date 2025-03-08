@@ -19,7 +19,7 @@ const LoginPage = () => {
 
 
             {/* From Amanda:this is temporary button that takes us to home page w/o logging in */}
-            <Link to="/tempGoToHomepage">
+            <Link to="/goToHomepage">
                 <button onClick={handleClick} style={{ marginLeft: 'auto', marginRight: '0', display: 'block', width: 'auto' }}>temporary go to homepage</button>
             </Link>
         </div>
