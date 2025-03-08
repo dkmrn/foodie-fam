@@ -12,6 +12,25 @@ import MyProfilePage from "./MyProfilePage";
 import SubmitReportPage from "./SubmitReportPage";
 import CreateAccountPage from "./CreateAccountPage";
 
+const [userId, setUserId] = useState("");
+
+export function setUserId(userId)
+{
+  try
+  {
+    setUserId(userId);
+  }
+  catch(error)
+  {
+    console.error("Failed to set userId:", error);
+  }
+}
+
+export function getUserId()
+{
+  return userId;
+}
+
 const router = createBrowserRouter([
   {
     path: "/",
