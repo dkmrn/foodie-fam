@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import './createStyle.css';
+import { useState } from "react";
 import { sendPost } from "../api/Posts";
+import { useNavigate } from "react-router-dom";
+
 
 export function CreatePost() {
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         name: "",
         location: "",
@@ -32,6 +34,9 @@ export function CreatePost() {
             //send formData to backend
             const response = await sendPost(formData);
             console.log("Post Created Successfully:", response);
+
+            navigate("/goToHomepage");
+
         } catch (error) {
             console.error("Failed to submit post:", error);
         }

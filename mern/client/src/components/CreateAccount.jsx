@@ -65,7 +65,7 @@ export function CreateAccount() {
             console.log("Submitting profile:", updatedProfileData);
             console.log("Profile Created Successfully, Profile ID:", responseProfile);
 
-            navigate("/"); //go back to log in after creating an account
+            navigate("/goToHomepage"); //go back to log in after creating an account
         } catch (error) {
             console.error("Failed to submit profile:", error);
         }
