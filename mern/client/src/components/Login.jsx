@@ -33,6 +33,7 @@ export function Login() {
 
             if (loginResponse && loginResponse._id) {
                 console.log("Login successful! Response: ", loginResponse);
+                setUserId(loginResponse._id);
                 navigate("/goToHomepage");
 
             } else {
