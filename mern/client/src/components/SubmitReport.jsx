@@ -1,7 +1,5 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import './SubmitReportStyle.css';
-//import '@fortawesome/fontawesome-free/css/all.css';
 import { sendPost } from "../api/Posts";
 
 export function SubmitReport() {

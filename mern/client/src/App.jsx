@@ -1,4 +1,3 @@
-import { Outlet } from "react-router-dom";
 import Post from "./components/Post";
 import { GoToCreate } from "./components/Create";
 import { Logout } from "./components/logout";
