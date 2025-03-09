@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../api/Users.js";
 import { setUserId } from "../main.jsx";
+import { getUserId } from "../main";
 
 // make the login page auto refresh
 
@@ -49,6 +50,7 @@ export function Login() {
         }
     };
     
+    const userId = getUserId();
     return (
         <div className="login-box">
             <h1>Login Here!</h1>
@@ -75,6 +77,12 @@ export function Login() {
         />
         </div>
         <button className="login-buttons" type='submit' onClick={handleSubmit}>Submit</button>
+
+
+        <div style={{ padding: "20px", textAlign: "center" }}>
+          <p><strong>User ID:</strong> {userId ? userId : "No user logged in"}</p>
+        </div>
+
     </div>
     );
 };
