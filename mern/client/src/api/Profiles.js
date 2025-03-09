@@ -27,6 +27,47 @@ export const sendProfile = async (profileData) => {
     }
 };
 
+export const getProfile = async (userId) => {
+    try {
+    const response = await fetch(`http://localhost:5050/profile/${userId}`,{
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error("Failed to fetch user");
+    }
+
+    const data = await response.json();
+    return data;
+    } catch (error) {
+        console.error("Error fetching profile:", error);
+        throw error;
+    }
+  };
+
+  export const getName = async (userId) => {
+    try {
+    const response = await fetch(`http://localhost:5050/profile/${userId}`,{
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error("Failed to fetch user");
+    }
+
+    const data = await response.json();
+    return data.myName;
+    } catch (error) {
+        console.error("Error fetching profile:", error);
+        throw error;
+    }
+  };
 
 
 export const updateProfile = async (userId, profileData) => {
@@ -53,7 +94,7 @@ export const updateProfile = async (userId, profileData) => {
         // const result = await response.json();
         // return result;
     } catch (error) {
-        console.error("Error updatingf= profile:", error);
+        console.error("Error updating profile:", error);
         throw error;
     }
 };
