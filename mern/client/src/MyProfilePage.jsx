@@ -1,8 +1,10 @@
 import { MyProfile } from "./components/MyProfile";
-import React from "react";
 import './components/backgroundStyle.css';
 import { getUserId } from "./main";
 import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+
+
 
 
 const MyProfilePage = () => {
