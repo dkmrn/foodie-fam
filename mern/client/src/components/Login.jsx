@@ -66,7 +66,7 @@ export function Login() {
 
     return (
         <div style={styles.container}>
-            <h1 styler={styles.heading}>Login Here!</h1>
+            <h1 style={styles.heading}>Login Here!</h1>
 
             <div style={styles.formContainer}>
                 <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column" }}>
