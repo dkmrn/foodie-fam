@@ -22,6 +22,7 @@ const CreatePostPage = () => {
         <div>
             <CreatePost />
         </div>
+
     )
 }
 

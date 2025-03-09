@@ -71,6 +71,8 @@ export default function DummyPost({post}) {
 
    //const { name, location, date, time } = post;
    const [name, setName] = useState("");
+   const userId = getUserId();  // Get current user's ID
+   const isPostCreator = post.listerId === userId;  // Check if user is the creator
 
    useEffect(() => 
     {
@@ -91,16 +93,13 @@ export default function DummyPost({post}) {
 
     function handleClick() {
         const postId = post._id;
-        const userId = getUserId();
         
         console.log("Attempting to join post:", postId);
         console.log("Current user:", userId);
         
-        // Call the API to add participant
         addParticipant(postId, userId)
             .then(result => {
                 console.log("Successfully joined the post:", result);
-                // Maybe update UI to show user has joined
             })
             .catch(error => {
                 console.error("Failed to join post:", error);
@@ -153,21 +152,23 @@ export default function DummyPost({post}) {
                 <Content post ={post}/>
             </div>
 
-            {/*bottom request banner*/}
-            <div style={{
-                padding: '5%',
-                width: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                height: '20%',
-                justifyContent: 'center',
-                background: 'lightsteelblue',
-                marginTop: 'auto'
-            }}>
-                <button onClick={handleClick} style={{ 
-                    fontSize: 'min(3vw, 3vh)' 
-                }}><b>save me a seat!</b></button>
-            </div>
+            {/* Only show the button if user is not the post creator */}
+            {!isPostCreator && (
+                <div style={{
+                    padding: '5%',
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    height: '20%',
+                    justifyContent: 'center',
+                    background: 'lightsteelblue',
+                    marginTop: 'auto'
+                }}>
+                    <button onClick={handleClick} style={{ 
+                        fontSize: 'min(3vw, 3vh)' 
+                    }}><b>save me a seat!</b></button>
+                </div>
+            )}
         </div>
     );
 }
