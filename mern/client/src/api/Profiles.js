@@ -29,6 +29,7 @@ export const sendProfile = async (profileData) => {
 
 export const getProfile = async (userId) => {
     try {
+    console.log(`http://localhost:5050/profile/${userId}`);
     const response = await fetch(`http://localhost:5050/profile/${userId}`,{
         method: "GET",
         headers: {
@@ -36,11 +37,15 @@ export const getProfile = async (userId) => {
         },
     });
 
-    if (!response.ok) {
-        throw new Error("Failed to fetch user");
-    }
+
+    // if (!response) {
+    //     throw new Error("Failed to fetch user");
+    // }
 
     const data = await response.json();
+    // console.log("data");
+    // console.log(data);
+    // console.log(data.myName);
     return data;
     } catch (error) {
         console.error("Error fetching profile:", error);

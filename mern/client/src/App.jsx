@@ -5,6 +5,7 @@ import  { ProfileButton } from "./components/profileButton";
 import { ReportButton } from "./components/reportButton";
 import { useEffect, useState } from 'react';
 import { fetchPosts } from "./api/Posts";
+import './components/backgroundStyle.css';
 import {SubmitReport} from "./components/SubmitReport";
 import DummyPost from "./components/Post";
 

@@ -1,5 +1,6 @@
 import { MyProfile } from "./components/MyProfile";
 import React from "react";
+import './components/backgroundStyle.css';
 
 const MyProfilePage = () => {
     return (
