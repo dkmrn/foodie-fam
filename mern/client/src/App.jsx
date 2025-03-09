@@ -5,7 +5,7 @@ import  { ProfileButton } from "./components/profileButton";
 import { ReportButton } from "./components/reportButton";
 import { useEffect, useState } from 'react';
 import { fetchPosts } from "./api/Posts";
-import DummyPost from "./components/Post";
+import './components/backgroundStyle.css';
 
 // Post data structure
 /*

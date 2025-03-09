@@ -1,0 +1,7 @@
+/* Set background color for the entire page */
+body {
+    background-color: #b8debf;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
