@@ -54,6 +54,14 @@ export function Login() {
     return (
         <div className="login-box">
             <h1>Login Here!</h1>
+
+            {/* Display error message if there is one */}
+            {error && (
+                <div className="error-message" style={{ color: 'red', margin: '10px 0', fontWeight: 'bold' }}>
+                    {error}
+                </div>
+            )}
+            
             <div>
                 <p>email address: {formData.email}</p>
                 <input 
