@@ -41,22 +41,18 @@ const App = () => {
     }
   }, [userId, navigate]);
 
-  useEffect(() => 
-  {
-    async function getPostArray()
-    {
-      try
-      {
-        const postArray = await fetchPosts();
-        setPostArray(postArray);
-      }
-      catch(error)
-      {
+  useEffect(() => {
+    async function getPostArray() {
+      try {
+        const allPosts = await fetchPosts();
+        const filteredPosts = allPosts.filter(post => post.listerId !== userId);
+        setPostArray(filteredPosts);
+      } catch(error) {
         console.error("Failed to fetch posts:", error);
-      };
-    };
+      }
+    }
     getPostArray();
-  },[]);
+  }, [userId]);  // Added userId as dependency
 
   console.log(postArray);
 
