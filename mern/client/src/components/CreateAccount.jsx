@@ -142,6 +142,8 @@ export function CreateAccount() {
 }
 
 // Styles
+import beigebackground from "../assets/beigebackground.png";
+
 const styles = {
     container: {
         display: "flex",
@@ -149,7 +151,8 @@ const styles = {
         alignItems: "center",
         justifyContent: "center",
         height: "100vh",
-        backgroundColor: "#b8debf", // Soft beige background
+        backgroundColor: "#f4e9dc", // Soft beige background
+        backgroundImage: `url(${beigebackground})`,
         fontFamily: "'Arial', sans-serif",
     },
     heading: {
@@ -158,7 +161,7 @@ const styles = {
         marginBottom: "20px",
     },
     formContainer: {
-        background: "#b8debf", // Light beige box
+        background: "#fffaf2", // Light beige box
         padding: "30px",
         borderRadius: "12px",
         boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",

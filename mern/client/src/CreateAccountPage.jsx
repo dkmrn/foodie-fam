@@ -5,7 +5,7 @@ import './components/backgroundStyle.css';
 const CreateAccountPage = () => {
     return (
         <div>
-            {/* <CreateAccount /> */}
+             <CreateAccount />
         </div>
     )
 }
