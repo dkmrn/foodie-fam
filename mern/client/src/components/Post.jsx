@@ -15,6 +15,7 @@ function Content({ post }) {
     const time = getTime(post);
     const caption = getCaption(post); //(optional) additional info
     const postId = getPostId(post);
+    const numJoined = post.participants.length;
 
     return (
         <>
@@ -29,6 +30,7 @@ function Content({ post }) {
                     <h1><b>address: </b>{address}</h1>
                     <h1><b>date: </b>{date}</h1>
                     <h1><b>time: </b>{time}</h1>
+                    <h1><b># of people joined: </b>{numJoined}</h1>
                 </div>
             </div>
         </>
@@ -72,22 +74,18 @@ export default function DummyPost({post}) {
    //const { name, location, date, time } = post;
    const [name, setName] = useState("");
 
-   useEffect(() => 
-    {
-      async function fetchName(listerId)
-      {
-        try
-        {
-          const listerName = await getName(listerId);
-          setName(listerName);
+   useEffect(() => {
+    async function fetchName(listerId) {
+        try {
+            const listerName = await getName(listerId);
+            setName(listerName);
         }
-        catch(error)
-        {
+        catch(error) {
           console.error("Failed to get name from post:", error);
         };
       };
       fetchName(post.listerId);
-    },[]);
+    }, []);
 
     function handleClick() {
         const postId = post._id;
