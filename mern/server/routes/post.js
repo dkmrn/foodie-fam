@@ -135,31 +135,43 @@ router.patch("/:id", async (req, res) => {
 
   router.patch("/:id/add-participant", async (req, res) => {
     try {
-      //console.log('User ID:', req.body.user._id);
-      const user = await db.collection('users').findOne( {_id: new ObjectId(req.body.userId)});
+      console.log('Post ID:', req.params.id);
+      console.log('User ID:', req.body.userId);
+      
+      // First check if user exists
+      const userCollection = db.collection('users');
+      const user = await userCollection.findOne({_id: new ObjectId(req.body.userId)});
       if (!user) {
         return res.status(404).send(`User not found: ${req.body.userId}`);
       }
-      console.log("FOUND USER")
-
       
-      await db.collection('posts').updateOne( 
-        //{_id: new ObjectId(req.params.id)},
+      // Update the post to add the participant
+      const postCollection = db.collection('posts');
+      const updatePostResult = await postCollection.updateOne( 
         {_id: new ObjectId(req.params.id)},
-        { $push: { participants: req.body.userId} }
+        { $push: { participants: req.body.userId } }
       );
-      console.log("UPDATED POST")
-
-      let postCollection = await db.collection('posts');
-      let post = await postCollection.findOne({_id: new ObjectId(req.params.id)});
-
-      await db.collection('profiles').findOneAndUpdate(
-        {myUserId: req.body.userId},
-        { $push: { myJoinedPosts: req.params.id} }
+      
+      if (updatePostResult.matchedCount === 0) {
+        return res.status(404).send(`Post not found: ${req.params.id}`);
+      }
+      
+      // Update the user's profile to add the joined post
+      const profileCollection = db.collection('profiles');
+      const updateProfileResult = await profileCollection.updateOne(
+        { myUserId: req.body.userId },
+        { $push: { myJoinedPosts: req.params.id } }
       );
-      res.status(200).send("Participant added to post");
+      
+      if (updateProfileResult.matchedCount === 0) {
+        console.log(`Profile not found for user: ${req.body.userId}`);
+        // Continue anyway as the post was updated
+      }
+      
+      res.status(200).json({ message: "Participant added to post" });
     }
-    catch(err){
+    catch(err) {
+      console.error("Error adding participant:", err);
       res.status(500).send("Error adding user to participants");
     }
   });
