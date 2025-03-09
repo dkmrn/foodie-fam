@@ -66,7 +66,7 @@ function getPostId(post)
 
 
 
-export default function DummyPost({post}) {   
+export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLeave}) {   
    // const username = getUsername();
 
    //const { name, location, date, time } = post;
@@ -152,23 +152,62 @@ export default function DummyPost({post}) {
                 <Content post ={post}/>
             </div>
 
-            {/* Only show the button if user is not the post creator */}
-            {!isPostCreator && (
-                <div style={{
-                    padding: '5%',
-                    width: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    height: '20%',
-                    justifyContent: 'center',
-                    background: 'lightsteelblue',
-                    marginTop: 'auto'
-                }}>
-                    <button onClick={handleClick} style={{ 
-                        fontSize: 'min(3vw, 3vh)' 
-                    }}><b>save me a seat!</b></button>
-                </div>
-            )}
+            {/* Action buttons */}
+            <div style={{
+                padding: '5%',
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                height: '20%',
+                justifyContent: 'center',
+                background: 'lightsteelblue',
+                marginTop: 'auto',
+                gap: '10px' // Add space between buttons
+            }}>
+                {/* Show different buttons based on context */}
+                {isProfileView ? (
+                    isMyPost ? (
+                        <button 
+                            onClick={onDelete}
+                            style={{ 
+                                fontSize: 'min(3vw, 3vh)',
+                                backgroundColor: '#ff4444',
+                                color: 'white',
+                                border: 'none',
+                                padding: '8px 16px',
+                                borderRadius: '4px',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            <b>Delete Post</b>
+                        </button>
+                    ) : (
+                        <button 
+                            onClick={onLeave}
+                            style={{ 
+                                fontSize: 'min(3vw, 3vh)',
+                                backgroundColor: '#ff8800',
+                                color: 'white',
+                                border: 'none',
+                                padding: '8px 16px',
+                                borderRadius: '4px',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            <b>Leave Group</b>
+                        </button>
+                    )
+                ) : (
+                    !isPostCreator && (
+                        <button 
+                            onClick={handleClick}
+                            style={{ fontSize: 'min(3vw, 3vh)' }}
+                        >
+                            <b>save me a seat!</b>
+                        </button>
+                    )
+                )}
+            </div>
         </div>
     );
 }

@@ -77,7 +77,7 @@ export const sendPost = async (postData) => {
 
   export const removeParticipant = async (postId, userId) => {
     try {
-      const response = await fetch(`http://localhost:5050/post/${postId}/add-participant`, {
+      const response = await fetch(`http://localhost:5050/post/${postId}/remove-participant`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -127,7 +127,6 @@ export const sendPost = async (postData) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(postId),
       });
   
       if (!response.ok) {

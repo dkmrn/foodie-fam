@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import './MyProfile.css';
 import { getUserId } from "../main";
 import { getProfile } from "../api/Profiles";
-import { getPost } from "../api/Posts";
+import { getPost, deletePost, removeParticipant } from "../api/Posts";
 import Post from "./Post";
 
 export function MyProfile() {
@@ -69,6 +69,30 @@ export function MyProfile() {
         setActiveTab(tab);
     };
 
+    const handleDeletePost = async (postId) => {
+        if (window.confirm("Are you sure you want to delete this post?")) {
+            try {
+                await deletePost(postId);
+                // Remove the post from the local state
+                setMyPosts(myPosts.filter(post => post._id !== postId));
+            } catch (error) {
+                console.error("Failed to delete post:", error);
+            }
+        }
+    };
+
+    const handleLeaveGroup = async (postId) => {
+        if (window.confirm("Are you sure you want to leave this group?")) {
+            try {
+                await removeParticipant(postId, getUserId());
+                // Remove the post from joined posts
+                setJoinedPosts(joinedPosts.filter(post => post._id !== postId));
+            } catch (error) {
+                console.error("Failed to leave group:", error);
+            }
+        }
+    };
+
     if (loading) {
         return <div className="loading">Loading profile...</div>;
     }
@@ -115,7 +139,13 @@ export function MyProfile() {
                 {activeTab === "myPosts" ? (
                     myPosts.length > 0 ? (
                         myPosts.map((post, index) => (
-                            <Post key={index} post={post} />
+                            <Post 
+                                key={index} 
+                                post={post}
+                                isProfileView={true}
+                                isMyPost={true}
+                                onDelete={() => handleDeletePost(post._id)}
+                            />
                         ))
                     ) : (
                         <p className="no-posts">You haven't created any posts yet.</p>
@@ -123,7 +153,13 @@ export function MyProfile() {
                 ) : (
                     joinedPosts.length > 0 ? (
                         joinedPosts.map((post, index) => (
-                            <Post key={index} post={post} />
+                            <Post 
+                                key={index} 
+                                post={post}
+                                isProfileView={true}
+                                isMyPost={false}
+                                onLeave={() => handleLeaveGroup(post._id)}
+                            />
                         ))
                     ) : (
                         <p className="no-posts">You haven't joined any posts yet.</p>
