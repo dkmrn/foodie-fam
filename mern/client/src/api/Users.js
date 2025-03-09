@@ -22,13 +22,13 @@ export const sendUser = async (userData) => {
 
 export const getUser = async (userId) => {
     try {
-    const responce = await fetch(`http://localhost:5050/user/${userId}`,{
+    const response = await fetch(`http://localhost:5050/user/${userId}`,{
         method: "GET",
         headers: {
             "Content-Type": "application/json",
         },
     });
-    const data = await responce.json();
+    const data = await response.json();
     return data;
     } catch (error) {
         console.error("Error fetching user:", error);
