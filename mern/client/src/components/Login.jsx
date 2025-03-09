@@ -24,7 +24,7 @@ export function Login() {
     const handleSubmit = async () => {
         setIsSubmitted(true);
         setError(""); // clear previous login errors
-        console.log("user email is: ", formData.email);
+        console.log("user email is: ", formData.email);``
         console.log("user pass is: ", formData.password);
 
         // implementing use of loginUser() from Users.js
@@ -33,6 +33,7 @@ export function Login() {
 
             if (loginResponse && loginResponse._id) {
                 console.log("Login successful! Response: ", loginResponse);
+                console.log(loginResponse._id);
                 setUserId(loginResponse._id);
                 navigate("/goToHomepage");
 
