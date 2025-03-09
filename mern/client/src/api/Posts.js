@@ -1,12 +1,12 @@
 export const fetchPosts = async () => {
     try {
-    const responce = await fetch("http://localhost:5050/post",{
+    const response = await fetch("http://localhost:5050/post",{
         method: "GET",
         headers: {
             "Content-Type": "application/json",
         },
     });
-    const data = await responce.json();
+    const data = await response.json();
     return data;
     } catch (error) {
         console.error("Error fetching posts:", error);
@@ -16,13 +16,13 @@ export const fetchPosts = async () => {
 
 export const getPost = async (postId) => {
   try {
-  const responce = await fetch(`http://localhost:5050/post/${postId}`,{
+  const response = await fetch(`http://localhost:5050/post/${postId}`,{
       method: "GET",
       headers: {
           "Content-Type": "application/json",
       },
   });
-  const data = await responce.json();
+  const data = await response.json();
   return data;
   } catch (error) {
       console.error("Error fetching post:", error);
