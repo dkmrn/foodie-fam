@@ -1,7 +1,7 @@
 import { SubmitReport } from "./components/SubmitReport";
 import React from "react";
 
-const SubmitReportPage = () => {
+const MyProfilePage = () => {
     return (
         <div>
             <h1>this is the report page</h1>
@@ -10,4 +10,4 @@ const SubmitReportPage = () => {
     )
 }
 
-export default SubmitReportPage;
+export default MyProfilePage;

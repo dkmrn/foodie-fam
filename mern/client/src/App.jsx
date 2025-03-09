@@ -5,6 +5,7 @@ import  { ProfileButton } from "./components/profileButton";
 import { ReportButton } from "./components/reportButton";
 import { useEffect, useState } from 'react';
 import { fetchPosts } from "./api/Posts";
+import './components/backgroundStyle.css';
 
 // Post data structure
 /*
@@ -18,7 +19,7 @@ import { fetchPosts } from "./api/Posts";
 
 */
 
-
+// hello test
 
 const App = () => {
   // Sample array of items 
@@ -74,18 +75,11 @@ const App = () => {
 
 
       <div className="grid">
-
-        {users.map((user,index) => (
-          <div 
-            key = {index}
-        >
-        <
-          Post
-          username ={user}
-        />
-          </div>
+        {postArray.length > 0 &&
+        postArray.map((post,index) => (
+          <Post key={index} post={post}/>
         ))}
-      </div>
+          </div>
     </div>
   );
 };

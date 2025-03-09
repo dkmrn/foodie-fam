@@ -1,11 +1,11 @@
 import { CreateAccount } from "./components/CreateAccount";
 import React from "react";
+import './components/backgroundStyle.css';
 
 const CreateAccountPage = () => {
     return (
         <div>
-            {/* <h1>this is the create account page</ h1> */}
-            <CreateAccount />
+             <CreateAccount />
         </div>
     )
 }

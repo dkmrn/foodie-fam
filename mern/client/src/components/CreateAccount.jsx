@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import './createStyle.css';
 import { sendUser } from "../api/Users.js";
 import { sendProfile } from "../api/Profiles.js";
 import { setUserId } from "../main.jsx";
@@ -22,6 +21,8 @@ export function CreateAccount() {
         bio: ""
     });
 
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
 
@@ -40,6 +41,7 @@ export function CreateAccount() {
 
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent default form submission
+        setIsSubmitted(true);
         console.log("Submitting user:", formDataUser);
 
         try {
@@ -76,103 +78,62 @@ export function CreateAccount() {
     };
 
     return (
-        <div style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100vh",
-            backgroundColor: "#f4f4f4"
-        }}>
-            <div style={{
-                background: "white",
-                padding: "20px",
-                borderRadius: "8px",
-                boxShadow: "0 0 10px rgba(0,0,0,0.1)",
-                textAlign: "center",
-                width: "300px"
-            }}>
-                <h1 style={{ marginBottom: "20px" }}>Create Account</h1>
+        <div style={styles.container}>
+            <h1 style={styles.heading}>Create Your Account</h1>
+
+            <div style={styles.formContainer}>
                 <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column" }}>
+                    <label style={styles.label}>Email:</label>
                     <input 
-                        type="text" 
-                        placeholder="Email" 
+                        type="email" 
                         name="email"
                         value={formDataUser.email} 
                         onChange={handleChange}  
                         required
-                        style={{
-                            padding: "10px",
-                            marginBottom: "10px",
-                            border: "1px solid #ccc",
-                            borderRadius: "5px"
-                        }}
+                        style={styles.input}
                     />
+
+                    <label style={styles.label}>Password:</label>
                     <input 
                         type="password" 
-                        placeholder="Password" 
                         name="password"
                         value={formDataUser.password} 
                         onChange={handleChange}  
                         required
-                        style={{
-                            padding: "10px",
-                            marginBottom: "20px",
-                            border: "1px solid #ccc",
-                            borderRadius: "5px"
-                        }}
+                        style={styles.input}
                     />
+
+                    <label style={styles.label}>Name:</label>
                     <input 
                         type="text" 
-                        placeholder="Name" 
                         name="name"
                         value={formDataProfile.name} 
                         onChange={handleChange}  
                         required
-                        style={{
-                            padding: "10px",
-                            marginBottom: "10px",
-                            border: "1px solid #ccc",
-                            borderRadius: "5px"
-                        }}
+                        style={styles.input}
                     />
+
+                    <label style={styles.label}>Location:</label>
                     <input 
                         type="text" 
-                        placeholder="Location" 
                         name="location"
                         value={formDataProfile.location} 
                         onChange={handleChange}  
                         required
-                        style={{
-                            padding: "10px",
-                            marginBottom: "10px",
-                            border: "1px solid #ccc",
-                            borderRadius: "5px"
-                        }}
+                        style={styles.input}
                     />
+
+                    <label style={styles.label}>Bio:</label>
                     <textarea 
-                        placeholder="Tell us more about you! 
-Any allergies?" 
                         name="bio"
                         value={formDataProfile.bio} 
                         onChange={handleChange}  
                         required
-                        style={{
-                            padding: "10px",
-                            marginBottom: "20px",
-                            border: "1px solid #ccc",
-                            borderRadius: "5px",
-                            height: "100px"
-                        }}
+                        style={styles.textarea}
                     />
-                    <button type="submit" style={{
-                        background: "#007BFF",
-                        color: "white",
-                        padding: "10px",
-                        border: "none",
-                        borderRadius: "5px",
-                        cursor: "pointer"
-                    }}>
-                        Create Account
+
+                    <button type="submit" style={styles.button} disabled={isSubmitted}>
+                        {isSubmitted ? "Submitted" : "Create Account"}
                     </button>
                 </form>
             </div>
@@ -180,28 +141,68 @@ Any allergies?"
     );
 }
 
-/*
-A component is changing a controlled input to be uncontrolled. This is likely caused by the value changing from a defined to undefined, which should not happen. Decide between using a controlled or uncontrolled input element for the lifetime of the component. More info: https://reactjs.org/link/controlled-components
-    at input
-    at form
-    at div
-    at div
-    at CreateAccount (http://127.0.0.1:5174/src/components/CreateAccount.jsx:25:43)
-    at div
-    at CreateAccountPage
-    at RenderedRoute (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=f031049e:4087:5)
-    at RenderErrorBoundary (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=f031049e:4047:5)
-    at DataRoutes (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=f031049e:5238:5)
-    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=f031049e:4500:15)
-    at RouterProvider (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=f031049e:5052:5)
-printWarning @ chunk-QXLG2TGQ.js?v=f031049e:519Understand this errorAI
-sendProfile.js:18 Error creating profile: SyntaxError: Failed to execute 'json' on 'Response': Unexpected end of JSON input
-    at sendProfile (sendProfile.js:15:39)
-    at async handleSubmit (CreateAccount.jsx:50:37)
-sendProfile @ sendProfile.js:18Understand this errorAI
-CreateAccount.jsx:56 Failed to submit profile: SyntaxError: Failed to execute 'json' on 'Response': Unexpected end of JSON input
-    at sendProfile (sendProfile.js:15:39)
-    at async handleSubmit (CreateAccount.jsx:50:37)
+// Styles
+import beigebackground from "../assets/beigebackground.png";
 
+const styles = {
+    container: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
+        backgroundColor: "#f4e9dc", // Soft beige background
+        backgroundImage: `url(${beigebackground})`,
+        fontFamily: "'Arial', sans-serif",
+    },
+    heading: {
+        fontSize: "28px",
+        color: "#d66b4d", // Coral color
+        marginBottom: "20px",
+    },
+    formContainer: {
+        background: "#fffaf2", // Light beige box
+        padding: "30px",
+        borderRadius: "12px",
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+        textAlign: "center",
+        width: "350px",
+        display: "flex",
+        flexDirection: "column",
+    },
+    label: {
+        fontSize: "16px",
+        color: "#5a7d5a", // Soft green
+        marginBottom: "8px",
+        textAlign: "left",
+    },
+    input: {
+        width: "100%",
+        padding: "12px",
+        marginBottom: "15px",
+        border: "2px solid #d9c2a3", // Soft beige border
+        borderRadius: "8px",
+        fontSize: "16px",
+    },
+    textarea: {
+        width: "100%",
+        padding: "12px",
+        marginBottom: "15px",
+        border: "2px solid #d9c2a3",
+        borderRadius: "8px",
+        fontSize: "16px",
+        minHeight: "80px",
+    },
+    button: {
+        backgroundColor: "#5a7d5a", // Soft green button
+        color: "white",
+        fontSize: "16px",
+        padding: "12px",
+        borderRadius: "8px",
+        cursor: "pointer",
+        border: "none",
+        transition: "background 0.3s",
+    },
+};
 
-*/
+export default CreateAccount;

@@ -1,2 +1,27 @@
 
 
+.report-top {
+    text-align: center;
+    font-weight: bold;
+    font-size: 2rem;
+    margin-top: 0px;
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.text-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.comment {
+    width: 50%;
+    height: 150px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    resize: vertical;
+}

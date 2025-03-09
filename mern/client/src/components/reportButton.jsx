@@ -1,17 +1,15 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-export function ReportButton() {
+export function ReportButton({onClick}) {
 return (
-    <Link to="/submitReport">
-        <div style={{
-            color: "grey",
-            textDecoration: "underline"
-        }}>
-            <button>
-                Submit Report
-                </button>
-        </div>
-    </Link>
+    <div style={{
+        color: "grey",
+        textDecoration: "underline"
+    }}>
+        <button onClick={onClick}>
+            Report
+            </button>
+    </div>
 );
 };
