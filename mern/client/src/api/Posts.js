@@ -75,6 +75,29 @@ export const sendPost = async (postData) => {
   };
 
 
+  export const removeParticipant = async (postId, userId) => {
+    try {
+      const response = await fetch(`http://localhost:5050/post/${postId}/add-participant`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({userId}),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to remove participant");
+      }
+  
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      console.error("Error removing participant:", error);
+      throw error;
+    }
+  };
+
+
   export const editPost = async (postId, postData) => {
     try {
       const response = await fetch(`http://localhost:5050/post/${postId}`, {
