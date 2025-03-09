@@ -5,6 +5,7 @@ import  { ProfileButton } from "./components/profileButton";
 import { ReportButton } from "./components/reportButton";
 import { useEffect, useState } from 'react';
 import { fetchPosts } from "./api/Posts";
+import {SubmitReport} from "./components/SubmitReport";
 import DummyPost from "./components/Post";
 
 // Post data structure
@@ -25,6 +26,14 @@ const App = () => {
   // Sample array of items 
   // NEED TO UPDATE THIS ACCORDING TO EACH NEW POST
   const users = ["Katia", "Joyce", "Amanda", "Daya", "Joaquin"];
+
+  const [isReportOpen, setIsReportOpen] = useState(false);
+  const openReport = () => {
+    setIsReportOpen(true);
+  }
+  const closeReport = () => {
+    setIsReportOpen(false);
+  }
 
   const [postArray, setPostArray] = useState([]);
 
@@ -69,10 +78,21 @@ const App = () => {
         </div>
 
         <div className="report-button">
-          <ReportButton />
+          {/* <ReportButton /> */}
+          <ReportButton onClick={openReport}/>
         </div>
       </header>
 
+      {isReportOpen && (
+       <div className="popup">
+         <div className="popup-inside">
+           <button className="exit-report" onClick={closeReport}>
+             X
+           </button>
+           <SubmitReport />
+         </div>
+       </div>
+       )}
 
       <div className="grid">
         {postArray.length > 0 &&
