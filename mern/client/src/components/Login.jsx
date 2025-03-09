@@ -66,7 +66,7 @@ export function Login() {
 
     return (
         <div style={styles.container}>
-            <h1 styler={styles.heading}>Login Here!</h1>
+            <h1 style={styles.heading}>Login Here!</h1>
 
             <div style={styles.formContainer}>
                 <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column" }}>
@@ -111,7 +111,17 @@ export function Login() {
                         <p><strong>User ID:</strong> {userId}</p>
                     </div>
                 )}
+
             </div>
+
+            <button
+                style={styles.createAccountButton}
+                onClick={() => navigate("/createAccount")}
+                onMouseOver={(e) => e.target.style.textDecoration = "underline"}
+                onMouseOut={(e) => e.target.style.textDecoration = "none"}
+            >
+                Create an Account
+            </button>
 
         </div>
     );
@@ -134,6 +144,16 @@ const styles = {
         color: "#d66b4d", // Coral color
         marginBottom: "20px",
     },
+    createAccountButton: {
+        color: "black", 
+        fontSize: "16px",
+        cursor: "pointer",
+        background: "none",
+        border: "none", 
+        textDecoration: "none", 
+        transition: "text-decoration 0.2s ease-in-out",
+        marginTop: "10px",
+    },    
     formContainer: {
         background: "#fffaf2", // Light beige box
         padding: "30px",
