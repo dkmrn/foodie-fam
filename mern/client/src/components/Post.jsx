@@ -1,5 +1,7 @@
 import './postPage.css';
-
+import { getProfile } from '../api/Profiles';
+import { getName } from '../api/Profiles';
+import { useState, useEffect } from 'react';
 function Content({ post }) {
 
     // const { name, location, date, time } = post;
@@ -53,10 +55,30 @@ function getTime(post) {
 //    return "joycejeoung";
 //}
 
+
+
 export default function DummyPost({post}) {   
    // const username = getUsername();
 
    //const { name, location, date, time } = post;
+   const [name, setName] = useState("");
+
+   useEffect(() => 
+    {
+      async function fetchName(listerId)
+      {
+        try
+        {
+          const listerName = await getName(listerId);
+          setName(listerName);
+        }
+        catch(error)
+        {
+          console.error("Failed to get name from post:", error);
+        };
+      };
+      fetchName(post.listerId);
+    },[]);
 
     function handleClick() {
         console.log("send my request to join!");
@@ -96,7 +118,7 @@ export default function DummyPost({post}) {
                     }}
                 />
                 <span style={{ fontSize: 'min(3vw, 3vh)' }}>
-                    {post._id}
+                    {name}
                 </span>
             </div>
 
