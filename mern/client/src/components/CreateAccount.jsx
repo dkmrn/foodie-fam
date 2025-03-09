@@ -137,6 +137,14 @@ export function CreateAccount() {
                     </button>
                 </form>
             </div>
+            <button
+                style={styles.loginButton}
+                onClick={() => navigate("/")}
+                onMouseOver={(e) => e.target.style.textDecoration = "underline"}
+                onMouseOut={(e) => e.target.style.textDecoration = "none"}
+            >
+                Log in
+            </button>
         </div>
     );
 }
@@ -158,8 +166,18 @@ const styles = {
     heading: {
         fontSize: "28px",
         color: "#d66b4d", // Coral color
-        marginBottom: "20px",
+        marginBottom: "5px",
     },
+    loginButton: {
+        color: "black", 
+        fontSize: "16px",
+        cursor: "pointer",
+        background: "none",
+        border: "none", 
+        textDecoration: "none", 
+        transition: "text-decoration 0.2s ease-in-out",
+        marginTop: "10px",
+    },    
     formContainer: {
         background: "#fffaf2", // Light beige box
         padding: "30px",

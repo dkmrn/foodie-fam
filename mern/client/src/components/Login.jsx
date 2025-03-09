@@ -142,7 +142,7 @@ const styles = {
     heading: {
         fontSize: "28px",
         color: "#d66b4d", // Coral color
-        marginBottom: "20px",
+        marginBottom: "5px",
     },
     createAccountButton: {
         color: "black", 

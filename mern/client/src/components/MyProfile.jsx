@@ -4,6 +4,14 @@ import { getUserId } from "../main";
 import { getProfile } from "../api/Profiles";
 import { getPost, deletePost, removeParticipant } from "../api/Posts";
 import Post from "./Post";
+import p1 from './profiles/p1.png';
+import p2 from './profiles/p2.png';
+import p3 from './profiles/p3.png';
+import p4 from './profiles/p4.png';
+import p5 from './profiles/p5.png';
+import p6 from './profiles/p6.png';
+
+const profileImages = [p1, p2, p3, p4, p5, p6];
 
 export function MyProfile() {
     const [profile, setProfile] = useState(null);
@@ -13,6 +21,7 @@ export function MyProfile() {
     const [loading, setLoading] = useState(true);
     const [removingPosts, setRemovingPosts] = useState(new Set());
     const [refreshing, setRefreshing] = useState(false);
+    const [profilePic, setProfilePic] = useState(null);
 
     // Function to fetch all data
     const fetchAllData = async () => {
@@ -21,6 +30,9 @@ export function MyProfile() {
             const userId = getUserId();
             const profileData = await getProfile(userId);
             setProfile(profileData);
+
+            //set profile pic
+            setProfilePic(profileImages[profileData.myImageIndex]);
             
             // Fetch my posts
             if (profileData.myPosts && profileData.myPosts.length > 0) {
@@ -123,8 +135,8 @@ export function MyProfile() {
             <div className="profile-header">
                 <div className="profile-picture">
                     <img
-                        src="https://randomuser.me/api/portraits/men/1.jpg"
-                        alt="Profile"
+                        src={profilePic}
+                        alt="profile picture"
                     />
                 </div>
                 <div className="profile-info">
