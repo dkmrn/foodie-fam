@@ -1,6 +1,9 @@
 import './postPage.css';
 
 function Content({ post }) {
+
+    // const { name, location, date, time } = post;
+
     const restaurant = getRestaurant(post);
     const address = getAddress(post);
     const date = getDate(post);
@@ -27,31 +30,33 @@ function Content({ post }) {
 }
 
 function getCaption(post) {
-    return "this text is optional!";
+    return "";
 }
 
 function getRestaurant(post) {
-    return "emporium thai";
+    return post.name;
 }
 
 function getAddress(post) {
-    return "403 landfair ave, los angeles, ca 90024";
+    return post.location;
 }
 
 function getDate(post) {
-    return "12/24/2025";
+    return post.date;
 }
 
 function getTime(post) {
-    return "7:30 p.m.";
+    return post.time;
 }
 
 //function getUsername() {
 //    return "joycejeoung";
 //}
 
-export default function DummyPost({username}) {   
+export default function DummyPost({post}) {   
    // const username = getUsername();
+
+   //const { name, location, date, time } = post;
 
     function handleClick() {
         console.log("send my request to join!");
@@ -91,7 +96,7 @@ export default function DummyPost({username}) {
                     }}
                 />
                 <span style={{ fontSize: 'min(3vw, 3vh)' }}>
-                    {username}
+                    {post._id}
                 </span>
             </div>
 
@@ -100,7 +105,7 @@ export default function DummyPost({username}) {
                 padding: '10%',
                 justifyContent: 'center'
             }}>
-                <Content />
+                <Content post ={post}/>
             </div>
 
             {/*bottom request banner*/}

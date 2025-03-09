@@ -1,11 +1,12 @@
 import { Outlet } from "react-router-dom";
-import Post from "./components/Post";
+import  Post  from "./components/Post";
 import { GoToCreate } from "./components/Create";
 import { Logout } from "./components/logout";
 import  { ProfileButton } from "./components/profileButton";
 import { ReportButton } from "./components/reportButton";
 import { useEffect, useState } from 'react';
 import { fetchPosts } from "./api/Posts";
+import DummyPost from "./components/Post";
 
 // Post data structure
 /*
@@ -75,18 +76,11 @@ const App = () => {
 
 
       <div className="grid">
-
-        {users.map((user,index) => (
-          <div 
-            key = {index}
-        >
-        <
-          Post
-          username ={user}
-        />
-          </div>
+        {postArray.length > 0 &&
+        postArray.map((post,index) => (
+          <Post key={index} post={post}/>
         ))}
-      </div>
+          </div>
     </div>
   );
 };
