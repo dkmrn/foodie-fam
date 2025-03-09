@@ -9,60 +9,48 @@ export function MyProfile() {
     const [profile, setProfile] = useState(null);
     const [myPosts, setMyPosts] = useState([]);
     const [joinedPosts, setJoinedPosts] = useState([]);
-    const [activeTab, setActiveTab] = useState("myPosts"); // Default to showing my posts
+    const [activeTab, setActiveTab] = useState("myPosts");
     const [loading, setLoading] = useState(true);
+    const [removingPosts, setRemovingPosts] = useState(new Set());
+    const [refreshing, setRefreshing] = useState(false);
 
-    // Fetch profile data
-    useEffect(() => {
-        async function fetchProfile(userId) {
-            try {
-                setLoading(true);
-                const profileData = await getProfile(userId);
-                setProfile(profileData);
-            } catch(error) {
-                console.error("Failed to fetch profile:", error);
-            } finally {
-                setLoading(false);
-            }
-        }
-        fetchProfile(getUserId());
-    }, []);
-
-    // Fetch my posts
-    useEffect(() => {
-        if (!profile || !profile.myPosts) return;
-        
-        async function fetchMyPosts() {
-            try {
-                setMyPosts([]); // Clear previous posts to avoid duplicates
-                const postsPromises = profile.myPosts.map(postId => getPost(postId));
+    // Function to fetch all data
+    const fetchAllData = async () => {
+        setRefreshing(true);
+        try {
+            const userId = getUserId();
+            const profileData = await getProfile(userId);
+            setProfile(profileData);
+            
+            // Fetch my posts
+            if (profileData.myPosts && profileData.myPosts.length > 0) {
+                const postsPromises = profileData.myPosts.map(postId => getPost(postId));
                 const postsData = await Promise.all(postsPromises);
                 setMyPosts(postsData.filter(post => post !== "Not found"));
-            } catch(error) {
-                console.error("Failed to fetch my posts:", error);
+            } else {
+                setMyPosts([]);
             }
+            
+            // Fetch joined posts
+            if (profileData.myJoinedPosts && profileData.myJoinedPosts.length > 0) {
+                const joinedPostsPromises = profileData.myJoinedPosts.map(postId => getPost(postId));
+                const joinedPostsData = await Promise.all(joinedPostsPromises);
+                setJoinedPosts(joinedPostsData.filter(post => post !== "Not found"));
+            } else {
+                setJoinedPosts([]);
+            }
+        } catch (error) {
+            console.error("Failed to refresh data:", error);
+        } finally {
+            setRefreshing(false);
+            setLoading(false);
         }
-        
-        fetchMyPosts();
-    }, [profile]);
+    };
 
-    // Fetch joined posts
+    // Initial data load
     useEffect(() => {
-        if (!profile || !profile.myJoinedPosts) return;
-        
-        async function fetchJoinedPosts() {
-            try {
-                setJoinedPosts([]); // Clear previous posts to avoid duplicates
-                const postsPromises = profile.myJoinedPosts.map(postId => getPost(postId));
-                const postsData = await Promise.all(postsPromises);
-                setJoinedPosts(postsData.filter(post => post !== "Not found"));
-            } catch(error) {
-                console.error("Failed to fetch joined posts:", error);
-            }
-        }
-        
-        fetchJoinedPosts();
-    }, [profile]);
+        fetchAllData();
+    }, []);
 
     // Toggle between My Posts and Joined Posts
     const handleTabChange = (tab) => {
@@ -72,11 +60,25 @@ export function MyProfile() {
     const handleDeletePost = async (postId) => {
         if (window.confirm("Are you sure you want to delete this post?")) {
             try {
+                // Add post to removing set to trigger animation
+                setRemovingPosts(prev => new Set([...prev, postId]));
+                
+                // Wait for animation
+                await new Promise(resolve => setTimeout(resolve, 300));
+                
+                // Delete from database
                 await deletePost(postId);
-                // Remove the post from the local state
-                setMyPosts(myPosts.filter(post => post._id !== postId));
+                
+                // Reload the page instead of just refreshing data
+                window.location.reload();
             } catch (error) {
                 console.error("Failed to delete post:", error);
+                // Remove from removing set in case of error
+                setRemovingPosts(prev => {
+                    const newSet = new Set(prev);
+                    newSet.delete(postId);
+                    return newSet;
+                });
             }
         }
     };
@@ -84,11 +86,25 @@ export function MyProfile() {
     const handleLeaveGroup = async (postId) => {
         if (window.confirm("Are you sure you want to leave this group?")) {
             try {
+                // Add post to removing set to trigger animation
+                setRemovingPosts(prev => new Set([...prev, postId]));
+                
+                // Wait for animation
+                await new Promise(resolve => setTimeout(resolve, 300));
+                
+                // Remove participant from database
                 await removeParticipant(postId, getUserId());
-                // Remove the post from joined posts
-                setJoinedPosts(joinedPosts.filter(post => post._id !== postId));
+                
+                // Reload the page instead of just refreshing data
+                window.location.reload();
             } catch (error) {
                 console.error("Failed to leave group:", error);
+                // Remove from removing set in case of error
+                setRemovingPosts(prev => {
+                    const newSet = new Set(prev);
+                    newSet.delete(postId);
+                    return newSet;
+                });
             }
         }
     };
@@ -118,34 +134,55 @@ export function MyProfile() {
                 </div>
             </div>
 
-            {/* Tab Navigation */}
-            <div className="profile-tabs">
+            {/* Tab Navigation with Refresh Button */}
+            <div className="profile-tabs-container">
+                <div className="profile-tabs">
+                    <button 
+                        className={activeTab === "myPosts" ? "active-tab" : ""} 
+                        onClick={() => handleTabChange("myPosts")}
+                    >
+                        My Posts ({myPosts.length})
+                    </button>
+                    <button 
+                        className={activeTab === "joinedPosts" ? "active-tab" : ""} 
+                        onClick={() => handleTabChange("joinedPosts")}
+                    >
+                        Joined Posts ({joinedPosts.length})
+                    </button>
+                </div>
                 <button 
-                    className={activeTab === "myPosts" ? "active-tab" : ""} 
-                    onClick={() => handleTabChange("myPosts")}
+                    className={`refresh-button ${refreshing ? 'refreshing' : ''}`}
+                    onClick={fetchAllData}
+                    disabled={refreshing}
                 >
-                    My Posts ({myPosts.length})
-                </button>
-                <button 
-                    className={activeTab === "joinedPosts" ? "active-tab" : ""} 
-                    onClick={() => handleTabChange("joinedPosts")}
-                >
-                    Joined Posts ({joinedPosts.length})
+                    {refreshing ? 'Refreshing...' : 'Refresh'}
                 </button>
             </div>
 
+            {/* Refreshing indicator */}
+            {refreshing && (
+                <div className="refresh-indicator">
+                    <div className="refresh-spinner"></div>
+                    <p>Refreshing data...</p>
+                </div>
+            )}
+
             {/* Posts Grid */}
-            <div className="grid">
+            <div className="two-column-grid">
                 {activeTab === "myPosts" ? (
                     myPosts.length > 0 ? (
                         myPosts.map((post, index) => (
-                            <Post 
-                                key={index} 
-                                post={post}
-                                isProfileView={true}
-                                isMyPost={true}
-                                onDelete={() => handleDeletePost(post._id)}
-                            />
+                            <div 
+                                className={`post-wrapper ${removingPosts.has(post._id) ? 'removing' : ''}`}
+                                key={`my-post-${post._id}-${index}`}
+                            >
+                                <Post 
+                                    post={post}
+                                    isProfileView={true}
+                                    isMyPost={true}
+                                    onDelete={() => handleDeletePost(post._id)}
+                                />
+                            </div>
                         ))
                     ) : (
                         <p className="no-posts">You haven't created any posts yet.</p>
@@ -153,13 +190,17 @@ export function MyProfile() {
                 ) : (
                     joinedPosts.length > 0 ? (
                         joinedPosts.map((post, index) => (
-                            <Post 
-                                key={index} 
-                                post={post}
-                                isProfileView={true}
-                                isMyPost={false}
-                                onLeave={() => handleLeaveGroup(post._id)}
-                            />
+                            <div 
+                                className={`post-wrapper ${removingPosts.has(post._id) ? 'removing' : ''}`}
+                                key={`joined-post-${post._id}-${index}`}
+                            >
+                                <Post 
+                                    post={post}
+                                    isProfileView={true}
+                                    isMyPost={false}
+                                    onLeave={() => handleLeaveGroup(post._id)}
+                                />
+                            </div>
                         ))
                     ) : (
                         <p className="no-posts">You haven't joined any posts yet.</p>

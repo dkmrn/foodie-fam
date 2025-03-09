@@ -89,8 +89,16 @@ export const sendPost = async (postData) => {
         throw new Error("Failed to remove participant");
       }
   
-      const result = await response.json();
-      return result;
+      const text = await response.text();
+      if (!text) {
+        return {};
+      }
+      
+      try {
+        return JSON.parse(text);
+      } catch (e) {
+        return { message: text };
+      }
     } catch (error) {
       console.error("Error removing participant:", error);
       throw error;
