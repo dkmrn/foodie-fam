@@ -168,7 +168,7 @@ router.patch("/:id", async (req, res) => {
     try {
 
       let profileCollection = db.collection('profiles');
-      let user = profileCollection.findOne( {userId: req.body.userId});
+      let user = await profileCollection.findOne( {myUserId: req.body.userId});
       if (!user) {
         return res.status(404).send(`Profile not found: ${req.body.userId}`);
       }
@@ -177,25 +177,27 @@ router.patch("/:id", async (req, res) => {
       let userPosts = user.myPosts;
 
       let postCollection = db.collection('posts');
-      let post = postCollection.findOne({_id: new ObjectId(req.params.id)})
+      let post = await postCollection.findOne({_id: new ObjectId(req.params.id)})
       if (!post) {
         return res.status(404).send(`Post not found: ${req.params.id}`)
       }
 
       let postParticipants = post.participants;
 
+      let indexOfUser = postParticipants.indexOf(req.body.userId);
 
-      let indexOfUser = postParticipants.indexOf(user);
       postParticipants.splice(indexOfUser, 1);
 
       await postCollection.updateOne(
-        {postId: req.params.id},
-        {$set: {participants: postParticipants}});
-      
+        {_id: new ObjectId(req.params.id)},
+        {$set: {participants: postParticipants}}
+      );
+
       
       let usersPosts = user.myJoinedPosts;
 
-      let indexOfPost = usersPosts.indexOf(post);
+      let indexOfPost = usersPosts.indexOf(req.params.id);
+
       usersPosts.splice(indexOfPost, 1);
 
       await profileCollection.updateOne(
@@ -203,7 +205,7 @@ router.patch("/:id", async (req, res) => {
         {$set: {myJoinedPosts: usersPosts}}
       );
 
-      res.send(result).status(200);
+      res.status(200).send("Participant removed from post");
     }
     catch(err){
       res.status(500).send("Error removing participant.");
