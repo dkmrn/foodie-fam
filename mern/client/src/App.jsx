@@ -26,7 +26,6 @@ import { useNavigate } from "react-router-dom";
 const App = () => {
   // Sample array of items 
   // NEED TO UPDATE THIS ACCORDING TO EACH NEW POST
-  const users = ["Katia", "Joyce", "Amanda", "Daya", "Joaquin"];
 
   const [postArray, setPostArray] = useState([]);
 
