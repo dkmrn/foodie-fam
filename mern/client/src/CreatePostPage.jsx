@@ -3,7 +3,8 @@ import React, { useEffect } from "react";
 import './components/backgroundStyle.css';
 import { getUserId } from "./main";
 import { useNavigate } from "react-router-dom";
-
+import { Logout } from "./components/logout";
+import { HomeButton } from "./components/homeButton";
 
 
 const CreatePostPage = () => {
@@ -21,6 +22,15 @@ const CreatePostPage = () => {
     return (
         <div>
             <CreatePost />
+
+            <div className="logout-button">
+                <Logout />
+            </div>
+
+            <div className="home-button">
+                <HomeButton />
+            </div>
+            
         </div>
 
     )

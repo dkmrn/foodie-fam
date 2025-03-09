@@ -8,6 +8,7 @@ import { fetchPosts } from "./api/Posts";
 import './components/backgroundStyle.css';
 import { getUserId } from "./main";
 import { useNavigate } from "react-router-dom";
+import { HomeButton } from "./components/homeButton";
 
 // Post data structure
 /*
@@ -78,6 +79,12 @@ const App = () => {
         <div className="report-button">
           <ReportButton />
         </div>
+
+        <div className="home-button">
+          <HomeButton />
+        </div>
+
+
       </header>
 
 
