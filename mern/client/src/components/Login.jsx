@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../api/Users.js";
+import { setUserId } from "../main.jsx";
 
 // make the login page auto refresh
 
@@ -32,7 +33,9 @@ export function Login() {
 
             if (loginResponse && loginResponse._id) {
                 console.log("Login successful! Response: ", loginResponse);
+                setUserId(loginResponse._id);
                 navigate("/goToHomepage");
+
             } else {
                 console.error("Login error due to unexpected response format: ", loginResponse);
                 setError("Login failed. Please check your username and password.");

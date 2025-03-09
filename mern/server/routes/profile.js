@@ -17,7 +17,7 @@ myJoinedPosts: joinedPosts []
 router.post("/", async (req, res) => {
     console.log("ENTER")
     try {
-        const userCollection = await db.collection("users");
+        const userCollection = db.collection("users");
         const user = await userCollection.findOne({ _id: new ObjectId(req.body.userId) });
         if (!user) {
             return res.status(404).send(new ObjectId(req.body.userId));
@@ -34,7 +34,7 @@ router.post("/", async (req, res) => {
         };
         console.log("NEW DOC")
 
-        let collection = await db.collection("profiles");
+        let collection = db.collection("profiles");
         let result = await collection.insertOne(newDocument);
         console.log("INSERT")
         let profile = await collection.findOne({ _id: result._id });
@@ -43,6 +43,21 @@ router.post("/", async (req, res) => {
         console.error(err);
         res.status(500).send("Error adding profile");
     }
+});
+
+//This section will help you get a profile by userId
+router.get("/:id", async (req, res) => {
+  try {
+    let collection = db.collection("profiles");
+    let query = { myUserId: req.params.id };
+    let result = await collection.findOne(query);
+
+  if (!result) res.send("Not found").status(404);
+  else res.send(result).status(200);
+} catch (err) {
+  console.error(err);
+  res.status(500).send("Error finding profile");
+}
 });
 
 // This route is for updating basic user info: Name, bio, location, profile pic, 
@@ -57,7 +72,7 @@ router.patch("/:id/update", async (req, res) => {
         },
       };
   //
-      let collection = await db.collection("profiles");
+      let collection = db.collection("profiles");
       let result = await collection.updateOne(query, updates);
       res.send(result).status(200);
     } catch (err) {

@@ -101,7 +101,7 @@ export default function DummyPost({post}) {
             </div>
 
             {/*post content*/}
-            <div classname="post-content" style={{
+            <div className="post-content" style={{
                 padding: '10%',
                 justifyContent: 'center'
             }}>
