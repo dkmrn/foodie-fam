@@ -11,6 +11,7 @@ function Content({ post }) {
     const date = getDate(post);
     const time = getTime(post);
     const caption = getCaption(post); //(optional) additional info
+    const postId = getPostId(post);
 
     return (
         <>
