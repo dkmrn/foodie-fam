@@ -32,6 +32,12 @@
     left: 2vw;
 }
 
+.home-button {
+    position: absolute;
+    top: 10vh;
+    left: 2vw;
+}
+
 .logout-button {
     position: absolute;
     top: 6vh;
@@ -40,7 +46,7 @@
 
 .report-button {
     position: absolute;
-    top: 10vh;
+    top: 14vh;
     left:2vw;
 }
 

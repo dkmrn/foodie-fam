@@ -68,11 +68,13 @@ function getPostId(post)
 
 
 
-export default function DummyPost({post}) {   
+export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLeave}) {   
    // const username = getUsername();
 
    //const { name, location, date, time } = post;
    const [name, setName] = useState("");
+   const userId = getUserId();  // Get current user's ID
+   const isPostCreator = post.listerId === userId;  // Check if user is the creator
 
    useEffect(() => {
     async function fetchName(listerId) {
@@ -89,16 +91,13 @@ export default function DummyPost({post}) {
 
     function handleClick() {
         const postId = post._id;
-        const userId = getUserId();
         
         console.log("Attempting to join post:", postId);
         console.log("Current user:", userId);
         
-        // Call the API to add participant
         addParticipant(postId, userId)
             .then(result => {
                 console.log("Successfully joined the post:", result);
-                // Maybe update UI to show user has joined
             })
             .catch(error => {
                 console.error("Failed to join post:", error);
@@ -151,7 +150,7 @@ export default function DummyPost({post}) {
                 <Content post ={post}/>
             </div>
 
-            {/*bottom request banner*/}
+            {/* Action buttons */}
             <div style={{
                 padding: '5%',
                 width: '100%',
@@ -160,11 +159,52 @@ export default function DummyPost({post}) {
                 height: '20%',
                 justifyContent: 'center',
                 background: 'lightsteelblue',
-                marginTop: 'auto'
+                marginTop: 'auto',
+                gap: '10px' // Add space between buttons
             }}>
-                <button onClick={handleClick} style={{ 
-                    fontSize: 'min(3vw, 3vh)' 
-                }}><b>save me a seat!</b></button>
+                {/* Show different buttons based on context */}
+                {isProfileView ? (
+                    isMyPost ? (
+                        <button 
+                            onClick={onDelete}
+                            style={{ 
+                                fontSize: 'min(3vw, 3vh)',
+                                backgroundColor: '#ff4444',
+                                color: 'white',
+                                border: 'none',
+                                padding: '8px 16px',
+                                borderRadius: '4px',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            <b>Delete Post</b>
+                        </button>
+                    ) : (
+                        <button 
+                            onClick={onLeave}
+                            style={{ 
+                                fontSize: 'min(3vw, 3vh)',
+                                backgroundColor: '#ff8800',
+                                color: 'white',
+                                border: 'none',
+                                padding: '8px 16px',
+                                borderRadius: '4px',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            <b>Leave Group</b>
+                        </button>
+                    )
+                ) : (
+                    !isPostCreator && (
+                        <button 
+                            onClick={handleClick}
+                            style={{ fontSize: 'min(3vw, 3vh)' }}
+                        >
+                            <b>save me a seat!</b>
+                        </button>
+                    )
+                )}
             </div>
         </div>
     );
