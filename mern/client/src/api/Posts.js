@@ -52,14 +52,14 @@ export const sendPost = async (postData) => {
     }
   };
 
-  export const addParticipant = async (postId, userData) => {
+  export const addParticipant = async (postId, userId) => {
     try {
       const response = await fetch(`http://localhost:5050/post/${postId}/add-participant`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(userData),
+        body: {"userId" : userId},
       });
   
       if (!response.ok) {

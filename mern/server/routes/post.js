@@ -97,13 +97,13 @@ router.patch("/:id", async (req, res) => {
   // This section will help you delete a record
   router.delete("/:id", async (req, res) => {
     try {
-      let postCollection = await db.collection('posts');
+      let postCollection = db.collection('posts');
       let post = await postCollection.findOne({_id: new ObjectId(req.params.id)});
 
       let listerId = post.listerId;
       let participantsIds = post.participants;
 
-      let profileCollection = await db.collection('profiles');
+      let profileCollection = db.collection('profiles');
 
       let listerProfile = await profileCollection.findOne({myUserId: listerId});
       let listerPosts = listerProfile.myPosts;
@@ -161,6 +161,52 @@ router.patch("/:id", async (req, res) => {
     }
     catch(err){
       res.status(500).send("Error adding user to participants");
+    }
+  });
+
+  router.patch("/:id/remove-participant", async (req, res) => {
+    try {
+
+      let profileCollection = db.collection('profiles');
+      let user = profileCollection.findOne( {userId: req.body.userId});
+      if (!user) {
+        return res.status(404).send(`Profile not found: ${req.body.userId}`);
+      }
+      console.log("FOUND USER")
+
+      let userPosts = user.myPosts;
+
+      let postCollection = db.collection('posts');
+      let post = postCollection.findOne({_id: new ObjectId(req.params.id)})
+      if (!post) {
+        return res.status(404).send(`Post not found: ${req.params.id}`)
+      }
+
+      let postParticipants = post.participants;
+
+
+      let indexOfUser = postParticipants.indexOf(user);
+      postParticipants.splice(indexOfUser, 1);
+
+      await postCollection.updateOne(
+        {postId: req.params.id},
+        {$set: {participants: postParticipants}});
+      
+      
+      let usersPosts = user.myJoinedPosts;
+
+      let indexOfPost = usersPosts.indexOf(post);
+      usersPosts.splice(indexOfPost, 1);
+
+      await profileCollection.updateOne(
+        {myUserId: req.body.userId},
+        {$set: {myJoinedPosts: usersPosts}}
+      );
+
+      res.send(result).status(200);
+    }
+    catch(err){
+      res.status(500).send("Error removing participant.");
     }
   });
   
