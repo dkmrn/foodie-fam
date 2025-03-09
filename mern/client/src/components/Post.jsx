@@ -4,6 +4,7 @@ import { getName } from '../api/Profiles';
 import { useState, useEffect } from 'react';
 import { getUserId } from '../main'; // Make sure to import this
 import { addParticipant } from '../api/Posts'; // Make sure to import this
+import { useNavigate } from "react-router-dom"; // use to "refresh" page
 
 function Content({ post }) {
 
@@ -70,6 +71,7 @@ function getPostId(post)
 
 export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLeave}) {   
    // const username = getUsername();
+   const navigate = useNavigate(); // use to "refresh" page
 
    //const { name, location, date, time } = post;
    const [name, setName] = useState("");
@@ -98,6 +100,7 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
         addParticipant(postId, userId)
             .then(result => {
                 console.log("Successfully joined the post:", result);
+                navigate(0); // "refreshes" page by redirecting to itself
             })
             .catch(error => {
                 console.error("Failed to join post:", error);
