@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { Logout } from "./components/logout";
 import { HomeButton } from "./components/homeButton";
 
-
 const CreatePostPage = () => {
     const navigate = useNavigate();
     const userId = getUserId();
