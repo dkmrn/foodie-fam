@@ -6,6 +6,8 @@ import { ReportButton } from "./components/reportButton";
 import { useEffect, useState } from 'react';
 import { fetchPosts } from "./api/Posts";
 import './components/backgroundStyle.css';
+import { getUserId } from "./main";
+import { useNavigate } from "react-router-dom";
 
 // Post data structure
 /*
@@ -28,6 +30,17 @@ const App = () => {
 
   const [postArray, setPostArray] = useState([]);
 
+  const navigate = useNavigate();
+  const userId = getUserId();
+
+
+  //this is to make sure when you have no userID you cant access homepage
+  useEffect(() => {
+    if (!userId) {
+      navigate("/"); // Redirect to login page
+    }
+  }, [userId, navigate]);
+
   useEffect(() => 
   {
     async function getPostArray()
@@ -46,7 +59,6 @@ const App = () => {
   },[]);
 
   console.log(postArray);
-
 
   return (
     <div className="container">
@@ -80,6 +92,11 @@ const App = () => {
           <Post key={index} post={post}/>
         ))}
           </div>
+
+
+        <div style={{ padding: "20px", textAlign: "center" }}>
+          <p><strong>User ID:</strong> {userId ? userId : "No user logged in"}</p>
+        </div>
     </div>
   );
 };

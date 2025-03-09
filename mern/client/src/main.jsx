@@ -17,14 +17,18 @@ let storedUserId = null;
 
 export function setUserId(userId) {
   try {
-    storedUserId = userId; // Store the userId in the variable
+    if (userId) {
+      localStorage.setItem("userId", userId); //save userId to localStorage
+    } else {
+      localStorage.removeItem("userId"); //clear userId on logout
+    }
   } catch (error) {
     console.error("Failed to set userId:", error);
   }
 }
 
 export function getUserId() {
-  return storedUserId; // Return the stored userId
+  return localStorage.getItem("userId"); //retrieve userId from localStorage
 }
 
 const router = createBrowserRouter([

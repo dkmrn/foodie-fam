@@ -11,6 +11,7 @@ function Content({ post }) {
     const date = getDate(post);
     const time = getTime(post);
     const caption = getCaption(post); //(optional) additional info
+    const postId = getPostId(post);
 
     return (
         <>
@@ -49,6 +50,11 @@ function getDate(post) {
 
 function getTime(post) {
     return post.time;
+}
+
+function getPostId(post)
+{
+    return post._id.toString();
 }
 
 //function getUsername() {
