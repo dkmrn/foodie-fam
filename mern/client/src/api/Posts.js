@@ -59,7 +59,7 @@ export const sendPost = async (postData) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: {"userId" : userId},
+        body: JSON.stringify({userId}),
       });
   
       if (!response.ok) {

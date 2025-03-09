@@ -2,6 +2,9 @@ import './postPage.css';
 import { getProfile } from '../api/Profiles';
 import { getName } from '../api/Profiles';
 import { useState, useEffect } from 'react';
+import { getUserId } from '../main'; // Make sure to import this
+import { addParticipant } from '../api/Posts'; // Make sure to import this
+
 function Content({ post }) {
 
     // const { name, location, date, time } = post;
@@ -87,7 +90,21 @@ export default function DummyPost({post}) {
     },[]);
 
     function handleClick() {
-        console.log("send my request to join!");
+        const postId = post._id;
+        const userId = getUserId();
+        
+        console.log("Attempting to join post:", postId);
+        console.log("Current user:", userId);
+        
+        // Call the API to add participant
+        addParticipant(postId, userId)
+            .then(result => {
+                console.log("Successfully joined the post:", result);
+                // Maybe update UI to show user has joined
+            })
+            .catch(error => {
+                console.error("Failed to join post:", error);
+            });
     }
     
     return (
