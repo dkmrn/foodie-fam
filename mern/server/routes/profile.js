@@ -30,7 +30,8 @@ router.post("/", async (req, res) => {
             myLocation: req.body.location,
             myBio: req.body.bio,
             myPosts: [],
-            myJoinedPosts: []
+            myJoinedPosts: [],
+            myImageIndex: Math.floor(Math.random() * 6)
         };
         console.log("NEW DOC")
 

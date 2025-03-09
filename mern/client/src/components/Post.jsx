@@ -1,9 +1,17 @@
 import './postPage.css';
-import { getProfile } from '../api/Profiles';
 import { getName } from '../api/Profiles';
 import { useState, useEffect } from 'react';
 import { getUserId } from '../main'; // Make sure to import this
 import { addParticipant } from '../api/Posts'; // Make sure to import this
+import { getProfile } from '../api/Profiles';
+import p1 from './profiles/p1.png';
+import p2 from './profiles/p2.png';
+import p3 from './profiles/p3.png';
+import p4 from './profiles/p4.png';
+import p5 from './profiles/p5.png';
+import p6 from './profiles/p6.png';
+
+const profileImages = [p1, p2, p3, p4, p5, p6];
 
 function Content({ post }) {
 
@@ -60,6 +68,7 @@ function getPostId(post)
     return post._id.toString();
 }
 
+
 //function getUsername() {
 //    return "joycejeoung";
 //}
@@ -71,23 +80,24 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
 
    //const { name, location, date, time } = post;
    const [name, setName] = useState("");
+   const [profilePic, setProfilePic] = useState("");
    const userId = getUserId();  // Get current user's ID
    const isPostCreator = post.listerId === userId;  // Check if user is the creator
 
-   useEffect(() => 
-    {
-      async function fetchName(listerId)
-      {
-        try
-        {
+   useEffect(() => {
+
+      async function fetchName(listerId) {
+        try {
           const listerName = await getName(listerId);
+          const profile = await getProfile(listerId);
           setName(listerName);
+          setProfilePic(profileImages[profile.myImageIndex]);
+          console.log(profileImages[profile.myImageIndex]);
         }
-        catch(error)
-        {
+        catch(error) {
           console.error("Failed to get name from post:", error);
-        };
-      };
+        }
+      }
       fetchName(post.listerId);
     },[]);
 
@@ -129,7 +139,7 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
             }}>
                 {/*profile picture icon*/}
                 <img 
-                    src="https://randomuser.me/api/portraits/men/1.jpg"
+                    src={profilePic}
                     alt="profile picture"
                     style={{
                         width: 'min(5vw,5vh)',
