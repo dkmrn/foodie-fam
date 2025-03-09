@@ -48,6 +48,27 @@ export const getProfile = async (userId) => {
     }
   };
 
+  export const getName = async (userId) => {
+    try {
+    const response = await fetch(`http://localhost:5050/profile/${userId}`,{
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error("Failed to fetch user");
+    }
+
+    const data = await response.json();
+    return data.myName;
+    } catch (error) {
+        console.error("Error fetching profile:", error);
+        throw error;
+    }
+  };
+
 
 export const updateProfile = async (userId, profileData) => {
     try{
