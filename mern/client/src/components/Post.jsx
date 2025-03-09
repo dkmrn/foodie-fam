@@ -51,6 +51,11 @@ function getTime(post) {
     return post.time;
 }
 
+function getPostId(post)
+{
+    return post._id.toString();
+}
+
 //function getUsername() {
 //    return "joycejeoung";
 //}
