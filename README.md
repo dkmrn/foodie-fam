@@ -4,7 +4,7 @@
 <table>
 <tr>
 <td>
- Foodie Fam is a web app built atop a MERN stack that aims to connect people to share a meal with
+ Foodie Fam is a web app built atop a MERN stack that aims to connect people to share a meal with.
 
  Have you ever wanted to try multiple dishes from a restaurant, but you're on a solo mission?
  Use Foodie Fam to find others to share a meal family style!
