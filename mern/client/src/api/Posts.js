@@ -14,6 +14,22 @@ export const fetchPosts = async () => {
     }
 }
 
+export const searchPosts = async (query) => {
+  try {
+    const response = await fetch(`http://localhost:5050/post/name/${postId}`,{
+      method: "GET",
+      headers: {
+          "Content-Type": "application/json",
+      },
+  });
+  const data = await response.json();
+  return data;
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    throw error;
+  }
+}
+
 export const getPost = async (postId) => {
   try {
   const response = await fetch(`http://localhost:5050/post/${postId}`,{

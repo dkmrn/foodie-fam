@@ -29,6 +29,14 @@ router.get("/:id", async (req, res) => {
     else res.send(result).status(200);
   });
 
+
+  //this section will help you get a list of records by restaurant name
+  router.get("/name/:name", async (req, res) => {
+    let collection = await db.collection("posts");
+    let results = await collection.find({ name: { $regex: req.params.name, $options: "i" }}).toArray();;
+    res.send(results).status(200);
+  });
+
   // This section will help you create a new record.
 router.post("/", async (req, res) => {
     try {
