@@ -95,7 +95,7 @@ const App = () => {
           <div className="btn-container post-button"><GoToCreate /></div>
         </div>
 
-
+      {/* testing */}
       {/* {searchTerm && <p className="text-lg text-green-600 mt-2">Stored Search: {searchTerm}</p>} */}
 
       </header>
