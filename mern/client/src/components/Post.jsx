@@ -30,11 +30,13 @@ function Content({ post }) {
         <>
             <div className="post-content" style={{ fontSize: 'min(3vw, 3vh)' }}>
                 <div className="optional-text" style={{
-                    marginBottom: '5%'
+                    marginBottom: '1%'
                 }}>
                     <h1>{caption}</h1>
                 </div>
-                <div className="logistics">
+                <div className="logistics" style={{
+                    marginBottom: 'min(30%, 60px)'
+                }}>
                     <h1><b>restaurant: </b>{restaurant}</h1>
                     <h1><b>address: </b>{address}</h1>
                     <h1><b>date: </b>{date}</h1>
@@ -114,6 +116,7 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
           setName(listerName);
           setProfilePic(profileImages[profile.myImageIndex]);
           console.log(profileImages[profile.myImageIndex]);
+
         }
         catch(error) {
           console.error("Failed to get name from post:", error);
@@ -146,15 +149,25 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
     
     return (
         <div style={{ 
-            width: '100%',  /* Let the grid control width */
-            aspectRatio: '1 / 1',  /* Ensures the post remains a square */
-            maxWidth: '300px', /* Prevents posts from getting too large */
-            minWidth: '150px', /* Ensures posts don't get too small */
-            borderRadius: '16%', /* Keeps rounded corners */
+            // width: 'min(50vw, 50vh)', 
+            // height: 'min(50vw, 50vh)', 
+            // borderRadius: '16%', 
+            // backgroundColor: "white",
+            // border: '5px solid rgb(14, 7, 66)',
+            // display: 'flex',
+            // flexDirection: 'column',
+            // justifyContent: 'flex-start',
+            // overflow: 'hidden'
+            width: 'min(50vw, 50vh)', 
+            height: 'min(50vw, 50vh)', 
+            borderRadius: '16%', 
             backgroundColor: "white",
             border: '5px solid rgb(14, 7, 66)',
-            display: 'block',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
             overflow: 'hidden',
+            position: 'relative',
         }}>
             {/*profile banner*/}
             <div style={{
@@ -163,7 +176,7 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
                 display: 'flex',
                 alignItems: 'center',
                 height: '20%',
-                background: 'lightsteelblue'
+                background: 'coral'
             }}>
                 {/*profile picture icon*/}
                 <img 
@@ -185,22 +198,31 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
             {/*post content*/}
             <div className="post-content" style={{
                 padding: '10%',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                height: 'auto',
+                overflowY: 'auto'
             }}>
                 <Content post ={post}/>
             </div>
 
             {/* Action buttons */}
             <div style={{
-                padding: '5%',
-                width: '100%',
+                // //padding: '5%',
+                // //width: '100%',
+                // display: 'flex',
+                // //alignItems: 'center',
+                // //height: '20%',
+                // justifyContent: 'center',
+                // //padding: '0 0 50px',
+                // //bottom: '20px'
+                // //background: 'green',
+                // //marginTop: 'auto',
+                // //gap: '10px' // Add space between buttons
                 display: 'flex',
-                alignItems: 'center',
-                height: '20%',
                 justifyContent: 'center',
-                background: 'lightsteelblue',
-                marginTop: 'auto',
-                gap: '10px' // Add space between buttons
+                width: '100%',
+                position: 'absolute', // Position this container
+                bottom: 'min(4vw, 4vh, 16px)',
             }}>
                 {/* Show different buttons based on context */}
                 {isProfileView ? (
@@ -208,13 +230,17 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
                         <button 
                             onClick={onDelete}
                             style={{ 
-                                fontSize: 'min(3vw, 3vh)',
-                                backgroundColor: '#ff4444',
-                                color: 'white',
-                                border: 'none',
-                                padding: '8px 16px',
-                                borderRadius: '4px',
-                                cursor: 'pointer'
+                                fontSize: 'min(2.5vw, 2.5vh, 16px)',
+                                backgroundColor: 'lightgreen',
+                                color: 'green',
+                                padding: 'min(1vw, 1vh, 10px) min(3vw, 3vh, 20px)',
+                                borderRadius: 'min(4vw, 4vh, 30px)',
+                                fontWeight: 'bold',
+                                border: '7px solid darkgreen',
+                                cursor: 'pointer',
+                                transition: 'background 0.3s, transform 0.2s',
+                                maxWidth: '80%',
+                                minWidth: 'min(30%, 120px)'
                             }}
                         >
                             <b>Delete Post</b>
@@ -223,13 +249,24 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
                         <button 
                             onClick={onLeave}
                             style={{ 
-                                fontSize: 'min(3vw, 3vh)',
-                                backgroundColor: '#ff8800',
-                                color: 'white',
-                                border: 'none',
-                                padding: '8px 16px',
-                                borderRadius: '4px',
-                                cursor: 'pointer'
+                                // fontSize: 'min(3vw, 3vh)',
+                                // backgroundColor: '#ff8800',
+                                // color: 'white',
+                                // border: 'none',
+                                // padding: '8px 16px',
+                                // borderRadius: '4px',
+                                // cursor: 'pointer'
+                                fontSize: 'min(2.5vw, 2.5vh, 16px)',
+                                backgroundColor: 'lightgreen',
+                                color: 'green',
+                                padding: 'min(1vw, 1vh, 10px) min(3vw, 3vh, 20px)',
+                                borderRadius: 'min(4vw, 4vh, 30px)',
+                                fontWeight: 'bold',
+                                border: '7px solid darkgreen',
+                                cursor: 'pointer',
+                                transition: 'background 0.3s, transform 0.2s',
+                                maxWidth: '80%',
+                                minWidth: 'min(30%, 120px)'
                             }}
                         >
                             <b>Leave Group</b>
@@ -239,7 +276,31 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
                     !isPostCreator && (
                         <button 
                             onClick={handleClick}
-                            style={{ fontSize: 'min(3vw, 3vh)' }}
+                            style={{ 
+                                // fontSize: 'min(3vw, 3vh)',
+                                // backgroundColor: 'red',
+                                // color: 'green',
+                                // padding: '12px 24px',
+                                // borderRadius: '9999px',
+                                // fontSize: '16px',
+                                // fontWeight: 'bold',
+                                // border: 'none',
+                                // cursor: 'pointer',
+                                // transition: 'background 0.3s',
+                                // position: 'absolute',
+                                // bottom: '16px'
+                                fontSize: 'min(2.5vw, 2.5vh, 16px)',
+                                backgroundColor: 'lightgreen',
+                                color: 'green',
+                                padding: 'min(1vw, 1vh, 10px) min(3vw, 3vh, 20px)',
+                                borderRadius: 'min(4vw, 4vh, 30px)',
+                                fontWeight: 'bold',
+                                border: '7px solid darkgreen',
+                                cursor: 'pointer',
+                                transition: 'background 0.3s, transform 0.2s',
+                                maxWidth: '80%',
+                                minWidth: 'min(30%, 120px)'
+                            }}
                         >
                             <b>save me a seat!</b>
                         </button>
