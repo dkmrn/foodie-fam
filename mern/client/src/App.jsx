@@ -8,6 +8,9 @@ import { fetchPosts } from "./api/Posts";
 import './components/backgroundStyle.css';
 import {SubmitReport} from "./components/SubmitReport";
 import DummyPost from "./components/Post";
+import { getUserId } from "./main";
+import { useNavigate } from "react-router-dom";
+import { HomeButton } from "./components/homeButton";
 
 // Post data structure
 /*
@@ -38,25 +41,31 @@ const App = () => {
 
   const [postArray, setPostArray] = useState([]);
 
-  useEffect(() => 
-  {
-    async function getPostArray()
-    {
-      try
-      {
-        const postArray = await fetchPosts();
-        setPostArray(postArray);
-      }
-      catch(error)
-      {
+  const navigate = useNavigate();
+  const userId = getUserId();
+
+
+  //this is to make sure when you have no userID you cant access homepage
+  useEffect(() => {
+    if (!userId) {
+      navigate("/"); // Redirect to login page
+    }
+  }, [userId, navigate]);
+
+  useEffect(() => {
+    async function getPostArray() {
+      try {
+        const allPosts = await fetchPosts();
+        const filteredPosts = allPosts.filter(post => post.listerId !== userId);
+        setPostArray(filteredPosts);
+      } catch(error) {
         console.error("Failed to fetch posts:", error);
-      };
-    };
+      }
+    }
     getPostArray();
-  },[]);
+  }, [userId]);  // Added userId as dependency
 
   console.log(postArray);
-
 
   return (
     <div className="container">
@@ -82,6 +91,12 @@ const App = () => {
           {/* <ReportButton /> */}
           <ReportButton onClick={openReport}/>
         </div>
+
+        <div className="home-button">
+          <HomeButton />
+        </div>
+
+
       </header>
 
       {isReportOpen && (
@@ -101,6 +116,11 @@ const App = () => {
           <Post key={index} post={post}/>
         ))}
           </div>
+
+
+        <div style={{ padding: "20px", textAlign: "center" }}>
+          <p><strong>User ID:</strong> {userId ? userId : "No user logged in"}</p>
+        </div>
     </div>
   );
 };

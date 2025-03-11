@@ -59,7 +59,7 @@ export const sendPost = async (postData) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: {"userId" : userId},
+        body: JSON.stringify({userId}),
       });
   
       if (!response.ok) {
@@ -70,6 +70,37 @@ export const sendPost = async (postData) => {
       return result;
     } catch (error) {
       console.error("Error adding user:", error);
+      throw error;
+    }
+  };
+
+
+  export const removeParticipant = async (postId, userId) => {
+    try {
+      const response = await fetch(`http://localhost:5050/post/${postId}/remove-participant`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({userId}),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to remove participant");
+      }
+  
+      const text = await response.text();
+      if (!text) {
+        return {};
+      }
+      
+      try {
+        return JSON.parse(text);
+      } catch (e) {
+        return { message: text };
+      }
+    } catch (error) {
+      console.error("Error removing participant:", error);
       throw error;
     }
   };
@@ -104,7 +135,6 @@ export const sendPost = async (postData) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(postId),
       });
   
       if (!response.ok) {

@@ -1,7 +1,18 @@
 import './postPage.css';
-import { getProfile } from '../api/Profiles';
 import { getName } from '../api/Profiles';
 import { useState, useEffect } from 'react';
+import { getUserId } from '../main'; // Make sure to import this
+import { addParticipant } from '../api/Posts'; // Make sure to import this
+import { getProfile } from '../api/Profiles';
+import p1 from './profiles/p1.png';
+import p2 from './profiles/p2.png';
+import p3 from './profiles/p3.png';
+import p4 from './profiles/p4.png';
+import p5 from './profiles/p5.png';
+import p6 from './profiles/p6.png';
+
+const profileImages = [p1, p2, p3, p4, p5, p6];
+
 function Content({ post }) {
 
     // const { name, location, date, time } = post;
@@ -11,6 +22,7 @@ function Content({ post }) {
     const date = getDate(post);
     const time = getTime(post);
     const caption = getCaption(post); //(optional) additional info
+    const postId = getPostId(post);
 
     return (
         <>
@@ -51,37 +63,57 @@ function getTime(post) {
     return post.time;
 }
 
+function getPostId(post)
+{
+    return post._id.toString();
+}
+
+
 //function getUsername() {
 //    return "joycejeoung";
 //}
 
 
 
-export default function DummyPost({post}) {   
+export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLeave}) {   
    // const username = getUsername();
 
    //const { name, location, date, time } = post;
    const [name, setName] = useState("");
+   const [profilePic, setProfilePic] = useState("");
+   const userId = getUserId();  // Get current user's ID
+   const isPostCreator = post.listerId === userId;  // Check if user is the creator
 
-   useEffect(() => 
-    {
-      async function fetchName(listerId)
-      {
-        try
-        {
+   useEffect(() => {
+
+      async function fetchName(listerId) {
+        try {
           const listerName = await getName(listerId);
+          const profile = await getProfile(listerId);
           setName(listerName);
+          setProfilePic(profileImages[profile.myImageIndex]);
+          console.log(profileImages[profile.myImageIndex]);
         }
-        catch(error)
-        {
+        catch(error) {
           console.error("Failed to get name from post:", error);
-        };
-      };
+        }
+      }
       fetchName(post.listerId);
     },[]);
 
     function handleClick() {
-        console.log("send my request to join!");
+        const postId = post._id;
+        
+        console.log("Attempting to join post:", postId);
+        console.log("Current user:", userId);
+        
+        addParticipant(postId, userId)
+            .then(result => {
+                console.log("Successfully joined the post:", result);
+            })
+            .catch(error => {
+                console.error("Failed to join post:", error);
+            });
     }
     
     return (
@@ -107,7 +139,7 @@ export default function DummyPost({post}) {
             }}>
                 {/*profile picture icon*/}
                 <img 
-                    src="https://randomuser.me/api/portraits/men/1.jpg"
+                    src={profilePic}
                     alt="profile picture"
                     style={{
                         width: 'min(5vw,5vh)',
@@ -130,7 +162,7 @@ export default function DummyPost({post}) {
                 <Content post ={post}/>
             </div>
 
-            {/*bottom request banner*/}
+            {/* Action buttons */}
             <div style={{
                 padding: '5%',
                 width: '100%',
@@ -139,11 +171,52 @@ export default function DummyPost({post}) {
                 height: '20%',
                 justifyContent: 'center',
                 background: 'lightsteelblue',
-                marginTop: 'auto'
+                marginTop: 'auto',
+                gap: '10px' // Add space between buttons
             }}>
-                <button onClick={handleClick} style={{ 
-                    fontSize: 'min(3vw, 3vh)' 
-                }}><b>save me a seat!</b></button>
+                {/* Show different buttons based on context */}
+                {isProfileView ? (
+                    isMyPost ? (
+                        <button 
+                            onClick={onDelete}
+                            style={{ 
+                                fontSize: 'min(3vw, 3vh)',
+                                backgroundColor: '#ff4444',
+                                color: 'white',
+                                border: 'none',
+                                padding: '8px 16px',
+                                borderRadius: '4px',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            <b>Delete Post</b>
+                        </button>
+                    ) : (
+                        <button 
+                            onClick={onLeave}
+                            style={{ 
+                                fontSize: 'min(3vw, 3vh)',
+                                backgroundColor: '#ff8800',
+                                color: 'white',
+                                border: 'none',
+                                padding: '8px 16px',
+                                borderRadius: '4px',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            <b>Leave Group</b>
+                        </button>
+                    )
+                ) : (
+                    !isPostCreator && (
+                        <button 
+                            onClick={handleClick}
+                            style={{ fontSize: 'min(3vw, 3vh)' }}
+                        >
+                            <b>save me a seat!</b>
+                        </button>
+                    )
+                )}
             </div>
         </div>
     );

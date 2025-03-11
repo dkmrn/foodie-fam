@@ -32,10 +32,8 @@ export function CreatePost() {
         // console.log("Submitted Data:", formData);
         try {
             //send formData to backend
-            console.log(formData.userId);
             const response = await sendPost(formData);
             console.log("Post Created Successfully:", response);
-
             navigate("/goToHomepage");
 
         } catch (error) {
@@ -117,6 +115,10 @@ export function CreatePost() {
     );
 }
 
+
+
+import beigebackground from "../assets/beigebackground.png";
+
 // Styles
 const styles = {
     container: {
@@ -126,15 +128,18 @@ const styles = {
         justifyContent: "center",
         height: "100vh",
         backgroundColor: "#f4e9dc", // Soft beige background
+        backgroundImage: `url(${beigebackground})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
         fontFamily: "'Arial', sans-serif",
     },
     heading: {
         fontSize: "28px",
-        color: "#d66b4d", //coral
+        color: "#d66b4d", // Coral color
         marginBottom: "20px",
     },
     formContainer: {
-        background: "#fffaf2", //light beige box
+        background: "#fffaf2", // Light beige box
         padding: "30px",
         borderRadius: "12px",
         boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
@@ -145,7 +150,7 @@ const styles = {
     },
     label: {
         fontSize: "16px",
-        color: "#5a7d5a", //soft green
+        color: "#5a7d5a", // Soft green
         marginBottom: "8px",
         textAlign: "left",
     },
@@ -153,7 +158,7 @@ const styles = {
         width: "100%",
         padding: "12px",
         marginBottom: "15px",
-        border: "2px solid #d9c2a3", //beige border
+        border: "2px solid #d9c2a3", // Soft beige border
         borderRadius: "8px",
         fontSize: "16px",
     },
@@ -167,7 +172,7 @@ const styles = {
         minHeight: "80px",
     },
     button: {
-        backgroundColor: "#5a7d5a", //green button
+        backgroundColor: "#5a7d5a", // Soft green button
         color: "white",
         fontSize: "16px",
         padding: "12px",
