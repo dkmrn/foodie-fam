@@ -11,6 +11,7 @@ import DummyPost from "./components/Post";
 import { getUserId } from "./main";
 import { useNavigate } from "react-router-dom";
 import { HomeButton } from "./components/homeButton";
+import { motion } from "framer-motion";
 
 // Post data structure
 /*
@@ -98,9 +99,19 @@ const App = () => {
        </div>
        )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+      <div className="grid grid-cols-3 gap-6 w-full max-w-5xl mx-auto">
         {postArray.length > 0 &&
-          postArray.map((post, index) => <Post key={index} post={post} />)}
+          postArray.map((post, index) => (
+            <motion.div 
+            key={post._id || index}
+            whileHover={{ scale: 1.05 }} // Slightly enlarges on hover
+            whileTap={{ scale: 0.95 }} // Shrinks a bit when clicked
+            transition={{ duration: 0.2 }} // Smooth transition
+            className="rounded-lg shadow-lg overflow-hidden" // Ensures smooth corners
+          >
+            <Post post={post} />
+          </motion.div>
+          ))}
       </div>
     </div>
   );
