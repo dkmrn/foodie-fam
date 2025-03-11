@@ -38,7 +38,12 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Here's a blank template to get started. To avoid retyping too much info, do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`, `project_license`
+* **Creating Posts** Create a post with a Restaurant Name, Location, Date, and Time that will be displayed on the Home Page
+* **Join Posts** From the Home Page, you can join other groups
+* **Search** Search for specific Restaurants by name
+* **Log In Authentification** Hash the passwords in our database, Log in/Log out, and Protective Pages
+* **Profile** Shows information about user as well as created posts and joined posts
+* **Report** Can report other users
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -46,15 +51,14 @@ Here's a blank template to get started. To avoid retyping too much info, do a se
 
 ### Built With
 
-* JavaScript![JavaScriptImage](https://github.com/user-attachments/assets/69dc78aa-bd5b-4de1-87af-7205800cb6fe)
-* JavaScipt <img src="https://github.com/user-attachments/assets/405c8546-aa12-4a54-ba6d-cd6463d883c0" alt="Sample Image" width="50" height="50">
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]W
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
+* JavaScipt  <img src="https://github.com/user-attachments/assets/405c8546-aa12-4a54-ba6d-cd6463d883c0" alt="Sample Image" width="50" height="50">
+* Node.js  <img src="https://github.com/user-attachments/assets/566f3aea-918c-4799-8fc9-41c86188013d" alt="Sample Image" width="100" height="50">
+* React.js  <img src="https://github.com/user-attachments/assets/cb945c51-dde3-4024-8715-4556ce913464" alt="Sample Image" width="50" height="50">
+* Express.js  <img src="https://github.com/user-attachments/assets/0d98866a-2b0b-4766-a4ac-4b33c2671de1" alt="Sample Image" width="100" height="50">
+* MongoDB  <img src="https://github.com/user-attachments/assets/50652b09-b061-41d2-b54f-167762861c26" alt="Sample Image" width="100" height="50">
+* MongoDB Atlas  <img src="https://github.com/user-attachments/assets/3c7fdddc-ee1b-485b-aaac-d4acb7ca74ff" alt="Sample Image" width="100" height="50">
+* HTML  <img src="https://github.com/user-attachments/assets/db82671c-8dc6-4e39-90dd-804d84b9d622" alt="Sample Image" width="100" height="50">
+* CSS  <img src="https://github.com/user-attachments/assets/d412e0a3-c167-4f80-b09c-5d3c458725ec" alt="Sample Image" width="50" height="50">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
