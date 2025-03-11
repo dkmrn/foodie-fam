@@ -11,7 +11,7 @@ import { getUserId } from "./main";
 import { useNavigate } from "react-router-dom";
 import { HomeButton } from "./components/homeButton";
 import { motion } from "framer-motion";
-import SearchBar from "./components/searchBar"; 
+import { SearchBar } from "./components/searchBar"; 
 
 
 // Post data structure
