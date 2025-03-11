@@ -121,7 +121,6 @@ const App = () => {
             whileHover={{ scale: 1.05 }} // Slightly enlarges on hover
             whileTap={{ scale: 0.95 }} // Shrinks a bit when clicked
             transition={{ duration: 0.2 }} // Smooth transition
-            className="rounded-lg shadow-lg overflow-hidden" // Ensures smooth corners
           >
             <Post post={post} />
           </motion.div>
