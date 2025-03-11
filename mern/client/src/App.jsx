@@ -6,6 +6,8 @@ import { ReportButton } from "./components/reportButton";
 import { useEffect, useState } from 'react';
 import { fetchPosts } from "./api/Posts";
 import './components/backgroundStyle.css';
+import {SubmitReport} from "./components/SubmitReport";
+import DummyPost from "./components/Post";
 import { getUserId } from "./main";
 import { useNavigate } from "react-router-dom";
 import { HomeButton } from "./components/homeButton";
@@ -27,6 +29,15 @@ import { HomeButton } from "./components/homeButton";
 const App = () => {
   // Sample array of items 
   // NEED TO UPDATE THIS ACCORDING TO EACH NEW POST
+  const users = ["Katia", "Joyce", "Amanda", "Daya", "Joaquin"];
+
+  const [isReportOpen, setIsReportOpen] = useState(false);
+  const openReport = () => {
+    setIsReportOpen(true);
+  }
+  const closeReport = () => {
+    setIsReportOpen(false);
+  }
 
   const [postArray, setPostArray] = useState([]);
 
@@ -66,15 +77,38 @@ const App = () => {
         <div className="button-group">
           <div className="btn-container profile-button"><ProfileButton /></div>
           <div className="btn-container logout-button"><Logout /></div>
-          <div className="btn-container report-button"><ReportButton /></div>
+          <div className="btn-container report-button"> <ReportButton onClick={openReport}/></div>
           <div className="btn-container home-button"><HomeButton /></div>
         </div>
 
         {/* Right side button */}
         <div className="btn-container post-button"><GoToCreate /></div>
+        <div className="profile-button">
+          <ProfileButton />
+        </div>
+
+        <div className="logout-button">
+          <Logout />
+        </div>
+
+        <div className="home-button">
+          <HomeButton />
+        </div>
+
+
       </header>
 
-      {/* Post Grid */}
+      {/* Post Grid */}      {isReportOpen && (
+       <div className="popup">
+         <div className="popup-inside">
+           <button className="exit-report" onClick={closeReport}>
+             X
+           </button>
+           <SubmitReport />
+         </div>
+       </div>
+       )}
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
         {postArray.length > 0 &&
           postArray.map((post, index) => <Post key={index} post={post} />)}
