@@ -62,6 +62,83 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- GETTING STARTED -->
+## Getting Started
+
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+
+* Must use Node v21.7.2 or newer
+
+### Installation
+
+### Backend
+
+Setup backend dependencies 
+
+```sh
+cd server
+npm install
+```
+
+Main Backend Dependicies
+
+* Express.js
+* MongoDB Atlas
+
+Create the file `mern/server/config.env` with your Atlas URI and the server port:
+```
+ATLAS_URI=mongodb+srv://Cluster94824:X2hkRkp0cFZr@cluster94824.y95qv.mongodb.net/foodie_friends?retryWrites=true&w=majority
+PORT=5050
+```
+
+Running
+```sh
+npm start
+```
+
+### Frontend
+
+Setup frontend dependencies
+
+```sh
+cd client
+npm install
+```
+
+Main Frontend Dependicies
+
+* React.js
+
+Running 
+
+```sh
+npm run dev
+```
+
+1. Get a free API Key at [https://example.com](https://example.com)
+2. Clone the repo
+   ```sh
+   git clone https://github.com/github_username/repo_name.git
+   ```
+3. Install NPM packages
+   ```sh
+   npm install
+   ```
+4. Enter your API in `config.js`
+   ```js
+   const API_KEY = 'ENTER YOUR API';
+   ```
+5. Change git remote url to avoid accidental pushes to base project
+   ```sh
+   git remote set-url origin github_username/repo_name
+   git remote -v # confirm the changes
+   ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## Site
 
 ### Landing Page
