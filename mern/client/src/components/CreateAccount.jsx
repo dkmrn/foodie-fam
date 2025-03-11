@@ -23,8 +23,14 @@ export function CreateAccount() {
 
     const [isSubmitted, setIsSubmitted] = useState(false);
 
+    const [errorMessage, setErrorMessage] = useState(""); 
+
     const handleChange = (e) => {
         const { name, value } = e.target;
+
+        if (errorMessage) {
+            setErrorMessage("");
+        }
 
         if (["email", "password"].includes(name)) {
             setFormDataUser((prev) => ({
@@ -42,12 +48,17 @@ export function CreateAccount() {
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent default form submission
         setIsSubmitted(true);
+        setErrorMessage(""); 
         console.log("Submitting user:", formDataUser);
 
         try {
             // Create user
             const responseUser = await sendUser(formDataUser);
             console.log("User created successfully:", responseUser);
+
+            if (responseUser.error) {
+                throw new Error(responseUser.error);
+            }
 
             if (!responseUser || !responseUser.insertedId) {
                 throw new Error("Invalid user response. User ID not found.");
@@ -74,6 +85,8 @@ export function CreateAccount() {
             navigate("/goToHomepage"); //go back to log in after creating an account
         } catch (error) {
             console.error("Failed to submit profile:", error);
+            setIsSubmitted(false); 
+            setErrorMessage(error.message || "An error occurred during account creation");
         }
     };
 
@@ -82,6 +95,13 @@ export function CreateAccount() {
             <h1 style={styles.heading}>Create Your Account</h1>
 
             <div style={styles.formContainer}>
+
+            {errorMessage && (
+                    <div style={styles.errorMessage}>
+                        {errorMessage}
+                    </div>
+                )}
+
                 <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column" }}>
                     <label style={styles.label}>Email:</label>
                     <input 
@@ -221,6 +241,17 @@ const styles = {
         border: "none",
         transition: "background 0.3s",
     },
+
+    errorMessage: {
+        color: '#d66b4d',
+        margin: '10px 0',
+        fontWeight: 'bold',
+        padding: '10px',
+        backgroundColor: 'rgba(214, 107, 77, 0.1)',
+        borderRadius: '8px',
+        textAlign: 'center',
+        marginBottom: '15px'
+    }
 };
 
 export default CreateAccount;
