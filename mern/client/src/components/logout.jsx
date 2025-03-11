@@ -12,7 +12,7 @@ export function Logout() {
     return (
         <div onClick={handleLogout}
             style={{
-            color: "red",
+            color: "black",
             textDecoration: "underline"
             }}>
             <button>

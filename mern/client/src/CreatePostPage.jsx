@@ -19,20 +19,20 @@ const CreatePostPage = () => {
     }, [userId, navigate]);
 
     return (
-        <div>
+        <>
             <CreatePost />
-
-            <div className="logout-button">
-                <Logout />
+    
+            {/* Buttons overlayed on top */}
+            <div className="button-group">
+                <div className="btn-container logout-button" style={{  }}>
+                    <Logout />
+                </div>
+                <div className="btn-container home-button">
+                    <HomeButton />
+                </div>
             </div>
-
-            <div className="home-button">
-                <HomeButton />
-            </div>
-            
-        </div>
-
-    )
+        </>
+    );
 }
 
 export default CreatePostPage;
