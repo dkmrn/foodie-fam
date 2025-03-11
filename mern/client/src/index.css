@@ -93,7 +93,7 @@
 
 .profile-button {
     position: absolute;
-    top: 2vh;
+    top: 9vh;
     left: 2vw;
 }
 
@@ -105,7 +105,7 @@
 
 .logout-button {
     position: absolute;
-    top: 9vh;
+    top: 2vh;
     left: 2vw;
 }
 

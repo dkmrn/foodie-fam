@@ -46,9 +46,10 @@ Here's a blank template to get started. To avoid retyping too much info, do a se
 
 ### Built With
 
-* [![Next][Next.js]][Next-url]
+* JavaScript![JavaScriptImage](https://github.com/user-attachments/assets/69dc78aa-bd5b-4de1-87af-7205800cb6fe)
+* JavaScipt <img src="https://github.com/user-attachments/assets/405c8546-aa12-4a54-ba6d-cd6463d883c0" alt="Sample Image" width="50" height="50">
 * [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
+* [![Vue][Vue.js]][Vue-url]W
 * [![Angular][Angular.io]][Angular-url]
 * [![Svelte][Svelte.dev]][Svelte-url]
 * [![Laravel][Laravel.com]][Laravel-url]
