@@ -25,3 +25,47 @@ body {
 .create-post-container {
     padding-right: 20px; /* Adds some spacing from the right edge */
 }
+
+
+.search-create-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Aligns everything to the right */
+    gap: 12px; /* Space between search bar & button */
+    margin-top: 10px; /* Slightly adjust spacing */
+    width: 100%;
+    max-width: 600px; /* Prevents it from expanding too much */
+}
+
+/* Ensure search bar is not too wide */
+.search-bar {
+    width: 200px; /* Keep it compact */
+    max-width: 250px;
+    padding: 8px;
+    font-size: 16px;
+    border: 2px solid #d9c2a3;
+    border-radius: 8px;
+    outline: none;
+    text-align: center;
+}
+
+/* Adjust button size */
+.post-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border-radius: 12px;
+    background-color: #d66b4d; /* Coral */
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease-in-out;
+    white-space: nowrap; /* Prevents button text from wrapping */
+}
+
+.post-button:hover {
+    background-color: #c55b3a;
+    transform: scale(1.05);
+}
