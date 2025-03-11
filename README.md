@@ -46,7 +46,7 @@ Here's a blank template to get started. To avoid retyping too much info, do a se
 
 ### Built With
 
-* [![Next][Next.js]][Next-url]
+* [![JavaScript][![image](https://github.com/user-attachments/assets/69dc78aa-bd5b-4de1-87af-7205800cb6fe)]
 * [![React][React.js]][React-url]
 * [![Vue][Vue.js]][Vue-url]
 * [![Angular][Angular.io]][Angular-url]
