@@ -38,7 +38,12 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Here's a blank template to get started. To avoid retyping too much info, do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`, `project_license`
+* **Creating Posts** Create a post with a Restaurant Name, Location, Date, and Time that will be displayed on the Home Page
+* **Join Posts** From the Home Page, you can join other groups
+* **Search** Search for specific Restaurants by name
+* **Log In Authentification** Hash the passwords in our database, Log in/Log out, and Protective Pages
+* **Profile** Shows information about user as well as created posts and joined posts
+* **Report** Can report other users
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -53,7 +58,7 @@ Here's a blank template to get started. To avoid retyping too much info, do a se
 * MongoDB  <img src="https://github.com/user-attachments/assets/50652b09-b061-41d2-b54f-167762861c26" alt="Sample Image" width="100" height="50">
 * MongoDB Atlas  <img src="https://github.com/user-attachments/assets/3c7fdddc-ee1b-485b-aaac-d4acb7ca74ff" alt="Sample Image" width="100" height="50">
 * HTML  <img src="https://github.com/user-attachments/assets/db82671c-8dc6-4e39-90dd-804d84b9d622" alt="Sample Image" width="100" height="50">
-* CSS  <img src="https://github.com/user-attachments/assets/d412e0a3-c167-4f80-b09c-5d3c458725ec" alt="Sample Image" width="100" height="50">
+* CSS  <img src="https://github.com/user-attachments/assets/d412e0a3-c167-4f80-b09c-5d3c458725ec" alt="Sample Image" width="50" height="50">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
