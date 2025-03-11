@@ -11,7 +11,7 @@ export function HomeButton() {
     return (
         <div onClick={handleLogout}
             style={{
-            color: "green",
+            color: "black",
             textDecoration: "underline"
             }}>
             <button>
