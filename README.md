@@ -71,6 +71,7 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 
 * Must use Node v21.7.2 or newer ```nvm list // to see```
+* Chrome Recomended 
 
 ### Installation
 
