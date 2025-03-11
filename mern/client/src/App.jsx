@@ -95,10 +95,6 @@ const App = () => {
         ))}
           </div>
 
-
-        <div style={{ padding: "20px", textAlign: "center" }}>
-          <p><strong>User ID:</strong> {userId ? userId : "No user logged in"}</p>
-        </div>
     </div>
   );
 };
