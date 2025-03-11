@@ -87,8 +87,25 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
    const [profilePic, setProfilePic] = useState("");
    const userId = getUserId();  // Get current user's ID
    const isPostCreator = post.listerId === userId;  // Check if user is the creator
+   const [isJoined, setIsJoined] = useState(false);
+   const [loading, setLoading] = useState(true);
+
 
    useEffect(() => {
+    
+    async function checkJoined(postId) 
+    {
+        try
+        {
+            const hasJoined = post.participants.includes(userId);
+            setIsJoined(hasJoined);
+        }
+        catch(error)
+        {
+            console.error("Failed to check if user has joined post:", error);
+        }
+    }
+    
 
       async function fetchName(listerId) {
         try {
@@ -103,6 +120,7 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
           console.error("Failed to get name from post:", error);
         }
       }
+      checkJoined(post._id);
       fetchName(post.listerId);
     }, []);
 
@@ -121,18 +139,23 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
                 console.error("Failed to join post:", error);
             });
     }
+
+    if (isJoined && !isProfileView)
+    {
+        return null;
+    }
     
     return (
         <div style={{ 
-            width: 'min(50vw, 50vh)', 
-            height: 'min(50vw, 50vh)', 
-            borderRadius: '16%', 
+            width: '100%',  /* Let the grid control width */
+            aspectRatio: '1 / 1',  /* Ensures the post remains a square */
+            maxWidth: '300px', /* Prevents posts from getting too large */
+            minWidth: '150px', /* Ensures posts don't get too small */
+            borderRadius: '16%', /* Keeps rounded corners */
             backgroundColor: "white",
             border: '5px solid rgb(14, 7, 66)',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'flex-start',
-            overflow: 'hidden'
+            display: 'block',
+            overflow: 'hidden',
         }}>
             {/*profile banner*/}
             <div style={{

@@ -106,12 +106,6 @@ export function Login() {
                     </button>
                 </form>
 
-                {userId && (
-                    <div style={styles.userIdContainer}>
-                        <p><strong>User ID:</strong> {userId}</p>
-                    </div>
-                )}
-
             </div>
 
             <button
