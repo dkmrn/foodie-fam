@@ -4,7 +4,10 @@
 <table>
 <tr>
 <td>
-  A webapp using Quandl API to display history of stock growth in a given period of time. It helps predict the growth of stocks from the  charts of stock performace in any period of time. It helps to judge stocks, with the principle of momentum investing, which returns 1% per month on average.
+ Foodie Fam is a web app built atop a MERN stack that aims to connect people to share a meal with
+
+ Have you ever wanted to try multiple dishes from a restaurant, but you're on a solo mission?
+ Use Foodie Fam to find others to share a meal family style!
 </td>
 </tr>
 </table>
