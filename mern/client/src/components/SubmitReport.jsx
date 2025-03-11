@@ -1,15 +1,18 @@
 import { useState } from "react";
 import './SubmitReportStyle.css';
-import { sendPost } from "../api/Posts";
+import { sendReport } from "../api/Reports";
 import {useNavigate} from "react-router-dom";
+import { getUserId } from "../main.jsx";
 
 
 export function SubmitReport() {
 
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         // additionalInfo: "", //for now, backend does not have parameter for additional info
-        //userId: getUserId(),
-        report: ""
+        userId: getUserId(),
+        message: ""
     });
 
 
@@ -20,7 +23,7 @@ export function SubmitReport() {
     const handleChange = (e) => {
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value
+            message: e.target.value
         });
     };
 
@@ -31,7 +34,7 @@ export function SubmitReport() {
         try {
             //send formData to backend
             console.log(formData.userId);
-            const response = await sendPost(formData);
+            const response = await sendReport(formData);
             console.log("Post Created Successfully:", response);
 
             navigate("/goToHomepage");
@@ -53,8 +56,8 @@ export function SubmitReport() {
         cols = "50"
         placeholder= "Please include as much info as possible..."
         className="comment"
-        value={additionalInfo}
-        onChange={(e) => setAdditionalInfo(e.target.value)}
+        value={formData.message}
+        onChange={handleChange}
         disabled={isSubmitted}
         >
         </textarea>

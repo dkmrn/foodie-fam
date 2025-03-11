@@ -24,7 +24,7 @@ const MyProfilePage = () => {
         <div className="container">
             <header className="header text-center py-6">
                 <h1 className="text-3xl font-bold text-[#d66b4d]">Create a Post</h1>
-                <p className="text-lg text-[#7a5a31]">Tell us about your group!</p>
+                <p className="text-lg text-[#7a5a31]">View your posts and groups here!</p>
 
                 {/* Left side buttons stacked */}
                 <div className="button-group">

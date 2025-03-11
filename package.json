@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/dkmrn/mern-stack-example-main#readme",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.7.2"
+    "@fortawesome/fontawesome-free": "^6.7.2",
+    "framer-motion": "^12.4.11"
   }
 }
