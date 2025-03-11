@@ -148,16 +148,7 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
     }
     
     return (
-        <div style={{ 
-            // width: 'min(50vw, 50vh)', 
-            // height: 'min(50vw, 50vh)', 
-            // borderRadius: '16%', 
-            // backgroundColor: "white",
-            // border: '5px solid rgb(14, 7, 66)',
-            // display: 'flex',
-            // flexDirection: 'column',
-            // justifyContent: 'flex-start',
-            // overflow: 'hidden'
+        <div style={{
             width: 'min(50vw, 50vh)', 
             height: 'min(50vw, 50vh)', 
             borderRadius: '16%', 
@@ -207,17 +198,6 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
 
             {/* Action buttons */}
             <div style={{
-                // //padding: '5%',
-                // //width: '100%',
-                // display: 'flex',
-                // //alignItems: 'center',
-                // //height: '20%',
-                // justifyContent: 'center',
-                // //padding: '0 0 50px',
-                // //bottom: '20px'
-                // //background: 'green',
-                // //marginTop: 'auto',
-                // //gap: '10px' // Add space between buttons
                 display: 'flex',
                 justifyContent: 'center',
                 width: '100%',
@@ -249,13 +229,6 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
                         <button 
                             onClick={onLeave}
                             style={{ 
-                                // fontSize: 'min(3vw, 3vh)',
-                                // backgroundColor: '#ff8800',
-                                // color: 'white',
-                                // border: 'none',
-                                // padding: '8px 16px',
-                                // borderRadius: '4px',
-                                // cursor: 'pointer'
                                 fontSize: 'min(2.5vw, 2.5vh, 16px)',
                                 backgroundColor: 'lightgreen',
                                 color: 'green',
@@ -277,18 +250,6 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
                         <button 
                             onClick={handleClick}
                             style={{ 
-                                // fontSize: 'min(3vw, 3vh)',
-                                // backgroundColor: 'red',
-                                // color: 'green',
-                                // padding: '12px 24px',
-                                // borderRadius: '9999px',
-                                // fontSize: '16px',
-                                // fontWeight: 'bold',
-                                // border: 'none',
-                                // cursor: 'pointer',
-                                // transition: 'background 0.3s',
-                                // position: 'absolute',
-                                // bottom: '16px'
                                 fontSize: 'min(2.5vw, 2.5vh, 16px)',
                                 backgroundColor: 'lightgreen',
                                 color: 'green',
