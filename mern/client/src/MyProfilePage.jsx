@@ -21,17 +21,26 @@ const MyProfilePage = () => {
     }, [userId, navigate]);
 
     return (
-        <div>
-            <h1>this is the profile page</h1>
-            <MyProfile />
+        <div className="container">
+            <header className="header text-center py-6">
+                <h1 className="text-3xl font-bold text-[#d66b4d]">Create a Post</h1>
+                <p className="text-lg text-[#7a5a31]">Tell us about your group!</p>
 
-            <div className="logout-button">
-                <Logout />
-            </div>
-            <div className="home-button">
-                <HomeButton />
-            </div>
+                {/* Left side buttons stacked */}
+                <div className="button-group">
+                    <div className="btn-container logout-button">
+                        <Logout />
+                    </div>
+
+                    <div className="btn-container home-button">
+                        <HomeButton />
+                    </div>
+                </div>
+            </header>
+
+            <MyProfile />
         </div>
+
     )
 }
 
