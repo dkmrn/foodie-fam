@@ -4,6 +4,7 @@ import records from "./routes/record.js";
 import user from "./routes/user.js";
 import post from "./routes/post.js";
 import profile from "./routes/profile.js";
+import report from "./routes/report.js";
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -18,6 +19,7 @@ app.use("/record", records);
 app.use("/user", user);
 app.use("/post", post);
 app.use("/profile", profile);
+app.use("/report", report);
 
 // // Enable CORS for requests from localhost:5173
 // app.use(cors({

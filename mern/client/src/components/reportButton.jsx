@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export function ReportButton({onClick}) {
 return (
     <div style={{
-        color: "grey",
+        color: "black",
         textDecoration: "underline"
     }}>
         <button onClick={onClick}>

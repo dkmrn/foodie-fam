@@ -3,6 +3,7 @@ import { getName } from '../api/Profiles';
 import { useState, useEffect } from 'react';
 import { getUserId } from '../main'; // Make sure to import this
 import { addParticipant } from '../api/Posts'; // Make sure to import this
+import { useNavigate } from "react-router-dom"; // use to "refresh" page
 import { getProfile } from '../api/Profiles';
 import p1 from './profiles/p1.png';
 import p2 from './profiles/p2.png';
@@ -23,6 +24,7 @@ function Content({ post }) {
     const time = getTime(post);
     const caption = getCaption(post); //(optional) additional info
     const postId = getPostId(post);
+    const numJoined = post.participants.length;
 
     return (
         <>
@@ -37,6 +39,7 @@ function Content({ post }) {
                     <h1><b>address: </b>{address}</h1>
                     <h1><b>date: </b>{date}</h1>
                     <h1><b>time: </b>{time}</h1>
+                    <h1><b># of people joined: </b>{numJoined}</h1>
                 </div>
             </div>
         </>
@@ -77,14 +80,32 @@ function getPostId(post)
 
 export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLeave}) {   
    // const username = getUsername();
+   const navigate = useNavigate(); // use to "refresh" page
 
    //const { name, location, date, time } = post;
    const [name, setName] = useState("");
    const [profilePic, setProfilePic] = useState("");
    const userId = getUserId();  // Get current user's ID
    const isPostCreator = post.listerId === userId;  // Check if user is the creator
+   const [isJoined, setIsJoined] = useState(false);
+   const [loading, setLoading] = useState(true);
+
 
    useEffect(() => {
+    
+    async function checkJoined(postId) 
+    {
+        try
+        {
+            const hasJoined = post.participants.includes(userId);
+            setIsJoined(hasJoined);
+        }
+        catch(error)
+        {
+            console.error("Failed to check if user has joined post:", error);
+        }
+    }
+    
 
       async function fetchName(listerId) {
         try {
@@ -98,8 +119,9 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
           console.error("Failed to get name from post:", error);
         }
       }
+      checkJoined(post._id);
       fetchName(post.listerId);
-    },[]);
+    }, []);
 
     function handleClick() {
         const postId = post._id;
@@ -110,23 +132,29 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
         addParticipant(postId, userId)
             .then(result => {
                 console.log("Successfully joined the post:", result);
+                navigate(0); // "refreshes" page by redirecting to itself
             })
             .catch(error => {
                 console.error("Failed to join post:", error);
             });
     }
+
+    if (isJoined && !isProfileView)
+    {
+        return null;
+    }
     
     return (
         <div style={{ 
-            width: 'min(50vw, 50vh)', 
-            height: 'min(50vw, 50vh)', 
-            borderRadius: '16%', 
+            width: '100%',  /* Let the grid control width */
+            aspectRatio: '1 / 1',  /* Ensures the post remains a square */
+            maxWidth: '300px', /* Prevents posts from getting too large */
+            minWidth: '150px', /* Ensures posts don't get too small */
+            borderRadius: '16%', /* Keeps rounded corners */
             backgroundColor: "white",
             border: '5px solid rgb(14, 7, 66)',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'flex-start',
-            overflow: 'hidden'
+            display: 'block',
+            overflow: 'hidden',
         }}>
             {/*profile banner*/}
             <div style={{
