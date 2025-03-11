@@ -87,8 +87,25 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
    const [profilePic, setProfilePic] = useState("");
    const userId = getUserId();  // Get current user's ID
    const isPostCreator = post.listerId === userId;  // Check if user is the creator
+   const [isJoined, setIsJoined] = useState(false);
+   const [loading, setLoading] = useState(true);
+
 
    useEffect(() => {
+    
+    async function checkJoined(postId) 
+    {
+        try
+        {
+            const hasJoined = post.participants.includes(userId);
+            setIsJoined(hasJoined);
+        }
+        catch(error)
+        {
+            console.error("Failed to check if user has joined post:", error);
+        }
+    }
+    
 
       async function fetchName(listerId) {
         try {
@@ -103,6 +120,7 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
           console.error("Failed to get name from post:", error);
         }
       }
+      checkJoined(post._id);
       fetchName(post.listerId);
     }, []);
 
@@ -120,6 +138,11 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
             .catch(error => {
                 console.error("Failed to join post:", error);
             });
+    }
+
+    if (isJoined && !isProfileView)
+    {
+        return null;
     }
     
     return (
