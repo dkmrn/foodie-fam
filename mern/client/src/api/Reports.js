@@ -1,6 +1,6 @@
 export const sendReport = async (reportData) => {
     try{
-        const response = await fetch("http://localhost:5050/user", {
+        const response = await fetch("http://localhost:5050/report", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
