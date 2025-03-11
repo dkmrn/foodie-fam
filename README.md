@@ -6,7 +6,7 @@
 <td>
  Foodie Fam is a web app built atop a MERN stack that aims to connect people to share a meal with.
 
- Have you ever wanted to try multiple dishes from a restaurant, but you're on a solo mission?
+ Have you ever wanted to try multiple dishes from a restaurant while on a solo mission?
  Use Foodie Fam to find others to share a meal family style!
 </td>
 </tr>
@@ -41,7 +41,7 @@
 * **Creating Posts** Create a post with a Restaurant Name, Location, Date, and Time that will be displayed on the Home Page
 * **Join Posts** From the Home Page, you can join other groups
 * **Search** Search for specific Restaurants by name
-* **Log In Authentification** Hash the passwords in our database, Log in/Log out, and Protective Pages
+* **Log In Authentication** Hash the passwords in our database, Log in/Log out, and Protective Pages
 * **Profile** Shows information about user as well as created posts and joined posts
 * **Report** Can report other users
 
@@ -90,7 +90,7 @@ Main Backend Dependicies
 
 Create the file `mern/server/config.env` with your Atlas URI and the server port:
 ```
-ATLAS_URI=mongodb+srv://Cluster94824:X2hkRkp0cFZr@cluster94824.y95qv.mongodb.net/foodie_friends?retryWrites=true&w=majority
+ATLAS_URI=mongodb+srv://<username>:<password>@sandbox.jadwj.mongodb.net/retryWrites=true&w=majority
 PORT=5050
 ```
 
