@@ -7,10 +7,12 @@ import { useEffect, useState } from 'react';
 import { fetchPosts } from "./api/Posts";
 import './components/backgroundStyle.css';
 import {SubmitReport} from "./components/SubmitReport";
-import DummyPost from "./components/Post";
 import { getUserId } from "./main";
 import { useNavigate } from "react-router-dom";
 import { HomeButton } from "./components/homeButton";
+import { motion } from "framer-motion";
+import SearchBar from "./components/searchBar"; 
+
 
 // Post data structure
 /*
@@ -29,7 +31,7 @@ import { HomeButton } from "./components/homeButton";
 const App = () => {
   // Sample array of items 
   // NEED TO UPDATE THIS ACCORDING TO EACH NEW POST
-  const users = ["Katia", "Joyce", "Amanda", "Daya", "Joaquin"];
+  const [searchTerm, setSearchTerm] = useState("");
 
   const [isReportOpen, setIsReportOpen] = useState(false);
   const openReport = () => {
@@ -67,6 +69,11 @@ const App = () => {
 
   console.log(postArray);
 
+  const handleSearchSubmit = (input) => {
+    console.log("Search term stored:", input);
+    setSearchTerm(input);
+  };
+
   return (
     <div className="container bg-[#f4e9dc] min-h-screen flex flex-col items-center">
       <header className="header text-center py-6">
@@ -84,10 +91,18 @@ const App = () => {
         {/* Right side button */}
         <div className="btn-container post-button"><GoToCreate /></div>
 
+        <div className="search-create-container">
+          <SearchBar onSubmit={handleSearchSubmit} />
+          <div className="btn-container post-button"><GoToCreate /></div>
+        </div>
+
+      {/* testing */}
+      {/* {searchTerm && <p className="text-lg text-green-600 mt-2">Stored Search: {searchTerm}</p>} */}
 
       </header>
 
-      {/* Post Grid */}      {isReportOpen && (
+      {/* Post Grid */}      
+      {isReportOpen && (
        <div className="popup">
          <div className="popup-inside">
            <button className="exit-report" onClick={closeReport}>
@@ -98,9 +113,19 @@ const App = () => {
        </div>
        )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+      <div className="grid grid-cols-3 gap-6 w-full max-w-5xl mx-auto">
         {postArray.length > 0 &&
-          postArray.map((post, index) => <Post key={index} post={post} />)}
+          postArray.map((post, index) => (
+            <motion.div 
+            key={post._id || index}
+            whileHover={{ scale: 1.05 }} // Slightly enlarges on hover
+            whileTap={{ scale: 0.95 }} // Shrinks a bit when clicked
+            transition={{ duration: 0.2 }} // Smooth transition
+            className="rounded-lg shadow-lg overflow-hidden" // Ensures smooth corners
+          >
+            <Post post={post} />
+          </motion.div>
+          ))}
       </div>
     </div>
   );
