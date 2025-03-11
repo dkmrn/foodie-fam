@@ -4,7 +4,7 @@
 
 .container {
     padding: 2vh;
-    background-color: #f4e9dc; 
+    background-color: transparent !important; 
     min-height: 100vh;
     display: flex;
     flex-direction: column;
