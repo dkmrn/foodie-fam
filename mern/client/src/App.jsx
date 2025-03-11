@@ -77,7 +77,7 @@ const App = () => {
         <div className="button-group">
           <div className="btn-container profile-button"><ProfileButton /></div>
           <div className="btn-container logout-button"><Logout /></div>
-          <div className="btn-container report-button"><ReportButton /></div>
+          <div className="btn-container report-button"> <ReportButton onClick={openReport}/></div>
           <div className="btn-container home-button"><HomeButton /></div>
         </div>
 
@@ -89,11 +89,6 @@ const App = () => {
 
         <div className="logout-button">
           <Logout />
-        </div>
-
-        <div className="report-button">
-          {/* <ReportButton /> */}
-          <ReportButton onClick={openReport}/>
         </div>
 
         <div className="home-button">
