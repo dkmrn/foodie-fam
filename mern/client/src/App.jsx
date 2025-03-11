@@ -83,17 +83,6 @@ const App = () => {
 
         {/* Right side button */}
         <div className="btn-container post-button"><GoToCreate /></div>
-        <div className="profile-button">
-          <ProfileButton />
-        </div>
-
-        <div className="logout-button">
-          <Logout />
-        </div>
-
-        <div className="home-button">
-          <HomeButton />
-        </div>
 
 
       </header>
