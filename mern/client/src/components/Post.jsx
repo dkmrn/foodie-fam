@@ -149,7 +149,6 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
     
     return (
         <div style={{ 
-<<<<<<< HEAD
             // width: 'min(50vw, 50vh)', 
             // height: 'min(50vw, 50vh)', 
             // borderRadius: '16%', 
@@ -169,17 +168,6 @@ export default function DummyPost({post, isProfileView, isMyPost, onDelete, onLe
             justifyContent: 'flex-start',
             overflow: 'hidden',
             position: 'relative',
-=======
-            width: '100%',  /* Let the grid control width */
-            aspectRatio: '1 / 1',  /* Ensures the post remains a square */
-            maxWidth: '300px', /* Prevents posts from getting too large */
-            minWidth: '150px', /* Ensures posts don't get too small */
-            borderRadius: '16%', /* Keeps rounded corners */
-            backgroundColor: "white",
-            border: '5px solid rgb(14, 7, 66)',
-            display: 'block',
-            overflow: 'hidden',
->>>>>>> 084cd7608109f1153b6fe868b2108a6b82bf9df7
         }}>
             {/*profile banner*/}
             <div style={{
