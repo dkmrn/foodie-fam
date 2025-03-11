@@ -57,7 +57,7 @@
 * Express.js  <img src="https://github.com/user-attachments/assets/0d98866a-2b0b-4766-a4ac-4b33c2671de1" alt="Sample Image" width="100" height="50">
 * MongoDB  <img src="https://github.com/user-attachments/assets/50652b09-b061-41d2-b54f-167762861c26" alt="Sample Image" width="100" height="50">
 * MongoDB Atlas  <img src="https://github.com/user-attachments/assets/3c7fdddc-ee1b-485b-aaac-d4acb7ca74ff" alt="Sample Image" width="100" height="50">
-* HTML  <img src="https://github.com/user-attachments/assets/db82671c-8dc6-4e39-90dd-804d84b9d622" alt="Sample Image" width="100" height="50">
+* HTML  <img src="https://github.com/user-attachments/assets/db82671c-8dc6-4e39-90dd-804d84b9d622" alt="Sample Image" width="50" height="50">
 * CSS  <img src="https://github.com/user-attachments/assets/d412e0a3-c167-4f80-b09c-5d3c458725ec" alt="Sample Image" width="50" height="50">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
