@@ -16,8 +16,8 @@ export function SubmitReport() {
     });
 
 
-    const [additionalInfo, setAdditionalInfo] = useState("");
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [showThankYou, setShowThankYou] = useState(false);
 
 
     const handleChange = (e) => {
@@ -37,7 +37,14 @@ export function SubmitReport() {
             const response = await sendReport(formData);
             console.log("Post Created Successfully:", response);
 
-            navigate("/goToHomepage");
+            setShowThankYou(true);
+
+            setTimeout(() => {
+                setShowThankYou(false);
+                navigate("/goToHomepage");
+            }, 2000);
+
+            navigate("/goToHomepage"); //unnecessary
 
         } catch (error) {
             console.error("Failed to submit post:", error);
@@ -46,6 +53,15 @@ export function SubmitReport() {
     
     return (
         <div>
+        {showThankYou && (
+            <div className="popup">
+                <div className="popup-inside">
+                    <p className="text-lg text-[#7a5a31] font-bold">
+                        Thank you for submitting! We'll reach out to you soon.
+                    </p>
+                </div>
+            </div>
+        )}
             <h1 className="report-top">
             Report an issue
                 </h1>
