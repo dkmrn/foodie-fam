@@ -85,7 +85,7 @@ git clone "https://github.com/dkmrn/foodie-fam"
 Setup backend dependencies 
 
 ```sh
-cd server
+cd mern/server
 npm install
 ```
 
@@ -110,7 +110,7 @@ npm start
 Setup frontend dependencies
 
 ```sh
-cd client
+cd mern/client
 npm install
 ```
 
