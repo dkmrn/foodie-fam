@@ -28,6 +28,32 @@ import SearchBar from "./components/searchBar";
 
 // hello test
 
+
+const TypeFont = ({ text, speed = 100 }) => {
+  const [displayedText, setDisplayedText] = useState("");
+
+  useEffect(() => {
+    let i = 0;
+    const interval = setInterval(() => {
+      setDisplayedText(text.slice(0, i));
+      i++;
+      if (i > text.length) clearInterval(interval);
+    }, speed);
+    return () => clearInterval(interval);
+  }, [text, speed]);
+
+  return (
+    <motion.h1 
+      className="text-3xl font-bold text-[#d66b4d]"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1.5 }}
+    >
+      {displayedText}
+    </motion.h1>
+  );
+};
+
 const App = () => {
   // Sample array of items 
   // NEED TO UPDATE THIS ACCORDING TO EACH NEW POST
@@ -77,7 +103,7 @@ const App = () => {
   return (
     <div className="container bg-[#f4e9dc] min-h-screen flex flex-col items-center">
       <header className="header text-center py-6">
-        <h1 className="text-3xl font-bold text-[#d66b4d]">Find your group</h1>
+      <TypeFont text="Find your group" speed={100} />
         <p className="text-lg text-[#7a5a31]">Say hi!</p>
 
         {/* Left side buttons stacked */}
