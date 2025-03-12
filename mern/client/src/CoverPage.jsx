@@ -17,7 +17,7 @@ const TypeFont = ({ text, speed = 100, Welcome }) => {
         i++;
         if (i > text.length) 
             clearInterval(interval);
-            if (Welcome) Welcome();
+          if (Welcome) Welcome();
       }, speed);
       return () => clearInterval(interval);
     }, [text, speed, Welcome]);

@@ -29,11 +29,6 @@ export function SubmitReport() {
 
     const handleSubmit = async () => {
 
-        if (formData.message.trim() === "") {
-            setErrorMessage("Please enter a message before submitting.");
-            return; // Prevent submission
-        }
-
         setIsSubmitted(true);
         // console.log("Submitted Data:", { restaurant, address, date, time, additionalInfo });
         // console.log("Submitted Data:", formData);
@@ -85,7 +80,7 @@ export function SubmitReport() {
         >
         </textarea>
 
-        {errorMessage && <p className="text-red-600">{errorMessage}</p>}
+        {/* {errorMessage && <p className="text-red-600">{errorMessage}</p>} */}
         </div>
         <button onClick={handleSubmit} disabled={isSubmitted}>Submit Report</button>
     </div>
