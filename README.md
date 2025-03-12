@@ -75,6 +75,11 @@ To get a local copy up and running follow these simple example steps.
 
 ### Installation
 
+Clone the repo
+```sh
+git clone "https://github.com/dkmrn/foodie-fam"
+```
+
 ### Backend
 
 Setup backend dependencies 
