@@ -47,6 +47,7 @@ export function MyProfile() {
             if (profileData.myJoinedPosts && profileData.myJoinedPosts.length > 0) {
                 const joinedPostsPromises = profileData.myJoinedPosts.map(postId => getPost(postId));
                 const joinedPostsData = await Promise.all(joinedPostsPromises);
+                console.log(joinedPostsData);
                 setJoinedPosts(joinedPostsData.filter(post => post !== "Not found"));
             } else {
                 setJoinedPosts([]);
@@ -70,6 +71,7 @@ export function MyProfile() {
     };
 
     const handleDeletePost = async (postId) => {
+        console.log("Deleting post: ", postId.toString());
         if (window.confirm("Are you sure you want to delete this post?")) {
             try {
                 // Add post to removing set to trigger animation

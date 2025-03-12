@@ -75,12 +75,17 @@ To get a local copy up and running follow these simple example steps.
 
 ### Installation
 
+Clone the repo
+```sh
+git clone "https://github.com/dkmrn/foodie-fam"
+```
+
 ### Backend
 
 Setup backend dependencies 
 
 ```sh
-cd server
+cd mern/server
 npm install
 ```
 
@@ -90,6 +95,9 @@ Main Backend Dependicies
 * MongoDB Atlas
 
 Create the file `mern/server/config.env` with your Atlas URI and the server port:
+* Create MongoDB account
+* Create a Cluster or have a valid MongoDB connection strings
+* Copy connection strings like the syntax below
 ```
 ATLAS_URI=mongodb+srv://<username>:<password>@sandbox.jadwj.mongodb.net/retryWrites=true&w=majority
 PORT=5050
@@ -105,7 +113,7 @@ npm start
 Setup frontend dependencies
 
 ```sh
-cd client
+cd mern/client
 npm install
 ```
 

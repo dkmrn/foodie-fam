@@ -52,6 +52,7 @@ router.post("/", async (req, res) => {
         time: req.body.time,
         listerId: req.body.userId,
         participants: [],
+        additionalInfo: req.body.additionalInfo
       };
 
       let collection = await db.collection("posts");
@@ -105,17 +106,22 @@ router.patch("/:id", async (req, res) => {
   // This section will help you delete a record
   router.delete("/:id", async (req, res) => {
     try {
+      console.error("Deleting post: ", req.params.id);
       let postCollection = db.collection('posts');
       let post = await postCollection.findOne({_id: new ObjectId(req.params.id)});
-
+      console.error("Post: ", post);
       let listerId = post.listerId;
       let participantsIds = post.participants;
 
       let profileCollection = db.collection('profiles');
 
+      console.error("Lister ID: ", listerId);
       let listerProfile = await profileCollection.findOne({myUserId: listerId});
       let listerPosts = listerProfile.myPosts;
-      let index = listerPosts.indexOf(post);
+      console.error("Post ID: ", req.params.id);
+      console.error("Lister Posts: ", listerPosts);
+      let index = listerPosts.indexOf(req.params.id.toString());
+      console.error("Index: ", index);
       listerPosts.splice(index,1);
       await profileCollection.updateOne(
         {myUserId: listerId},
@@ -125,7 +131,7 @@ router.patch("/:id", async (req, res) => {
         let participantId = participantsIds[i];
         let participantProfile = await profileCollection.findOne({myUserId: participantId});
         let participantPosts = participantProfile.myJoinedPosts;
-        index = participantPosts.indexOf(post);
+        index = participantPosts.indexOf(req.params.id.toString());
         participantPosts.splice(index,1);
         await profileCollection.updateOne(
           {myUserId: participantId},

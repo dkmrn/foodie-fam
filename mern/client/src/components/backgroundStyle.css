@@ -69,3 +69,12 @@ body {
     background-color: #c55b3a;
     transform: scale(1.05);
 }
+
+
+body {
+    background-image: url('../assets/beigebackground.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}

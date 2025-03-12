@@ -25,6 +25,7 @@ function Content({ post }) {
     const caption = getCaption(post); //(optional) additional info
     const postId = getPostId(post);
     const numJoined = post.participants.length;
+    const additionalInfo = getPostAdditionalInfo(post);
 
     return (
         <>
@@ -41,7 +42,8 @@ function Content({ post }) {
                     <h1><b>address: </b>{address}</h1>
                     <h1><b>date: </b>{date}</h1>
                     <h1><b>time: </b>{time}</h1>
-                    <h1><b># of people joined: </b>{numJoined}</h1>
+                    <h1 style={{ marginBottom: '10px' }}><b># of people joined: </b>{numJoined}</h1>
+                    <h1 style={{ color: 'coral'}}><b>foodie note: </b>{additionalInfo}</h1>
                 </div>
             </div>
         </>
@@ -71,6 +73,11 @@ function getTime(post) {
 function getPostId(post)
 {
     return post._id.toString();
+}
+
+function getPostAdditionalInfo(post)
+{
+    return post.additionalInfo;
 }
 
 
