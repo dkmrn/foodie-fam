@@ -91,7 +91,7 @@ export function CreatePost() {
                 />
 
                 <label style={styles.label}>Additional Info:</label>
-                <input
+                <textarea
                     type="text"
                     className="input-box"
                     style={styles.textarea}

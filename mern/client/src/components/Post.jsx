@@ -42,8 +42,8 @@ function Content({ post }) {
                     <h1><b>address: </b>{address}</h1>
                     <h1><b>date: </b>{date}</h1>
                     <h1><b>time: </b>{time}</h1>
-                    <h1><b>additional info: </b>{additionalInfo}</h1>
-                    <h1><b># of people joined: </b>{numJoined}</h1>
+                    <h1 style={{ marginBottom: '10px' }}><b># of people joined: </b>{numJoined}</h1>
+                    <h1 style={{ color: 'coral'}}><b>foodie note: </b>{additionalInfo}</h1>
                 </div>
             </div>
         </>
