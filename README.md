@@ -95,6 +95,9 @@ Main Backend Dependicies
 * MongoDB Atlas
 
 Create the file `mern/server/config.env` with your Atlas URI and the server port:
+* Create MongoDB account
+* Create a Cluster or have a valid MongoDB connection strings
+* Copy connection strings like the syntax below
 ```
 ATLAS_URI=mongodb+srv://<username>:<password>@sandbox.jadwj.mongodb.net/retryWrites=true&w=majority
 PORT=5050
