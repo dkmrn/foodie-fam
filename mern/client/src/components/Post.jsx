@@ -25,7 +25,7 @@ function Content({ post }) {
     const caption = getCaption(post); //(optional) additional info
     const postId = getPostId(post);
     const numJoined = post.participants.length;
-    const additionInfo = getPostAdditionalInfo(post);
+    const additionalInfo = getPostAdditionalInfo(post);
 
     return (
         <>
@@ -42,6 +42,7 @@ function Content({ post }) {
                     <h1><b>address: </b>{address}</h1>
                     <h1><b>date: </b>{date}</h1>
                     <h1><b>time: </b>{time}</h1>
+                    <h1><b>additional info: </b>{additionalInfo}</h1>
                     <h1><b># of people joined: </b>{numJoined}</h1>
                 </div>
             </div>

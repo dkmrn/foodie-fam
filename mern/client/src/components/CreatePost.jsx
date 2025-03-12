@@ -12,11 +12,8 @@ export function CreatePost() {
         date: "",
         time: "",
         // additionalInfo: "", //for now, backend does not have parameter for additional info
-        userId: getUserId(),
-        additionalInfo:""
+        userId: getUserId()
     });
-
-    const [additionalInfo, setAdditionalInfo] = useState("");
 
     const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -94,14 +91,16 @@ export function CreatePost() {
                 />
 
                 <label style={styles.label}>Additional Info:</label>
-                <textarea
+                <input
+                    type="text"
                     className="input-box"
                     style={styles.textarea}
+                    name="additionalInfo"
                     placeholder="Any allergies? What dishes are you planning on ordering?"
-                    value={additionalInfo}
-                    onChange={(e) => setAdditionalInfo(e.target.value)}
+                    value={formData.additionalInfo}
+                    onChange={handleChange}
                     disabled={isSubmitted}
-                ></textarea>
+                />
 
                 <button
                     className="createButton"
