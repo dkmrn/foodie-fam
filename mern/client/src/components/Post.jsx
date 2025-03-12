@@ -25,6 +25,7 @@ function Content({ post }) {
     const caption = getCaption(post); //(optional) additional info
     const postId = getPostId(post);
     const numJoined = post.participants.length;
+    const additionInfo = getPostAdditionalInfo(post);
 
     return (
         <>
@@ -71,6 +72,11 @@ function getTime(post) {
 function getPostId(post)
 {
     return post._id.toString();
+}
+
+function getPostAdditionalInfo(post)
+{
+    return post.additionalInfo;
 }
 
 
