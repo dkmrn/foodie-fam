@@ -12,7 +12,8 @@ export function CreatePost() {
         date: "",
         time: "",
         // additionalInfo: "", //for now, backend does not have parameter for additional info
-        userId: getUserId()
+        userId: getUserId(),
+        additionalInfo:""
     });
 
     const [additionalInfo, setAdditionalInfo] = useState("");
