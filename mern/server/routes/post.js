@@ -52,6 +52,7 @@ router.post("/", async (req, res) => {
         time: req.body.time,
         listerId: req.body.userId,
         participants: [],
+        additionalInfo: req.body.additionalInfo
       };
 
       let collection = await db.collection("posts");
