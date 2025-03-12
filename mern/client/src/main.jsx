@@ -11,6 +11,7 @@ import LoginPage from "./LoginPage";
 import MyProfilePage from "./MyProfilePage";
 import SubmitReportPage from "./SubmitReportPage";
 import CreateAccountPage from "./CreateAccountPage";
+import CoverPage from "./CoverPage";
 
 
 let storedUserId = null;
@@ -34,6 +35,10 @@ export function getUserId() {
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <CoverPage />,
+  },
+  {
+    path: "/LoginPage",
     element: <LoginPage />,
   },
   {

@@ -159,9 +159,9 @@ const App = () => {
           filteredPosts.map((post, index) => (
             <motion.div 
             key={post._id || index}
-            whileHover={{ scale: 1.05 }} // Slightly enlarges on hover
-            whileTap={{ scale: 0.95 }} // Shrinks a bit when clicked
-            transition={{ duration: 0.2 }} // Smooth transition
+            whileHover={{ scale: 1.05 }} // slightly enlarges on hover
+            whileTap={{ scale: 0.95 }} // shrinks a bit when clicked
+            transition={{ duration: 0.2 }} // smooth transition
           >
             <Post post={post} />
           </motion.div>
