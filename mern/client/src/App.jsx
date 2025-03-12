@@ -12,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 import { HomeButton } from "./components/homeButton";
 import { motion } from "framer-motion";
 import SearchBar from "./components/searchBar"; 
+import { searchPosts } from "./api/Posts";
+
 
 
 // Post data structure
@@ -32,8 +34,9 @@ const App = () => {
   // Sample array of items 
   // NEED TO UPDATE THIS ACCORDING TO EACH NEW POST
   const [searchTerm, setSearchTerm] = useState("");
-
   const [isReportOpen, setIsReportOpen] = useState(false);
+  const [allPosts, setAllPosts] = useState([]);
+  const [filteredPosts, setFilteredPosts] = useState([]);
   const openReport = () => {
     setIsReportOpen(true);
   }
@@ -69,53 +72,65 @@ const App = () => {
 
   console.log(postArray);
 
+  useEffect(() =>
+  {
+    async function getFilteredPosts() 
+    {
+      if (searchTerm.trim() === "")
+        {
+          setFilteredPosts(postArray);
+        }
+        else
+        {
+          const filtered = await searchPosts(searchTerm);
+          setFilteredPosts(filtered);
+        }
+    }
+    getFilteredPosts();
+  }, [searchTerm, postArray]);
+
   const handleSearchSubmit = (input) => {
     console.log("Search term stored:", input);
     setSearchTerm(input);
   };
+
 
   return (
     <div className="container bg-[#f4e9dc] min-h-screen flex flex-col items-center">
       <header className="header text-center py-6">
         <h1 className="text-3xl font-bold text-[#d66b4d]">Find your group</h1>
         <p className="text-lg text-[#7a5a31]">Say hi!</p>
-
+  
         {/* Left side buttons stacked */}
         <div className="button-group">
           <div className="btn-container profile-button"><ProfileButton /></div>
           <div className="btn-container logout-button"><Logout /></div>
-          <div className="btn-container report-button"> <ReportButton onClick={openReport}/></div>
+          <div className="btn-container report-button"><ReportButton onClick={openReport}/></div>
           <div className="btn-container home-button"><HomeButton /></div>
         </div>
-
+  
         {/* Right side button */}
         <div className="btn-container post-button"><GoToCreate /></div>
-
+  
         <div className="search-create-container">
           <SearchBar onSubmit={handleSearchSubmit} />
           <div className="btn-container post-button"><GoToCreate /></div>
         </div>
-
-      {/* testing */}
-      {/* {searchTerm && <p className="text-lg text-green-600 mt-2">Stored Search: {searchTerm}</p>} */}
-
       </header>
-
-      {/* Post Grid */}      
+  
+      {/* Report Popup */}      
       {isReportOpen && (
-       <div className="popup">
-         <div className="popup-inside">
-           <button className="exit-report" onClick={closeReport}>
-             X
-           </button>
-           <SubmitReport />
-         </div>
-       </div>
-       )}
-
+        <div className="popup">
+          <div className="popup-inside">
+            <button className="exit-report" onClick={closeReport}>X</button>
+            <SubmitReport />
+          </div>
+        </div>
+      )}
+  
       <div className="grid grid-cols-3 gap-6 w-full max-w-5xl mx-auto">
-        {postArray.length > 0 &&
-          postArray.map((post, index) => (
+        {filteredPosts.length > 0 &&
+          filteredPosts.map((post, index) => (
             <motion.div 
             key={post._id || index}
             whileHover={{ scale: 1.05 }} // Slightly enlarges on hover
@@ -128,6 +143,6 @@ const App = () => {
       </div>
     </div>
   );
-};
+}
 
 export default App;

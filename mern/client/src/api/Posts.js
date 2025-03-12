@@ -16,7 +16,7 @@ export const fetchPosts = async () => {
 
 export const searchPosts = async (query) => {
   try {
-    const response = await fetch(`http://localhost:5050/post/name/${postId}`,{
+    const response = await fetch(`http://localhost:5050/post/name/${query}`,{
       method: "GET",
       headers: {
           "Content-Type": "application/json",
