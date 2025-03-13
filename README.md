@@ -40,6 +40,8 @@
 
 * **Creating Posts** Create a post with a Restaurant Name, Location, Date, and Time that will be displayed on the Home Page
 * **Join Posts** From the Home Page, you can join other groups
+* **Leave/Delete** You can leave joined post/Delete your own
+* **Dynamic Post** Added/deleted posts are dynamically added/removed from the home page and profile. Leaving/joining a group will change the numbers for all users in the post.
 * **Search** Search for specific Restaurants by name
 * **Log In Authentication** Hash the passwords in our database, Log in/Log out, and Protective Pages
 * **Profile** Shows information about user as well as created posts and joined posts
